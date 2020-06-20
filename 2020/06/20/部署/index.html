@@ -27,14 +27,14 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="什么是部署?软件分为两个阶段: 开发、部署 定义  通过部署使得软件在某一环境运行起来  将源代码生成可运行的软件包 例如jar, war  将可运行的软件放到目标环境上  配置目标环境使得软件能够运行    远程部署  部署到远程服务器  本地部署  配置本地服务器, 使得软件可以运行  hexo deploy做了什么? 将public 目录中的文件、目录push到_config.yml中指定的">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/2020/06/20/typora_imgs/image-20200620202806030.png">
-<meta property="og:image" content="http://yoursite.com/2020/06/20/typora_imgs/image-20200620203132890.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfz6l5yk55j30fu02it8p.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfz6lkudg1j307v04ddfy.jpg">
 <meta property="article:published_time" content="2020-06-20T15:16:31.000Z">
-<meta property="article:modified_time" content="2020-06-20T15:31:19.117Z">
+<meta property="article:modified_time" content="2020-06-20T15:40:49.116Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/06/20/typora_imgs/image-20200620202806030.png">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfz6l5yk55j30fu02it8p.jpg">
 
 <link rel="canonical" href="http://yoursite.com/2020/06/20/%E9%83%A8%E7%BD%B2/">
 
@@ -160,7 +160,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-06-20 23:16:31 / Modified: 23:31:19" itemprop="dateCreated datePublished" datetime="2020-06-20T23:16:31+08:00">2020-06-20</time>
+              <time title="Created: 2020-06-20 23:16:31 / Modified: 23:40:49" itemprop="dateCreated datePublished" datetime="2020-06-20T23:16:31+08:00">2020-06-20</time>
             </span>
 
           
@@ -200,13 +200,13 @@
 <p>将public 目录中的文件、目录push到_config.yml中指定的远程仓库和分支中, </p>
 <p>完全覆盖该分支下的已有内容</p>
 </blockquote>
-<h4 id="创建新仓库"><a href="#创建新仓库" class="headerlink" title="创建新仓库"></a>创建新仓库</h4><p><img src="../typora_imgs/image-20200620202806030.png" alt="image-20200620202806030"></p>
+<h4 id="创建新仓库"><a href="#创建新仓库" class="headerlink" title="创建新仓库"></a>创建新仓库</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfz6l5yk55j30fu02it8p.jpg" alt="image-20200620202806030"></p>
 <p>命名是有要求的</p>
 <h4 id="初始化hexo"><a href="#初始化hexo" class="headerlink" title="初始化hexo"></a>初始化hexo</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装hexo</span></span><br><span class="line">npm install -g hexo-cli </span><br><span class="line">hexo init illuca_demo</span><br></pre></td></tr></table></figure>
 
 <h4 id="开启hexo-server"><a href="#开启hexo-server" class="headerlink" title="开启hexo-server"></a>开启hexo-server</h4><blockquote>
 <p>package.json: </p>
-<p><img src="../typora_imgs/image-20200620203132890.png" alt="image-20200620203132890"> </p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfz6lkudg1j307v04ddfy.jpg" alt="image-20200620203132890"> </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add hexo-server</span><br><span class="line">yarn run server <span class="comment"># 等价于hexo server, 开启本地服务器</span></span><br></pre></td></tr></table></figure>
 </blockquote>
 <h4 id="部署到远程"><a href="#部署到远程" class="headerlink" title="部署到远程"></a>部署到远程</h4><p>_config.yml</p>
