@@ -100,4 +100,4 @@ theme: landscape
 deploy:
     type: git
     repo: https://github.com/hexo-demo/hexo-demo.github.io
-    branch: master # 每次将public文件夹中文件,上传到远程master的public文件
+    branch: master
