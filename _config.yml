@@ -99,5 +99,5 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
     type: git
-    repo: https://github.com/hexo-demo/hexo-demo.github.io
+    repo: https://github.com/illuca/illuca.github.io
     branch: master
