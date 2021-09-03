@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="杭州福猫公司 vue生命周期 数据库范式 事务前端 element uiupload组件 action 和url上传方式 单页面的生命周期hook  数据库范式第一范式是指电话号码不能有手机和电话两种值，强调列的原子性。所以电话号码就应该分为两个原子列 手机电话和固定电话列 第二范式必须要有主键 第三范式普通列必须完全依赖主键 第四范式 索引解决大量多表联查方法：分成多个月，名字的时效性 单例模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="杭州福猫">
+<meta property="og:url" content="https://illuca.github.io/2021/08/16/%E7%A6%8F%E7%8C%AB/index.html">
+<meta property="og:site_name" content="兰陵">
+<meta property="og:description" content="杭州福猫公司 vue生命周期 数据库范式 事务前端 element uiupload组件 action 和url上传方式 单页面的生命周期hook  数据库范式第一范式是指电话号码不能有手机和电话两种值，强调列的原子性。所以电话号码就应该分为两个原子列 手机电话和固定电话列 第二范式必须要有主键 第三范式普通列必须完全依赖主键 第四范式 索引解决大量多表联查方法：分成多个月，名字的时效性 单例模式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gu2q6mvvb8j610p0u0tc202.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gu2q6u8wgrj30u0140af0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gu2q7gf6f0j60qu06amxu02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gu2q7kkc3gj60qu06amxu02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gu2q7oqpepj60io0gmab802.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gu2q81v79tj60gq03q74i02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gu2q852i6xj61l609ymzd02.jpg">
+<meta property="article:published_time" content="2021-08-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-09-03T08:08:45.221Z">
+<meta property="article:author" content="illuca">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gu2q6mvvb8j610p0u0tc202.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'sayo'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://illuca.github.io/2021/08/16/福猫/"/>
+
+
+
+
+
+  <title>杭州福猫 | 兰陵</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">兰陵</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2021/08/16/%E7%A6%8F%E7%8C%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/sayo.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="兰陵">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">杭州福猫</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-08-16T00:00:00+08:00">
+                2021-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/08/16/%E7%A6%8F%E7%8C%AB/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/08/16/%E7%A6%8F%E7%8C%AB/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="杭州福猫公司-vue生命周期-数据库范式-事务"><a href="#杭州福猫公司-vue生命周期-数据库范式-事务" class="headerlink" title="杭州福猫公司 vue生命周期 数据库范式 事务"></a>杭州福猫公司 vue生命周期 数据库范式 事务</h1><h2 id="前端-element-ui"><a href="#前端-element-ui" class="headerlink" title="前端 element ui"></a>前端 element ui</h2><p>upload组件 action 和url上传方式</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gu2q6mvvb8j610p0u0tc202.jpg" alt="Pasted Graphic">单页面的生命周期hook</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gu2q6u8wgrj30u0140af0.jpg" alt="Image"></p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h3><p>第一范式是指电话号码不能有手机和电话两种值，强调列的原子性。所以电话号码就应该分为两个原子列 手机电话和固定电话列</p>
+<p>第二范式<br>必须要有主键</p>
+<p>第三范式<br>普通列必须完全依赖主键</p>
+<p>第四范式</p>
+<p>索引<br>解决大量多表联查方法：分成多个月，名字的时效性</p>
+<p>单例模式</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gu2q7gf6f0j60qu06amxu02.jpg" alt="Pasted Graphic-0598428"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gu2q7kkc3gj60qu06amxu02.jpg" alt="Pasted Graphic 1-0598435"></p>
+<img src="https://tva1.sinaimg.cn/large/008i3skNly1gu2q7oqpepj60io0gmab802.jpg" alt="Pasted Graphic 2" style="zoom:50%;" />
+
+<h2 id="事务的特性和spring的事务传播特性"><a href="#事务的特性和spring的事务传播特性" class="headerlink" title="事务的特性和spring的事务传播特性"></a>事务的特性和spring的事务传播特性</h2><p><code>ACID</code><br><strong>原子性（Atomicity）</strong>、<strong>一致性（Consistency）</strong>、<strong>隔离性（Isolation）</strong>、<strong>持久性（Durability）</strong>。<br><strong>这个是数据库事物的核心</strong>，它是数据库最基本的特性。这条特性看起来简单，但是理解起来还是比较复杂的。</p>
+<p>它的书面定义是：数据库<strong>一致性</strong>（Database Consistency）是指事务执行的结果必须是使数据库从一个一致性状态变到另一个一致性状态。<br>它分为两个方面：<strong>一致读</strong> 和 <strong>一致写</strong><br>一致读：事务读取数据只能从一个状态中读取，不能从2个或者2个以上状态读取。<br>一致写：事务执行的数据变更只能基于上一个一致的状态，且只能体现在一个状态中。<br>具体解释请认真参看并理解 知乎 如何理解数据库事务中的一致性的概念？徐志斌的回答</p>
+<h3 id="使用-transactional后如何回滚，传统方式如何回滚"><a href="#使用-transactional后如何回滚，传统方式如何回滚" class="headerlink" title="使用@transactional后如何回滚，传统方式如何回滚"></a>使用@transactional后如何回滚，传统方式如何回滚</h3><p>先开启@EnableTransactionManagement，后在Service中@transactional</p>
+<img src="https://tva1.sinaimg.cn/large/008i3skNly1gu2q81v79tj60gq03q74i02.jpg" alt="D919BDBF-B512-4D43-B7A6-72BB18D53A05" style="zoom:50%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gu2q852i6xj61l609ymzd02.jpg" alt="E14FF2E5-A383-463B-BFE1-41322BF17C33"></p>
+<h3 id="传播行为"><a href="#传播行为" class="headerlink" title="传播行为"></a>传播行为</h3><p>默认的事务传播行为是Propagation.REQUIRED，也就是说：如果当前存在事务，则加入该事务，如果当前不存在事务，则创建一个新的事务。<br>思寒就是用的require</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Service </span><br><span class="line">public class UserService2 &#123; </span><br><span class="line">	@Autowired private UserService userService; </span><br><span class="line">	</span><br><span class="line">	@Transactional </span><br><span class="line">	public void inserBatch() &#123; </span><br><span class="line">		for (int i = 0; i &lt; 10; i++) &#123; </span><br><span class="line">			if (i == 9) &#123; </span><br><span class="line">				throw new RuntimeException(); </span><br><span class="line">			&#125; </span><br><span class="line">			userService.insert(); </span><br><span class="line">		&#125; </span><br><span class="line">	 &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数插入了10次  在第九次有异常<br>按理说前面8次应该正常执行,但是并没有 数据库中没有数据<br>这就是最省事的 一旦整个函数中有异常 就直接回滚<br>2. supports<br>如果当前存在事务，则加入该事务；如果当前不存在事务，则以非事务的方式继续运行。也就是说，该模式是否支持事务，看调用它的方法是否有事务支持。测试代码如下：<br>UserService</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(propagation = Propagation.SUPPORTS)</span> </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span> </span>&#123; </span><br><span class="line">		UserEntity user = <span class="keyword">new</span> UserEntity(); </span><br><span class="line">		user.setUsername(“happyjava”); </span><br><span class="line">		user.setPassword(“<span class="number">123456</span>”); </span><br><span class="line">		userRepo.save(user); </span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>UserService2</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertWithoutTx</span><span class="params">()</span> </span>&#123; </span><br><span class="line">	userService.insert(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>按理说insert是一个事务应该回滚 但是最终没有回滚</p>
+<h2 id="隔离性"><a href="#隔离性" class="headerlink" title="隔离性"></a>隔离性</h2><p>多个事务同时运行 可能会有 脏读 幻读 不可重复读等问题<br>为了防止<br>需要将事务隔离<br>隔离方法有 </p>
+<ol>
+<li>默认 </li>
+<li>读-未提交: 一个事务A可以读取一个未提交的事务</li>
+<li>读-提交</li>
+<li>重复读: 读取时 不允许修改</li>
+<li>序列化</li>
+</ol>
+<p>读-未提交<br><strong>Read uncommitted</strong><br>读未提交，顾名思义，就是一个事务可以读取另一个未提交事务的数据。<br>事例：老板要给程序员发工资，程序员的工资是3.6万/月。但是发工资时老板不小心按错了数字，按成3.9万/月，该钱已经打到程序员的户口，但是事务还没有提交，就在这时，程序员去查看自己这个月的工资，发现比往常多了3千元，以为涨工资了非常高兴。但是老板及时发现了不对，马上回滚差点就提交了的事务，将数字改成3.6万再提交。<br>分析：实际程序员这个月的工资还是3.6万，但是程序员看到的是3.9万。他看到的是老板还没提交事务时的数据。这就是脏读。</p>
+<p>那怎么解决脏读呢？Read committed！读提交，能解决脏读问题。</p>
+<p>例子读-提交<br>你拿着银行卡去充游戏 看到有100万 但是你付款时发现没钱了<br>因为你老婆把你钱那去买钻石了</p>
+<p>例子 重复读<br>你和同学同时去银行取同一张卡的钱</p>
+<p>串行化<br>隔离脏数据 旧数据</p>
+<p>持久性（Durability）<br>就是说任何执行成功的事务修改后的数据都要保证永久的保存在数据库系统中，能够时刻记录系统的状态，并且保证发生故障后能够恢复</p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>四种线程创建方式: Runnable接口, callable接口, futureTask</p>
+<p>生命周期: new 就绪 阻塞 运行 Dead</p>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>举例常用运行时常:IOException,ArrithmeticException,NullPointerException<br>运行时都是RuntimeException子类 一般由于逻辑引起 可以避免 可以不管它<br>Throwable祖先 Error Exception子类<br>Exception等于RuntimeException+非运行时</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/08/20/%E9%9D%A2%E9%A2%89%E7%8E%9B%E8%83%BD%E6%BA%90/" rel="prev" title="颉玛能源">
+                颉玛能源 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/sayo.jpeg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/illuca" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ailluca@126.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-globe"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9D%AD%E5%B7%9E%E7%A6%8F%E7%8C%AB%E5%85%AC%E5%8F%B8-vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F-%E4%BA%8B%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">杭州福猫公司 vue生命周期 数据库范式 事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF-element-ui"><span class="nav-number">1.1.</span> <span class="nav-text">前端 element ui</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.2.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8C%83%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">范式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E7%89%B9%E6%80%A7%E5%92%8Cspring%E7%9A%84%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E7%89%B9%E6%80%A7"><span class="nav-number">1.3.</span> <span class="nav-text">事务的特性和spring的事务传播特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-transactional%E5%90%8E%E5%A6%82%E4%BD%95%E5%9B%9E%E6%BB%9A%EF%BC%8C%E4%BC%A0%E7%BB%9F%E6%96%B9%E5%BC%8F%E5%A6%82%E4%BD%95%E5%9B%9E%E6%BB%9A"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用@transactional后如何回滚，传统方式如何回滚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E6%92%AD%E8%A1%8C%E4%B8%BA"><span class="nav-number">1.3.2.</span> <span class="nav-text">传播行为</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">隔离性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.5.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8"><span class="nav-number">1.6.</span> <span class="nav-text">异常</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">illuca</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'OABmVqILu48QmB8J6Uzfw1kP-MdYXbMMI',
+        appKey: 'k1GvfrKHJzgp1Mj44L7rjIXM',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
