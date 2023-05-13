@@ -28,7 +28,7 @@
 <meta property="og:description" content="Since i have no course to choose, so i have to choose this one. On the other hand, this course can help me to understand better about database. Although this course is called Database Implementation,">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-05-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-05-13T09:45:56.646Z">
+<meta property="article:modified_time" content="2023-05-13T09:46:44.462Z">
 <meta property="article:author" content="illuca">
 <meta property="article:tag" content="unsw">
 <meta name="twitter:card" content="summary">
@@ -175,7 +175,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-05-13 00:00:00 / Modified: 17:45:56" itemprop="dateCreated datePublished" datetime="2023-05-13T00:00:00+08:00">2023-05-13</time>
+              <time title="Created: 2023-05-13 00:00:00 / Modified: 17:46:44" itemprop="dateCreated datePublished" datetime="2023-05-13T00:00:00+08:00">2023-05-13</time>
             </span>
 
           
@@ -192,14 +192,14 @@
         <p>Since i have no course to choose, so i have to choose this one. On the other hand, this course can help me to understand better about database. Although this course is called Database Implementation, it does not teach you how to write a database application. Instead, the course is full of various algorithms, taking Postgre as example.</p>
 <p>The quiz almost does not change every year. It aims to help you check whether you grasp the knowledge taught on lectures.</p>
 <h2 id="Assessment-1"><a href="#Assessment-1" class="headerlink" title="Assessment 1"></a>Assessment 1</h2><p>For assessment 1, it needs you to implement a new type called gcoord. You can get more details on <a target="_blank" rel="noopener" href="https://cgi.cse.unsw.edu.au/~cs9315/23T1/assignment/1/index.php">https://cgi.cse.unsw.edu.au/~cs9315/23T1/assignment/1/index.php</a>.</p>
-<p>Note 1: </p>
+<p><strong>Note 1:</strong> </p>
 <p>Because C Postgre library has special processing on struct storage. You should follow the document standard.</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">GeoCoord</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">double</span> latitude_value;</span><br><span class="line">    <span class="keyword">double</span> longitude_value;</span><br><span class="line">    <span class="keyword">char</span> latitude_direction;</span><br><span class="line">    <span class="keyword">char</span> longitude_direction;</span><br><span class="line">    <span class="keyword">char</span> location_name[FLEXIBLE_ARRAY_MEMBER];</span><br><span class="line">&#125; GeoCoord;</span><br></pre></td></tr></table></figure>
 
 <p>As shown above, variable-length variable must be declared at the end of the struct.</p>
 <p>You can get more details on <a target="_blank" rel="noopener" href="https://www.postgresql.org/docs/current/xfunc-c.html">https://www.postgresql.org/docs/current/xfunc-c.html</a>.</p>
 <p>Even though you don’t pay attention to this special usage,  <code>malloc</code> can also helps you pass lots of tests provided by the convener.</p>
-<p>Note 2:</p>
+<p><strong>Note 2:</strong></p>
 <p>This problem is about precision. </p>
 <p>For function Convert2DMS:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">It converts the greographical coordinates from decimal to DMS(degree, minute, second). The calculation can be described as:</span><br><span class="line">D = floor(Ddec),</span><br><span class="line">M = floor(60 × |Ddec-D|),</span><br><span class="line">S = floor(3600 × |Ddec-D| - 60 × M),</span><br></pre></td></tr></table></figure>
@@ -214,19 +214,19 @@
 <p>But my friend has better idea:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">GeoCoord</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> latitude;</span><br><span class="line">  <span class="keyword">int</span> longitude;</span><br><span class="line">&#125;</span><br><span class="line">latitude = (<span class="keyword">int</span>)((x * <span class="number">10000</span>) + <span class="number">0.5</span>);</span><br><span class="line">longitude = (<span class="keyword">int</span>)((y * <span class="number">10000</span>) + <span class="number">0.5</span>);</span><br></pre></td></tr></table></figure>
 
-<p>Note 3:</p>
+<p><strong>Note 3:</strong></p>
 <p>Because latitude and longitude in my struct are double and double is 64 bit. So we need 64-bit hash.</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">uint32_t</span></span></span><br><span class="line"><span class="function"><span class="title">hash_uint64</span><span class="params">(<span class="keyword">uint64_t</span> key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    key = (~key) + (key &lt;&lt; <span class="number">21</span>);</span><br><span class="line">    key = key ^ (key &gt;&gt; <span class="number">24</span>);</span><br><span class="line">    key = key + (key &lt;&lt; <span class="number">3</span>) + (key &lt;&lt; <span class="number">8</span>);</span><br><span class="line">    key = key ^ (key &gt;&gt; <span class="number">14</span>);</span><br><span class="line">    key = key + (key &lt;&lt; <span class="number">2</span>) + (key &lt;&lt; <span class="number">4</span>);</span><br><span class="line">    key = key ^ (key &gt;&gt; <span class="number">28</span>);</span><br><span class="line">    key = key + (key &lt;&lt; <span class="number">31</span>);</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">uint32_t</span>)key;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PG_FUNCTION_INFO_V1(gcoord_hash);</span><br><span class="line"><span class="function">Datum</span></span><br><span class="line"><span class="function"><span class="title">gcoord_hash</span><span class="params">(PG_FUNCTION_ARGS)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    GeoCoord* coord = (GeoCoord*)PG_GETARG_POINTER(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">uint32_t</span> hash = <span class="number">0</span>;</span><br><span class="line">    hash ^= (<span class="keyword">uint32_t</span>) <span class="built_in">strlen</span>(coord-&gt;location_name);</span><br><span class="line">    hash ^= hash_uint64(coord-&gt;latitude_value);</span><br><span class="line">    hash ^= hash_uint64(coord-&gt;longitude_value);</span><br><span class="line">    hash ^= (<span class="keyword">uint32_t</span>) coord-&gt;latitude_direction;</span><br><span class="line">    PG_RETURN_UINT32(hash);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>I think it is too tricky and there should be a better solution.</p>
 <h2 id="Assessment-2"><a href="#Assessment-2" class="headerlink" title="Assessment 2"></a>Assessment 2</h2><p>The second ass needs you to implement operation <code>Sel</code> and <code>Join</code>. You can find more details on <a target="_blank" rel="noopener" href="https://cgi.cse.unsw.edu.au/~cs9315/23T1/assignment/2/">https://cgi.cse.unsw.edu.au/~cs9315/23T1/assignment/2/</a>.</p>
-<p>Note1: read page from file</p>
+<p><strong>Note1: read page from file</strong></p>
 <p>You need to read page from file and for each page, you read tuple from it.</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> page_idx = <span class="number">0</span>; page_idx &lt; total_page; page_idx++) &#123;</span><br><span class="line">  buffer* buffer_p = request_page(t, page_idx);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> tid = <span class="number">0</span>; tid &lt; get_tuples_num(buffer_p); tid++) &#123;</span><br><span class="line">    Tuple tuple = get_tuple_by_tuple_id(buffer_p, tid);</span><br><span class="line">    <span class="keyword">if</span> (tuple[idx] == cond_val) &#123;</span><br><span class="line">      result-&gt;tuples[counter++] = tuple;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">free</span>(tuple);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  release_page(buffer_p);</span><br><span class="line">  log_release_page(buffer_p-&gt;page_id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>The thought seems simple but i didn’t come out at the beginning. I read all pages from files and then read tuples from pages.</p>
-<p>Note2: buffer pool</p>
-<p>Note3: file pool</p>
+<p><strong>Note2: buffer pool</strong></p>
+<p><strong>Note3: file pool</strong></p>
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2>
     </div>
 
