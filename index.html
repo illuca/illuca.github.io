@@ -262,6 +262,75 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/03/25/ANZAC_CONTEST_2023/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="illuca">
+      <meta itemprop="description" content="illuca 's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="illuca">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/25/ANZAC_CONTEST_2023/" class="post-title-link" itemprop="url">ANZAC CONTEST 2023</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-03-25 00:00:00" itemprop="dateCreated datePublished" datetime="2023-03-25T00:00:00+08:00">2023-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-13 23:31:59" itemprop="dateModified" datetime="2023-05-13T23:31:59+08:00">2023-05-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="A"><a href="#A" class="headerlink" title="A"></a>A</h1><p><img src="https://p.ipic.vip/e81xxn.png" alt="image-20230514013121971"></p>
+<h1 id="B"><a href="#B" class="headerlink" title="B"></a>B</h1><p><img src="https://p.ipic.vip/ko3pol.png" alt="image-20230514013012760"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// input two numbers</span></span><br><span class="line">    <span class="comment">// first is the number to insert</span></span><br><span class="line">    <span class="comment">// second is the original number</span></span><br><span class="line">    <span class="comment">// our aim is to insert at a certain location to make the output biggest</span></span><br><span class="line">    <span class="comment">// find the first num that less than number to insert. 789 6-&gt;7896, 749 5-&gt;7549</span></span><br><span class="line">    <span class="comment">// 749 0-&gt;7490</span></span><br><span class="line">    <span class="comment">// 0 0 -&gt;0</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    string number;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    cin &gt;&gt; number;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">    <span class="keyword">bool</span> inserted = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; number.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> curr = number[i] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span> (curr &lt;= x &amp;&amp; !inserted) &#123;</span><br><span class="line">            number.<span class="built_in">insert</span>(i, <span class="built_in">to_string</span>(x));</span><br><span class="line">            inserted = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        result.<span class="built_in">push_back</span>(curr);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!inserted) &#123;</span><br><span class="line">        number.<span class="built_in">push_back</span>(<span class="string">&#x27;0&#x27;</span> + x);</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; number &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="H"><a href="#H" class="headerlink" title="H"></a>H</h1><p><img src="https://p.ipic.vip/jtxhry.png" alt="image-20230514013149755"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2021/09/02/9.2_%E4%B8%8A%E6%B5%B7%E9%BC%8E%E7%AD%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1134,84 +1203,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2021/08/24/%E9%9D%A2%E8%AF%95%E8%BD%AF%E9%80%9A%E5%8A%A8%E5%8A%9B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="illuca">
-      <meta itemprop="description" content="illuca 's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="illuca">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/24/%E9%9D%A2%E8%AF%95%E8%BD%AF%E9%80%9A%E5%8A%A8%E5%8A%9B/" class="post-title-link" itemprop="url">软通动力</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-08-24 00:00:00" itemprop="dateCreated datePublished" datetime="2021-08-24T00:00:00+08:00">2021-08-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-12 21:59:08" itemprop="dateModified" datetime="2023-05-12T21:59:08+08:00">2023-05-12</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="java特性有哪些"><a href="#java特性有哪些" class="headerlink" title="java特性有哪些"></a>java特性有哪些</h2><p>封装、多态、继承</p>
-<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>将类的信息隐藏起来，通过该类的方法来进行访问。适当的封装更容易理解、安全。</p>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>基于已经存在的一个类，增加新的方法或者重写方法或增加新的属性，产生一个新类。</p>
-<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>有两种方式，基于继承实现，基于接口实现。</p>
-<h4 id="基于继承实现"><a href="#基于继承实现" class="headerlink" title="基于继承实现"></a>基于继承实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 多态.基于继承的实现;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;汪汪！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;喵喵！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnimalTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Animal a1 = <span class="keyword">new</span> Cat();</span><br><span class="line">        Animal a2 = <span class="keyword">new</span> Dog();</span><br><span class="line">        a1.shout();</span><br><span class="line">        a2.shout();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="基于接口实现"><a href="#基于接口实现" class="headerlink" title="基于接口实现"></a>基于接口实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 多态.基于接口的实现;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">implements</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;汪汪！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">implements</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;喵喵！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 基于接口的实现 </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Animal a1 = <span class="keyword">new</span> Cat();</span><br><span class="line">        Animal a2 = <span class="keyword">new</span> Dog();</span><br><span class="line">        a1.shout();</span><br><span class="line">        a2.shout();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="重载的规则是什么？overload"><a href="#重载的规则是什么？overload" class="headerlink" title="重载的规则是什么？overload"></a>重载的规则是什么？overload</h2><p>函数名相同、异常相同、参数列表不同、返回值相同、修饰符</p>
-<h2 id="重写的规则是？override"><a href="#重写的规则是？override" class="headerlink" title="重写的规则是？override"></a>重写的规则是？override</h2><p>函数名、返回值、形参、修饰符都不变，函数体不同，抛出的异常必须相同或者是子类。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1281,7 +1272,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
