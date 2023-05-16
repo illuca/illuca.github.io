@@ -147,6 +147,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/16/1055.%20Shortest%20Way%20to%20Form%20String/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="illuca">
+      <meta itemprop="description" content="illuca 's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="illuca">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/16/1055.%20Shortest%20Way%20to%20Form%20String/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-05-16 00:00:00 / Modified: 20:03:47" itemprop="dateCreated datePublished" datetime="2023-05-16T00:00:00+08:00">2023-05-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/shortest-way-to-form-string/description/">https://leetcode.com/problems/shortest-way-to-form-string/description/</a></p>
+<p>A <strong>subsequence</strong> of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., <code>&quot;ace&quot;</code> is a subsequence of <code>&quot;abcde&quot;</code> while <code>&quot;aec&quot;</code> is not).</p>
+<p>Given two strings <code>source</code> and <code>target</code>, return <em>the minimum number of <strong>subsequences</strong> of</em> <code>source</code> <em>such that their concatenation equals</em> <code>target</code>. If the task is impossible, return <code>-1</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: source = &quot;abc&quot;, target = &quot;abcbc&quot;</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: The target &quot;abcbc&quot; can be formed by &quot;abc&quot; and &quot;bc&quot;, which are subsequences of source &quot;abc&quot;.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: source = &quot;abc&quot;, target = &quot;acdbc&quot;</span><br><span class="line">Output: -1</span><br><span class="line">Explanation: The target string cannot be constructed from the subsequences of source string due to the character &quot;d&quot; in target string.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: source = &quot;xyz&quot;, target = &quot;xzyxz&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The target string can be constructed as follows &quot;xz&quot; + &quot;y&quot; + &quot;xz&quot;.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= source.length, target.length &lt;= 1000</code></li>
+<li><code>source</code> and <code>target</code> consist of lowercase English letters.</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">shortestWay</span><span class="params">(string source, string target)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//explain subsequence. it is a special string that remain relative position in original string</span></span><br><span class="line">        <span class="comment">//we use sub of source and use them to form target</span></span><br><span class="line">        <span class="comment">//traverse target and for each target[i] try to find matched ch in source. so we need to traverse source.</span></span><br><span class="line">            <span class="comment">//traverse source</span></span><br><span class="line">                <span class="comment">//if find matched ch in source, then increase both string index and try to find next match ch</span></span><br><span class="line">            <span class="comment">//if in current loop, num of matched is 0, then return -1</span></span><br><span class="line">            <span class="comment">//otherwise i+=num of matched</span></span><br><span class="line">        <span class="keyword">int</span> loops=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;target.<span class="built_in">size</span>();)&#123;</span><br><span class="line">            <span class="keyword">int</span> matched=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;source.<span class="built_in">size</span>();j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(target[i+matched]==source[j])&#123;</span><br><span class="line">                    matched++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(matched==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                i+=matched;</span><br><span class="line">                loops++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> loops;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Beats 100% and only one submit no debug. It seems finally i grasp some trick? Amazing.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/15/1101.%20The%20Earliest%20Moment%20When%20Everyone%20Become%20Friends/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -170,10 +248,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-05-15 00:00:00 / Modified: 18:18:56" itemprop="dateCreated datePublished" datetime="2023-05-15T00:00:00+08:00">2023-05-15</time>
+              <time title="Created: 2023-05-15 00:00:00" itemprop="dateCreated datePublished" datetime="2023-05-15T00:00:00+08:00">2023-05-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-16 20:01:05" itemprop="dateModified" datetime="2023-05-16T20:01:05+08:00">2023-05-16</time>
+              </span>
 
           
 
@@ -208,6 +292,12 @@
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRoot</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; &amp;parent, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// keep find next util next is -1</span></span><br><span class="line">        <span class="keyword">int</span> curr = x;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> next = parent[curr];</span><br><span class="line">            <span class="keyword">if</span> (next == <span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> curr;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                curr = next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">compare</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp;v1, vector&lt;<span class="keyword">int</span>&gt;&amp;v2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> v1[<span class="number">0</span>] &lt; v2[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">earliestAcq</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; &amp;logs, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// init a nodes array, every time connect two parent, we firstly find root of i, and parent[root]=j</span></span><br><span class="line">        <span class="comment">// remove j from leaves</span></span><br><span class="line">        <span class="comment">// if all leaves have same root, then return time. </span></span><br><span class="line">        <span class="comment">// otherwise, keep traversing logs</span></span><br><span class="line">        <span class="built_in">sort</span>(logs.<span class="built_in">begin</span>(), logs.<span class="built_in">end</span>(), compare);</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">parent</span><span class="params">(n, <span class="number">-1</span>)</span></span>;</span><br><span class="line">        set&lt;<span class="keyword">int</span>&gt; leaves;</span><br><span class="line">        set&lt;<span class="keyword">int</span>&gt; seen;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; logs.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = logs[i][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">int</span> y = logs[i][<span class="number">2</span>];</span><br><span class="line">            seen.<span class="built_in">insert</span>(x);</span><br><span class="line">            seen.<span class="built_in">insert</span>(y);</span><br><span class="line">            <span class="keyword">int</span> root = <span class="built_in">findRoot</span>(parent, x);</span><br><span class="line">            <span class="comment">// if root is itself, it is a leaf</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">findRoot</span>(parent,y) == root) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (x == root) &#123;</span><br><span class="line">                leaves.<span class="built_in">insert</span>(x);</span><br><span class="line">            &#125;</span><br><span class="line">            parent[root] = y;</span><br><span class="line">            leaves.<span class="built_in">erase</span>(y);</span><br><span class="line">            <span class="keyword">if</span> (seen.<span class="built_in">size</span>() == n) &#123;</span><br><span class="line">                <span class="keyword">int</span> curr_root = <span class="built_in">findRoot</span>(parent, <span class="number">0</span>);</span><br><span class="line">                <span class="keyword">bool</span> connected = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> item: leaves) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(curr_root!=<span class="built_in">findRoot</span>(parent, item))&#123;</span><br><span class="line">                        connected=<span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (connected) &#123;</span><br><span class="line">                    <span class="keyword">return</span> logs[i][<span class="number">0</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+
+
+<p>After optimization:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; parent;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; rank;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRoot</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="comment">// keep find next util curr is itself</span></span><br><span class="line">        <span class="keyword">if</span>(parent[x]==x) &#123;</span><br><span class="line">            <span class="keyword">return</span> x;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">findRoot</span>(parent[x]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">earliestAcq</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; &amp;logs, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// sort logs by time</span></span><br><span class="line">        <span class="comment">// init a parent array, every time we connect two people, we exec parent[root of i]=j</span></span><br><span class="line">        <span class="comment">// but we firstly check if i and j has been connected already.</span></span><br><span class="line">            <span class="comment">// namely find the root of j and compare it with root of i</span></span><br><span class="line">            <span class="comment">// if they equal, then they are connected.</span></span><br><span class="line">        <span class="comment">// we find root of i and parent[root]=j</span></span><br><span class="line">        <span class="built_in">sort</span>(logs.<span class="built_in">begin</span>(), logs.<span class="built_in">end</span>());</span><br><span class="line">        parent.<span class="built_in">resize</span>(n,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            parent[i]=i;</span><br><span class="line">        &#125;</span><br><span class="line">        rank.<span class="built_in">resize</span>(n,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> groups=n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;logs.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> x=logs[i][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">int</span> y=logs[i][<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">int</span> rootx=<span class="built_in">findRoot</span>(x);</span><br><span class="line">            <span class="keyword">int</span> rooty=<span class="built_in">findRoot</span>(y);</span><br><span class="line">            <span class="keyword">if</span> (rootx==rooty) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// At first, there are n independent person. if two root are not equal, then merge two groups</span></span><br><span class="line">            <span class="comment">// when only 1 group left, all people are connected</span></span><br><span class="line">            <span class="comment">// let node with higher rank be the parent</span></span><br><span class="line">            <span class="keyword">if</span>(rank[rootx]==rank[rooty])&#123;</span><br><span class="line">                parent[rootx]=rooty;</span><br><span class="line">                rank[rooty]++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(rank[rootx]&lt;rank[rooty])&#123;</span><br><span class="line">                parent[rootx]=rooty;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(rank[rootx]&gt;rank[rooty]) &#123;</span><br><span class="line">                parent[rooty]=rootx;</span><br><span class="line">            &#125;</span><br><span class="line">            groups--;</span><br><span class="line">            <span class="keyword">if</span>(groups==<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> logs[i][<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// does not exist that time</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>If rooty is root, its rank will be increased.<br>Then it will be more likely to be parent. The graph looks like a star and the root is in the center.</p>
 
       
     </div>
@@ -1108,128 +1198,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2021/08/27/8.27_%E6%80%9D%E9%94%90%E7%A7%91%E6%8A%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="illuca">
-      <meta itemprop="description" content="illuca 's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="illuca">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/27/8.27_%E6%80%9D%E9%94%90%E7%A7%91%E6%8A%80/" class="post-title-link" itemprop="url">思锐科技</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-08-27 00:00:00" itemprop="dateCreated datePublished" datetime="2021-08-27T00:00:00+08:00">2021-08-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-13 17:28:53" itemprop="dateModified" datetime="2023-05-13T17:28:53+08:00">2023-05-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="字段是日期，当时最后要求查出来是月份，月度金额"><a href="#字段是日期，当时最后要求查出来是月份，月度金额" class="headerlink" title="字段是日期，当时最后要求查出来是月份，月度金额"></a>字段是日期，当时最后要求查出来是月份，月度金额</h2><p>核心：date_format(date,%m)、month(date)</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> Salary;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> Salary (</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> auto_increment <span class="keyword">primary</span> key,</span><br><span class="line">    <span class="type">date</span> datetime <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    profit <span class="keyword">double</span> <span class="keyword">not</span> <span class="keyword">null</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Salary (id, <span class="type">date</span>, profit) <span class="keyword">VALUES</span> (<span class="keyword">null</span>,<span class="string">&#x27;2018-03-04&#x27;</span>,<span class="number">100</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Salary (id, <span class="type">date</span>, profit) <span class="keyword">VALUES</span> (<span class="keyword">null</span>,<span class="string">&#x27;2018-03-05&#x27;</span>,<span class="number">200</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Salary (id, <span class="type">date</span>, profit) <span class="keyword">VALUES</span> (<span class="keyword">null</span>,<span class="string">&#x27;2018-04-04&#x27;</span>,<span class="number">300</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Salary (id, <span class="type">date</span>, profit) <span class="keyword">VALUES</span> (<span class="keyword">null</span>,<span class="string">&#x27;2018-04-04&#x27;</span>,<span class="number">300</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Salary (id, <span class="type">date</span>, profit) <span class="keyword">VALUES</span> (<span class="keyword">null</span>,<span class="string">&#x27;2018-06-04&#x27;</span>,<span class="number">200</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> Salary (id, <span class="type">date</span>, profit) <span class="keyword">VALUES</span> (<span class="keyword">null</span>,<span class="string">&#x27;2018-07-04&#x27;</span>,<span class="number">200</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> Salary;</span><br><span class="line"></span><br><span class="line"># 月利润</span><br><span class="line"><span class="keyword">select</span> DATE_FORMAT(<span class="type">date</span>,<span class="string">&#x27;%m&#x27;</span>), <span class="built_in">sum</span>(Salary.profit) <span class="keyword">from</span> si_rui.Salary <span class="keyword">group</span> <span class="keyword">by</span> DATE_FORMAT(<span class="type">date</span>,<span class="string">&#x27;%m&#x27;</span>) ;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 月利润</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">MONTH</span>(<span class="type">date</span>) <span class="keyword">as</span> <span class="string">&#x27;月度&#x27;</span>, <span class="built_in">sum</span>(Salary.profit) <span class="keyword">as</span> <span class="string">&#x27;月利润&#x27;</span> <span class="keyword">from</span> si_rui.Salary <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">MONTH</span>(<span class="type">date</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 年利润</span><br><span class="line"><span class="keyword">select</span> DATE_FORMAT(<span class="type">date</span>,<span class="string">&#x27;%Y&#x27;</span>) <span class="keyword">as</span> <span class="string">&#x27;月度&#x27;</span>, <span class="built_in">sum</span>(Salary.profit) <span class="keyword">as</span> <span class="string">&#x27;月利润&#x27;</span> <span class="keyword">from</span> si_rui.Salary <span class="keyword">group</span> <span class="keyword">by</span> DATE_FORMAT(<span class="type">date</span>,<span class="string">&#x27;%Y&#x27;</span>) ;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="js中checkbox如何设置取消"><a href="#js中checkbox如何设置取消" class="headerlink" title="js中checkbox如何设置取消"></a>js中checkbox如何设置取消</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> check = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;input&#x27;</span>)[<span class="number">0</span>];</span><br><span class="line">check = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="sql包含三的"><a href="#sql包含三的" class="headerlink" title="sql包含三的"></a>sql包含三的</h2><p>like匹配整个单元格，regexp匹配单元格的值</p>
-<p>举例：名字中带’三’的</p>
-<p><code>select * from jwt_test.user where username like &#39;%三%&#39;;</code></p>
-<p><code>select * from jwt_test.user where username regexp &#39;三&#39;</code></p>
-<p>举例：名字带’三’或’四’的</p>
-<p><code>select * from user where username regexp &#39;三|四&#39;</code></p>
-<h2 id="spring的包"><a href="#spring的包" class="headerlink" title="spring的包"></a>spring的包</h2><p>Beans context 提供IOC</p>
-<p>expression jdbc orm test  tx事务 webmvc websocket通信</p>
-<h2 id="springmvc是控制器单例的，有什么问题，如何解决"><a href="#springmvc是控制器单例的，有什么问题，如何解决" class="headerlink" title="springmvc是控制器单例的，有什么问题，如何解决"></a>springmvc是控制器单例的，有什么问题，如何解决</h2><p>默认是单例的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/demo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MultViewController</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> st = <span class="number">0</span>;      <span class="comment">//静态的</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index = <span class="number">0</span>;          <span class="comment">//非静态</span></span><br><span class="line">   </span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/test&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">        System.out.println(st++ + <span class="string">&quot; | &quot;</span> + index++);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当多个请求即多个线程访问时，出现资源重复增加，而我们想要的不是这样，每个请求访问Controller应该有独立的属性。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">左静态 右非静态</span><br><span class="line">0 | 0</span><br><span class="line">1 | 1</span><br><span class="line">2 | 2</span><br><span class="line">3 | 3</span><br><span class="line">4 | 4</span><br></pre></td></tr></table></figure>
-
-
-
-<p>改为多例模式</p>
-<p>controller增加注解:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)</span><br></pre></td></tr></table></figure>
-
-<p>输出结果如下，可见静态资源不管是单例还是多例，表现都一致，而非静态不一致。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">左静态 右非静态</span><br><span class="line">0 | 0</span><br><span class="line">1 | 0</span><br><span class="line">2 | 0</span><br><span class="line">3 | 0</span><br><span class="line">4 | 0</span><br></pre></td></tr></table></figure>
-
-<p>解决方案是：</p>
-<ol>
-<li>不要再controller中定义成员变量</li>
-<li>定义非静态成员变量时，通过@Scope(prototype)设置为多例模式</li>
-</ol>
-<h2 id="单表1000万的数据量的经历"><a href="#单表1000万的数据量的经历" class="headerlink" title="单表1000万的数据量的经历"></a>单表1000万的数据量的经历</h2><h2 id="ajax是什么，异步和同步有什么区别"><a href="#ajax是什么，异步和同步有什么区别" class="headerlink" title="ajax是什么，异步和同步有什么区别"></a>ajax是什么，异步和同步有什么区别</h2><h2 id="a中有3个开关，b中有3个灯，互相看不见"><a href="#a中有3个开关，b中有3个灯，互相看不见" class="headerlink" title="a中有3个开关，b中有3个灯，互相看不见"></a>a中有3个开关，b中有3个灯，互相看不见</h2><h2 id="100个自然数，99个放入数组arr，找出没有放入的那个"><a href="#100个自然数，99个放入数组arr，找出没有放入的那个" class="headerlink" title="100个自然数，99个放入数组arr，找出没有放入的那个"></a>100个自然数，99个放入数组arr，找出没有放入的那个</h2><h2 id="运行时异常和一般异常有什么区别，spring的事务怎么处理"><a href="#运行时异常和一般异常有什么区别，spring的事务怎么处理" class="headerlink" title="运行时异常和一般异常有什么区别，spring的事务怎么处理"></a>运行时异常和一般异常有什么区别，spring的事务怎么处理</h2><h2 id="如何知道一串中英文字符串的字节数"><a href="#如何知道一串中英文字符串的字节数" class="headerlink" title="如何知道一串中英文字符串的字节数"></a>如何知道一串中英文字符串的字节数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String string = <span class="string">&quot;我有一个梦想i have a dream&quot;</span>;</span><br><span class="line">    <span class="keyword">byte</span>[] bytes = string.getBytes();</span><br><span class="line">    System.out.println(<span class="string">&quot;bytes.length = &quot;</span> + bytes.length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>utf-8编码中，一个英文字符占用一个字节，一个汉字占用3~4个字节。</p>
-<h2 id="sql语句如何去重"><a href="#sql语句如何去重" class="headerlink" title="sql语句如何去重"></a>sql语句如何去重</h2><p>在表中，可能会包含重复值。这并不成问题，不过，有时您也许希望仅仅列出不同（distinct）的值。</p>
-<p>关键词 DISTINCT 用于返回唯一不同的值。</p>
-<p>简单举例：<code>select distinct(Salary) from Employee;</code></p>
-<p>复杂举例：选出第二高的成绩</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">(<span class="keyword">select</span> <span class="keyword">distinct</span>(`Salary`) <span class="keyword">from</span> Employee <span class="keyword">order</span> <span class="keyword">by</span> Salary <span class="keyword">desc</span> limit <span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"><span class="keyword">as</span> SecondHighestSalary;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://p.ipic.vip/oxi2oa.png" alt="image-20230513192840909"></p>
-<p>distinct是去重的意思</p>
-<h2 id="list如何去重"><a href="#list如何去重" class="headerlink" title="list如何去重"></a>list如何去重</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeDuplicateUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 2个同名的人</span></span><br><span class="line">        User user1 = <span class="keyword">new</span> User(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;123&quot;</span>);</span><br><span class="line">        User user2 = <span class="keyword">new</span> User(<span class="string">&quot;张三&quot;</span>, <span class="string">&quot;888&quot;</span>);</span><br><span class="line">        User user3 = <span class="keyword">new</span> User(<span class="string">&quot;李四&quot;</span>, <span class="string">&quot;789&quot;</span>);</span><br><span class="line"></span><br><span class="line">        List&lt;User&gt; userList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        userList.add(user1);</span><br><span class="line">        userList.add(user2);</span><br><span class="line">        userList.add(user3);</span><br><span class="line">        System.out.println(<span class="string">&quot;去重前&quot;</span>);</span><br><span class="line">        System.out.println(userList);</span><br><span class="line">        HashSet&lt;String&gt; hashSet = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        List&lt;User&gt; unique = userList.stream()</span><br><span class="line">                .filter(e -&gt; &#123;</span><br><span class="line">                    <span class="comment">// 如果已经存在 返回false</span></span><br><span class="line">                    <span class="comment">// filter接收一个断言</span></span><br><span class="line">                    <span class="keyword">return</span> hashSet.add(e.getUsername());</span><br><span class="line">                &#125;)</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line">        System.out.println(<span class="string">&quot;去重后&quot;</span>);</span><br><span class="line">        System.out.println(unique);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="索引问题-外键是否建立了索引"><a href="#索引问题-外键是否建立了索引" class="headerlink" title="索引问题 外键是否建立了索引"></a>索引问题 外键是否建立了索引</h2><h2 id="如何防止sql注入"><a href="#如何防止sql注入" class="headerlink" title="如何防止sql注入"></a>如何防止sql注入</h2><h2 id="如果两个线程同时对某个文件写入会发生什么？"><a href="#如果两个线程同时对某个文件写入会发生什么？" class="headerlink" title="如果两个线程同时对某个文件写入会发生什么？"></a>如果两个线程同时对某个文件写入会发生什么？</h2><h2 id="vue手动实现v-model"><a href="#vue手动实现v-model" class="headerlink" title="vue手动实现v-model"></a>vue手动实现v-model</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1299,7 +1267,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
