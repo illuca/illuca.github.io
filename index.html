@@ -147,6 +147,155 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/20/214.%20Shortest%20Palindrome/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="illuca">
+      <meta itemprop="description" content="illuca 's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="illuca">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/20/214.%20Shortest%20Palindrome/" class="post-title-link" itemprop="url">214. Shortest Palindrome</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-05-20 00:00:00" itemprop="dateCreated datePublished" datetime="2023-05-20T00:00:00+08:00">2023-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-21 15:19:39" itemprop="dateModified" datetime="2023-05-21T15:19:39+08:00">2023-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Firstly, i use brute method to solve it, but get Time Limit.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> &amp;left, <span class="keyword">int</span> &amp;right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">bool</span> isEven = (left+right)%<span class="number">2</span>==<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(isEven)&#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            left--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">string <span class="title">shortestPalindrome</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//there is a string s. I need to add chs to convert it to a palindrome.</span></span><br><span class="line">        <span class="comment">//I only can add chs in front of s.</span></span><br><span class="line">        <span class="comment">//There many ways to form a palindrome by adding chs. But you must add fewest chs so that you get the shortest palindrome.</span></span><br><span class="line">        <span class="comment">//find the center ch. check if the chs on both sides are equal. Cal the num of chs that equal.</span></span><br><span class="line">        <span class="comment">//it must cannot meet any ch that does not equal</span></span><br><span class="line">        <span class="comment">//loop util one pointer arrives bound</span></span><br><span class="line">        <span class="comment">// init mid and let it close to left end;</span></span><br><span class="line">        <span class="keyword">int</span> n=s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> left, right;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid=n/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">1</span>) &#123;</span><br><span class="line">            left=mid<span class="number">-1</span>;</span><br><span class="line">            right=mid+<span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid<span class="number">-1</span>;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> start=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> pleft=left, pright=right;</span><br><span class="line">            <span class="comment">//initial value for pleft and pright in every loop</span></span><br><span class="line">            <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// loop util pleft arrives bound or appear not equal</span></span><br><span class="line">                <span class="keyword">if</span>(pleft &lt; <span class="number">0</span> || s[pleft]!=s[pright]) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                pleft--;</span><br><span class="line">                pright++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//if left does not arrive bound, then mid--</span></span><br><span class="line">            <span class="keyword">if</span>(pleft&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="built_in">change</span>(left, right);</span><br><span class="line">            &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                start=pright;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// add [start, end].reverse to s</span></span><br><span class="line">        string sub=s.<span class="built_in">substr</span>(start, n<span class="number">-1</span>-start+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;sub.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            s=sub[i]+s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Actually, this problem can be converted to find the longest common part and we only need the last comparison. </p>
+<p>We compare [0:matched]==[i-matched, i]</p>
+<p>We can use KMP to boost the process. Otherwise, every time we fail to match s[matched] and s[i]. We need to set i as N-1 and reset matched as 0.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildArray</span><span class="params">(string &amp;s, vector&lt;<span class="keyword">int</span>&gt; &amp;back)</span> </span>&#123;</span><br><span class="line">        back[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">0</span>, i = <span class="number">1</span>; i &lt; s.<span class="built_in">size</span>();) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[len] == s[i]) &#123;</span><br><span class="line">                <span class="comment">//match then increase both and set table</span></span><br><span class="line">                <span class="comment">// len means the num of matched</span></span><br><span class="line">                back[i] = len + <span class="number">1</span>;</span><br><span class="line">                len++;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (len==<span class="number">0</span>) &#123;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    len = back[len - <span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">shortestPalindrome</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> N = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">back</span><span class="params">(N)</span></span>;</span><br><span class="line">        <span class="built_in">buildArray</span>(s, back);</span><br><span class="line">        <span class="keyword">int</span> matched = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = N - <span class="number">1</span>; i &gt;= <span class="number">0</span>;) &#123;</span><br><span class="line">            <span class="comment">//check if match then increase</span></span><br><span class="line">            <span class="keyword">if</span> (s[matched] == s[i]) &#123;</span><br><span class="line">                matched++;</span><br><span class="line">                i--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//reset matched</span></span><br><span class="line">                <span class="keyword">if</span> (matched==<span class="number">0</span>) &#123;</span><br><span class="line">                    i--;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    matched = back[matched - <span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//sub=[matched:]</span></span><br><span class="line">        string sub = s.<span class="built_in">substr</span>(matched);</span><br><span class="line">        <span class="built_in">reverse</span>(sub.<span class="built_in">begin</span>(),sub.<span class="built_in">end</span>());</span><br><span class="line">        s=sub+s;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/20/KMP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="illuca">
+      <meta itemprop="description" content="illuca 's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="illuca">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/20/KMP/" class="post-title-link" itemprop="url">KMP</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-05-20 00:00:00" itemprop="dateCreated datePublished" datetime="2023-05-20T00:00:00+08:00">2023-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-21 13:57:08" itemprop="dateModified" datetime="2023-05-21T13:57:08+08:00">2023-05-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getLongestCommonPartSize</span><span class="params">(string &amp;pat, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// For each sub string, we have [0, end-1-i], [1+i, end]</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="comment">//check if prefix[m]==suffix[m]</span></span><br><span class="line">        <span class="keyword">int</span> m = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> suffixLen = len - <span class="number">1</span> - i;</span><br><span class="line">        <span class="keyword">for</span> (; m &lt; suffixLen; m++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (pat[m] != pat[<span class="number">1</span> + i + m]) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (m == suffixLen) &#123;</span><br><span class="line">            <span class="comment">// match</span></span><br><span class="line">            <span class="keyword">return</span> m;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">KMPSearch</span><span class="params">(string &amp;pat, string &amp;txt)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//construct suffix table</span></span><br><span class="line">    <span class="comment">//suffix table has the same size as pat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//ababa</span></span><br><span class="line">    <span class="comment">//0 a</span></span><br><span class="line">    <span class="comment">//0 ab</span></span><br><span class="line">    <span class="comment">//1 aba</span></span><br><span class="line">    <span class="comment">//2 abab</span></span><br><span class="line">    <span class="keyword">int</span> suffix[pat.<span class="built_in">size</span>()];</span><br><span class="line">    suffix[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">    <span class="comment">// we totally have pat.size()-1 sub string</span></span><br><span class="line">    <span class="comment">//i is the size of substring</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">1</span>; len &lt; pat.<span class="built_in">size</span>(); len++) &#123;</span><br><span class="line">        suffix[len] = <span class="built_in">getLongestCommonPartSize</span>(pat, len);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//check if pat[j]==txt[i]</span></span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">0</span>, i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">//break if one of the pointers overflow</span></span><br><span class="line">        <span class="comment">//if match, then both pointer++</span></span><br><span class="line">        <span class="comment">//else: check if can move(big&#x27;s pointer+small&#x27;s size==big&#x27;s size)</span></span><br><span class="line">        <span class="comment">// move pat to where fails</span></span><br><span class="line">        <span class="comment">//set pat&#x27;s p as suffix[p]</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= txt.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (j &gt;= pat.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            cout &lt;&lt; i - pat.<span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">            j = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (pat[j] == txt[i]) &#123;</span><br><span class="line">            j++;</span><br><span class="line">            i++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// check can move</span></span><br><span class="line">            <span class="keyword">if</span> (i + pat.<span class="built_in">size</span>() == txt.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (suffix[j] == <span class="number">-1</span>) &#123;</span><br><span class="line">                i++;</span><br><span class="line">                j = <span class="number">0</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                j = suffix[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (j &gt;= pat.<span class="built_in">size</span>()) &#123;</span><br><span class="line">        cout &lt;&lt; i - pat.<span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string txt = <span class="string">&quot;ABABDABACDABABCABAB&quot;</span>;</span><br><span class="line">    string pat = <span class="string">&quot;ABABCABAB&quot;</span>;</span><br><span class="line">    <span class="built_in">KMPSearch</span>(pat, txt);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>The size of pat is M.</p>
+<p>The process of build suffix table is O(M^2), we need to optimize it.</p>
+<p>There are ways of implementing the loop.</p>
+<p>One way is:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//if matched then increase both pointers and set table</span></span><br><span class="line"><span class="comment">//else go back to find previous matched to start</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">0</span>, i=<span class="number">1</span>;i&lt;s.<span class="built_in">size</span>();)&#123;</span><br><span class="line">  <span class="keyword">if</span> (s[len] == s[i]) &#123;</span><br><span class="line">    len++;</span><br><span class="line">    back[i] = len;</span><br><span class="line">    i++;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (len==<span class="number">0</span>) &#123;</span><br><span class="line">      i++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      len = back[len - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Another is:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//loop util find a character matched</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">0</span>, i=<span class="number">1</span>;i&lt;s.<span class="built_in">size</span>();)&#123;</span><br><span class="line">  <span class="keyword">while</span>(len&gt;=<span class="number">1</span>&amp;&amp;s[i]!=s[len])&#123;</span><br><span class="line">    len=back[len<span class="number">-1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(len&lt;<span class="number">1</span>&amp;&amp;s[i]!=s[len]) &#123;</span><br><span class="line">    i++;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">//matched</span></span><br><span class="line">    len++;</span><br><span class="line">    back[i]=len;</span><br><span class="line">    i++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The prefix and suffix are like two eras before and after, all conditions are the same, but at a certain point in time, the latter era B is destroyed. Therefore, era A, at that point, needs to make a different move than B to possibly succeed.</p>
+<p>Era A = [Common Part + Different Part]<br>Era B = [Common Part]</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/18/2013.%20Detect%20Squares/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -857,302 +1006,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2021/08/31/8.31_%E9%B9%8F%E4%BF%A1%E7%A7%91%E6%8A%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="illuca">
-      <meta itemprop="description" content="illuca 's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="illuca">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/31/8.31_%E9%B9%8F%E4%BF%A1%E7%A7%91%E6%8A%80/" class="post-title-link" itemprop="url">鹏信科技</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-08-31 00:00:00" itemprop="dateCreated datePublished" datetime="2021-08-31T00:00:00+08:00">2021-08-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-13 17:31:09" itemprop="dateModified" datetime="2023-05-13T17:31:09+08:00">2023-05-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="村民-干部"><a href="#村民-干部" class="headerlink" title="村民 干部"></a>村民 干部</h2><p>今天的面试题:<br>村里新来一位干部，5位村民分别听到关于这位干部的如下情况：</p>
-<p>(1)姓莫，中年，女干部，精通会计;</p>
-<p>(2)姓徐，中年，男干部，懂建筑设计;</p>
-<p>(3)姓刘，青年，男干部，熟悉农业生产技术;</p>
-<p>(4)姓吕，青年，男干部，懂建筑设计;</p>
-<p>(5)姓莫，老年，男干部，熟悉农业生产技术。</p>
-<p>每位村民听到的四项情况中各只有一项正确。这位新来的干部是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">假设精通农业，则不姓刘、莫，不为青、老，不为男，</span><br><span class="line">	则姓徐、吕，为中，为女</span><br><span class="line">	则为徐中女、吕中女，则(1)命中2个条件，不符合</span><br><span class="line">	</span><br><span class="line">假设精通建筑，则不姓徐、吕，不为中、青，不为男，</span><br><span class="line">	则姓刘、莫，为老，为女</span><br><span class="line">	则为刘老女、莫老女，</span><br><span class="line">	莫老女时，(5)命中2个条件，不符合</span><br><span class="line">	刘老女时，符合</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="计算字符出现的次数，字符之间用分号间隔"><a href="#计算字符出现的次数，字符之间用分号间隔" class="headerlink" title="计算字符出现的次数，字符之间用分号间隔"></a>计算字符出现的次数，字符之间用分号间隔</h2><p>例如HelloWorld，输出H-1;e-1;l-3;o-2;d-1</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">countAndPrint</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">        Map&lt;Character, Integer&gt; map = <span class="keyword">new</span> LinkedHashMap&lt;&gt;();</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">// 计数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; input.length(); i++) &#123;</span><br><span class="line">            Character ch = input.charAt(i);</span><br><span class="line">            <span class="keyword">if</span> (!map.containsKey(ch)) &#123;</span><br><span class="line">                map.put(ch, <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                map.put(ch, map.get(ch) + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 遍历map并添加到list中</span></span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;Character, Integer&gt; entry : map.entrySet()) &#123;</span><br><span class="line">            list.add(entry.getKey() + <span class="string">&quot;-&quot;</span> + entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">        String res = StringUtils.join(list, <span class="string">&quot;;&quot;</span>);</span><br><span class="line">        System.out.println(res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        countAndPrint(<span class="string">&quot;HelloWorld&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>因为要顺序的输出，所以用到LinkedHashMap</p>
-<p>方法二：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">countAndPrint2</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> len = (<span class="keyword">int</span>) <span class="string">&#x27;z&#x27;</span>;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 默认初始化为0</span></span><br><span class="line">       <span class="keyword">int</span>[] num = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">       Set&lt;Character&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">       List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; input.length(); i++) &#123;</span><br><span class="line">           <span class="keyword">char</span> ch = input.charAt(i);</span><br><span class="line">           num[ch] += <span class="number">1</span>;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; input.length(); i++) &#123;</span><br><span class="line">           <span class="keyword">char</span> ch = input.charAt(i);</span><br><span class="line">           <span class="keyword">if</span> (!set.contains(ch)) &#123;</span><br><span class="line">               list.add(ch + <span class="string">&quot;-&quot;</span> + num[ch]);</span><br><span class="line">           &#125;</span><br><span class="line">           set.add(ch);</span><br><span class="line">       &#125;</span><br><span class="line">       String res = StringUtils.join(list, <span class="string">&quot;;&quot;</span>);</span><br><span class="line">       System.out.println(res);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="redis的数据类型"><a href="#redis的数据类型" class="headerlink" title="redis的数据类型"></a>redis的数据类型</h2><p>List、Hash、Set</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建并初始化</span></span><br><span class="line">$ LPUSH list1 5 6 7 8 9</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">$ LRANGE list1 0 -1</span><br><span class="line">9</span><br><span class="line">8</span><br><span class="line">7</span><br><span class="line">6</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
-
-<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p>list是一个栈，操作是lpush、rpush、lpop、rpop</p>
-<p>lpush表示list push、lrange表示list range</p>
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">set</span> username naruto</span><br><span class="line">$ get username</span><br><span class="line">naruto</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="hmset-表示hash-multiple-set"><a href="#hmset-表示hash-multiple-set" class="headerlink" title="hmset 表示hash multiple set"></a>hmset 表示hash multiple set</h3><p>可以一次插入多个键值对</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建并初始化</span></span><br><span class="line">$ hmset student01 name <span class="string">&quot;naruto&quot;</span> age 18</span><br><span class="line"><span class="comment"># 获取键值</span></span><br><span class="line">$ hget student01 name</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="hset-表示hash-set"><a href="#hset-表示hash-set" class="headerlink" title="hset 表示hash set"></a>hset 表示hash set</h3><p>与hmset相比，一次只能插入一个键值对</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建并初始化</span></span><br><span class="line">$ hset student01 name <span class="string">&quot;naruto&quot;</span></span><br><span class="line">$ hset student02 age 18</span><br><span class="line"><span class="comment"># 获取键值</span></span><br><span class="line">$ hget student01 name</span><br></pre></td></tr></table></figure>
-
-<h3 id="set-表示无序集合"><a href="#set-表示无序集合" class="headerlink" title="set 表示无序集合"></a>set 表示无序集合</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd student_name naruto</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd student_name <span class="string">&quot;sasuke&quot;</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd student_name sakura</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; smembers student_name</span><br><span class="line">1) <span class="string">&quot;sakura&quot;</span></span><br><span class="line">2) <span class="string">&quot;naruto&quot;</span></span><br><span class="line">3) <span class="string">&quot;sasuke&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>可以看到并没有按照我们添加的顺序进行打印，所以是无序集合</p>
-<h3 id="zset-表示有序集合"><a href="#zset-表示有序集合" class="headerlink" title="zset 表示有序集合"></a>zset 表示有序集合</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zadd roles 1 大蛇</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd roles 2 八神奄</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd roles 2 隆</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd roles 3 草薙京</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zrange roles 0 10</span><br><span class="line">大蛇</span><br><span class="line">八神奄</span><br><span class="line">隆</span><br><span class="line">草薙京</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zrange roles 0 10 withscores</span><br><span class="line">大蛇</span><br><span class="line">1</span><br><span class="line">八神奄</span><br><span class="line">2</span><br><span class="line">隆</span><br><span class="line">2</span><br><span class="line">草薙京</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="hashmap的属性"><a href="#hashmap的属性" class="headerlink" title="hashmap的属性"></a>hashmap的属性</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">int</span> threshold;</span><br><span class="line"><span class="comment">// 存放键值对</span></span><br><span class="line"><span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</span><br><span class="line"></span><br><span class="line">The number of key-value mappings contained in <span class="keyword">this</span> map.</span><br><span class="line"><span class="keyword">transient</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 是缓存</span></span><br><span class="line"><span class="comment">// Holds cached entrySet(). Note that AbstractMap fields are used for keySet() and values().</span></span><br><span class="line"><span class="keyword">transient</span> Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;</span><br></pre></td></tr></table></figure>
-
-<p>threshold阈值</p>
-<p>threshold表示当HashMap的size大于threshold时会执行resize操作。<br>threshold=capacity*loadFactor</p>
-<h2 id="hashmap的方法"><a href="#hashmap的方法" class="headerlink" title="hashmap的方法"></a>hashmap的方法</h2><p>isEmpty()</p>
-<p>containsKey()，containsValue()</p>
-<p>entrySet()</p>
-<p>put()</p>
-<p>putAll()</p>
-<p>remove()</p>
-<p>keys()，values()</p>
-<p>clear()</p>
-<p>get()</p>
-<h2 id="hashmap用到的设计模式"><a href="#hashmap用到的设计模式" class="headerlink" title="hashmap用到的设计模式"></a>hashmap用到的设计模式</h2><p>Nodes</p>
-<p>组合模式、代理模式</p>
-<h3 id="composite"><a href="#composite" class="headerlink" title="composite"></a>composite</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lin.composite;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">OrganizationComponmet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> String des;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(OrganizationComponmet organizationComponmet)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(OrganizationComponmet organizationComponmet)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">OrganizationComponmet</span><span class="params">(String name, String des)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.des = des;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> des;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDes</span><span class="params">(String des)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.des = des;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</span><br><span class="line">       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="University"><a href="#University" class="headerlink" title="University"></a>University</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lin.composite;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">University</span> <span class="keyword">extends</span> <span class="title">OrganizationComponmet</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;OrganizationComponmet&gt; organizationComponmets = <span class="keyword">new</span> ArrayList&lt;OrganizationComponmet&gt;();</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">University</span><span class="params">(String name, String des)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name, des);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(OrganizationComponmet organizationComponmet)</span> </span>&#123;</span><br><span class="line">        organizationComponmets.add(organizationComponmet);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(OrganizationComponmet organizationComponmet)</span> </span>&#123;</span><br><span class="line">        organizationComponmets.remove(organizationComponmet);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getDes();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.getName();</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">        System.out.println(<span class="string">&quot;---------------------&quot;</span> + getName() + <span class="string">&quot;--------------------&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (OrganizationComponmet organizationComponmet : organizationComponmets) &#123;</span><br><span class="line">            organizationComponmet.print();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="College"><a href="#College" class="headerlink" title="College"></a>College</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lin.composite;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">College</span> <span class="keyword">extends</span> <span class="title">OrganizationComponmet</span></span>&#123;</span><br><span class="line"></span><br><span class="line">List&lt;OrganizationComponmet&gt; organizationComponmets = <span class="keyword">new</span> ArrayList&lt;OrganizationComponmet&gt;();</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">College</span><span class="params">(String name, String des)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name, des);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(OrganizationComponmet organizationComponmet)</span> </span>&#123;</span><br><span class="line">        organizationComponmets.add(organizationComponmet);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(OrganizationComponmet organizationComponmet)</span> </span>&#123;</span><br><span class="line">        organizationComponmets.remove(organizationComponmet);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getDes();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.getName();</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">        System.out.println(<span class="string">&quot;---------------------&quot;</span> + getName() + <span class="string">&quot;--------------------&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (OrganizationComponmet organizationComponmet : organizationComponmets) &#123;</span><br><span class="line">            organizationComponmet.print();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Department"><a href="#Department" class="headerlink" title="Department"></a>Department</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lin.composite;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Department</span> <span class="keyword">extends</span> <span class="title">OrganizationComponmet</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Department</span><span class="params">(String name, String des)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name, des);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getDes();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.getName();</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(getName());</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lin.composite;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        OrganizationComponmet university = <span class="keyword">new</span> University(<span class="string">&quot;波大&quot;</span>, <span class="string">&quot;美国大学&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        OrganizationComponmet college1 = <span class="keyword">new</span> College(<span class="string">&quot;计算机学院&quot;</span>, <span class="string">&quot;计算机&quot;</span>);</span><br><span class="line">        OrganizationComponmet college2 = <span class="keyword">new</span> College(<span class="string">&quot;中文学院&quot;</span>, <span class="string">&quot;中文&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        university.add(college1);</span><br><span class="line">        university.add(college2);</span><br><span class="line">        </span><br><span class="line">        OrganizationComponmet department1 = <span class="keyword">new</span> Department(<span class="string">&quot;软件工程专业&quot;</span>, <span class="string">&quot;软件&quot;</span>);</span><br><span class="line">        OrganizationComponmet department2 = <span class="keyword">new</span> Department(<span class="string">&quot;大数据专业&quot;</span>, <span class="string">&quot;大数据&quot;</span>);</span><br><span class="line">        OrganizationComponmet department3 = <span class="keyword">new</span> Department(<span class="string">&quot;汉语言专业&quot;</span>, <span class="string">&quot;汉语言&quot;</span>);</span><br><span class="line">        OrganizationComponmet department4 = <span class="keyword">new</span> Department(<span class="string">&quot;中华文化专业&quot;</span>, <span class="string">&quot;中华文化&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        college1.add(department1);</span><br><span class="line">        college1.add(department2);</span><br><span class="line">        college2.add(department3);</span><br><span class="line">        college2.add(department4);</span><br><span class="line">        </span><br><span class="line">        university.print();</span><br><span class="line">        System.out.println(<span class="string">&quot;--------------------------------------------&quot;</span>);</span><br><span class="line">        college1.print();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p><img src="https://p.ipic.vip/sk2cbk.jpg" alt="74922d10b7121f73e972951901eb44c2"></p>
-<p><img src="https://p.ipic.vip/x26tn2.jpg" alt="92205c7628d7b345f2b6e6f2a17e21e2"></p>
-<p>Map的put、putall交给AbstractHashMap实现，再交给HashMap实现，而结点的管理交给Node来实现。</p>
-<h3 id="什么是组合模式？"><a href="#什么是组合模式？" class="headerlink" title="什么是组合模式？"></a>什么是组合模式？</h3><p>大部分国家的军队都采用层次结构管理。 每支部队包括几个师， 师由旅构成， 旅由团构成， 团可以继续划分为排。 最后， 每个排由一小队实实在在的士兵组成。 军事命令由最高层下达， 通过每个层级传递， 直到每位士兵都知道自己应该服从的命令。</p>
-<img src="https://p.ipic.vip/e3fx1k.jpg" alt="0d636cc347c14d64bac869bfc7d49268" style="zoom: 33%;" />
-
-<ol>
-<li><p><strong>组件</strong> （Component） 接口描述了树中简单项目和复杂项目所共有的操作。</p>
-</li>
-<li><p><strong>叶节点</strong> （Leaf） 是树的基本结构， 它不包含子项目。</p>
-<p> 一般情况下， 叶节点最终会完成大部分的实际工作， 因为它们无法将工作指派给其他部分。</p>
-</li>
-<li><p><strong>容器</strong> （Container）——又名 “组合 （Composite）”——是包含叶节点或其他容器等子项目的单位。 容器不知道其子项目所属的具体类， 它只通过通用的组件接口与其子项目交互。</p>
-<p> 容器接收到请求后会将工作分配给自己的子项目， 处理中间结果， 然后将最终结果返回给客户端。</p>
-</li>
-<li><p><strong>客户端</strong> （Client） 通过组件接口与所有项目交互。 因此， 客户端能以相同方式与树状结构中的简单或复杂项目交互。</p>
-</li>
-</ol>
-<p>而Map也是一样，先让AbstractHashMap完成一些事情，再将剩下的任务交给HashMap完成，HashMap又将一部分任务交给Node完成，Node是容器。</p>
-<h2 id="和-的区别"><a href="#和-的区别" class="headerlink" title="${}和#{}的区别"></a>${}和#{}的区别</h2><p>#{}是预编译，${}是字符串替换</p>
-<h2 id="mybatis有什么好处"><a href="#mybatis有什么好处" class="headerlink" title="mybatis有什么好处"></a>mybatis有什么好处</h2><ul>
-<li>sql参数注入、返回</li>
-<li>动态sql</li>
-</ul>
-<h2 id="mybatis注入支持的数据类型"><a href="#mybatis注入支持的数据类型" class="headerlink" title="mybatis注入支持的数据类型"></a>mybatis注入支持的数据类型</h2><p>基本数据类型：整型、浮点、字符串</p>
-<p>复杂数据类型：Map、引用</p>
-<table>
-<thead>
-<tr>
-<th>java</th>
-<th>sql</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>String</td>
-<td>varchar</td>
-<td></td>
-</tr>
-<tr>
-<td>Integer</td>
-<td>Integer</td>
-<td></td>
-</tr>
-<tr>
-<td>BigDecimal</td>
-<td>numeric</td>
-<td></td>
-</tr>
-<tr>
-<td>date</td>
-<td>date</td>
-<td></td>
-</tr>
-<tr>
-<td>calendar</td>
-<td>timestamp</td>
-<td></td>
-</tr>
-<tr>
-<td>byte[]</td>
-<td>blob</td>
-<td></td>
-</tr>
-<tr>
-<td>Double</td>
-<td>double</td>
-<td></td>
-</tr>
-</tbody></table>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里parameterType是Map</span></span><br><span class="line">&lt;sql id=<span class="string">&quot;Base_Column_List&quot;</span> &gt; </span><br><span class="line"> id, car_dept_name, car_maker_name, icon,car_maker_py,hot_type </span><br><span class="line"> &lt;/sql&gt; </span><br><span class="line"> &lt;select id=<span class="string">&quot;selectByPrimaryKey&quot;</span> resultMap=<span class="string">&quot;BaseResultMap&quot;</span> parameterType=<span class="string">&quot;java.lang.Long&quot;</span> &gt; </span><br><span class="line"> select </span><br><span class="line"> &lt;include refid=<span class="string">&quot;Base_Column_List&quot;</span> /&gt; </span><br><span class="line"> from common_car_make </span><br><span class="line"> where id = #&#123;id,jdbcType=BIGINT&#125; </span><br><span class="line"> &lt;/select&gt; </span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// parameterType是自定义引用类型</span></span><br><span class="line">&lt;update id=<span class="string">&quot;updateByPrimaryKeySelective&quot;</span> parameterType=<span class="string">&quot;com.illuca.entity.Student&quot;</span> &gt; </span><br><span class="line"> update student </span><br><span class="line"> &lt;set &gt; </span><br><span class="line">  &lt;<span class="keyword">if</span> test=<span class="string">&quot;studentName != null&quot;</span> &gt; </span><br><span class="line">  student_name = #&#123;studentName,jdbcType=VARCHAR&#125;, </span><br><span class="line">  &lt;/<span class="keyword">if</span>&gt; </span><br><span class="line">  &lt;<span class="keyword">if</span> test=<span class="string">&quot;score != null&quot;</span> &gt; </span><br><span class="line">  score = #&#123;score,jdbcType=VARCHAR&#125;</span><br><span class="line"> &lt;/set&gt; </span><br><span class="line"> where student_id = #&#123;studentId,jdbcType=BIGINT&#125; </span><br><span class="line"> &lt;/update&gt; </span><br></pre></td></tr></table></figure>
-
-<h2 id="删除A中存在但B中不存在的记录"><a href="#删除A中存在但B中不存在的记录" class="headerlink" title="删除A中存在但B中不存在的记录"></a>删除A中存在但B中不存在的记录</h2><p>delete from A where tagetColumn not in ( select targetColumn from B)</p>
-<h2 id="网关解决什么问题？什么是熔断？"><a href="#网关解决什么问题？什么是熔断？" class="headerlink" title="网关解决什么问题？什么是熔断？"></a>网关解决什么问题？什么是熔断？</h2><p>解决路由问题</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2021/08/30/8.30_%E9%9D%A2%E8%AF%95%E4%B8%8A%E6%B5%B7%E5%90%8C%E4%BD%99%E7%A7%91%E6%8A%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="illuca">
-      <meta itemprop="description" content="illuca 's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="illuca">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/30/8.30_%E9%9D%A2%E8%AF%95%E4%B8%8A%E6%B5%B7%E5%90%8C%E4%BD%99%E7%A7%91%E6%8A%80/" class="post-title-link" itemprop="url">同余科技</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-08-30 00:00:00" itemprop="dateCreated datePublished" datetime="2021-08-30T00:00:00+08:00">2021-08-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-12 21:59:08" itemprop="dateModified" datetime="2023-05-12T21:59:08+08:00">2023-05-12</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="多线程在项目中有运用么？"><a href="#多线程在项目中有运用么？" class="headerlink" title="多线程在项目中有运用么？"></a>多线程在项目中有运用么？</h2><h2 id="后端单元测试包，生成假数据"><a href="#后端单元测试包，生成假数据" class="headerlink" title="后端单元测试包，生成假数据"></a>后端单元测试包，生成假数据</h2><p>Mock</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> WebApplicationContext webApplicationContext;</span><br><span class="line"><span class="keyword">private</span> MockMvc mockMvc;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在每个测试方法执行之前都初始化MockMvc对象</span></span><br><span class="line"><span class="meta">@BeforeEach</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setupMockMvc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DisplayName(&quot;测试根据Id获取User&quot;)</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//perform,执行一个RequestBuilders请求，会自动执行SpringMVC的流程并映射到相应的控制器执行处理</span></span><br><span class="line">    mockMvc.perform(MockMvcRequestBuilders</span><br><span class="line">        <span class="comment">//构造一个get请求</span></span><br><span class="line">        .get(<span class="string">&quot;/user/1&quot;</span>)</span><br><span class="line">        <span class="comment">//请求类型 json</span></span><br><span class="line">        .contentType(MediaType.APPLICATION_JSON))</span><br><span class="line">        <span class="comment">// 期待返回的状态码是4XX，因为我们并没有写/user/&#123;id&#125;的get接口</span></span><br><span class="line">        .andExpect(MockMvcResultMatchers.status().is4xxClientError());</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="jwt在项目中应用"><a href="#jwt在项目中应用" class="headerlink" title="jwt在项目中应用"></a>jwt在项目中应用</h2><p>生成token</p>
-<p>TOKEN分为3个部分=头部 负载  签证</p>
-<p>头部声明jwt和所用算法</p>
-<p>负载包含用户信息</p>
-<p>用加密算法生成signature</p>
-<h2 id="nacos作用"><a href="#nacos作用" class="headerlink" title="nacos作用"></a>nacos作用</h2><p>负载均衡 注册中心 </p>
-<h2 id="redis项目中应用"><a href="#redis项目中应用" class="headerlink" title="redis项目中应用"></a>redis项目中应用</h2><h2 id="单点登录"><a href="#单点登录" class="headerlink" title="单点登录"></a>单点登录</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1218,7 +1075,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

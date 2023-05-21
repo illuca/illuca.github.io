@@ -147,6 +147,298 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2021/08/31/8.31_%E9%B9%8F%E4%BF%A1%E7%A7%91%E6%8A%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="illuca">
+      <meta itemprop="description" content="illuca 's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="illuca">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/31/8.31_%E9%B9%8F%E4%BF%A1%E7%A7%91%E6%8A%80/" class="post-title-link" itemprop="url">鹏信科技</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-08-31 00:00:00" itemprop="dateCreated datePublished" datetime="2021-08-31T00:00:00+08:00">2021-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-13 17:31:09" itemprop="dateModified" datetime="2023-05-13T17:31:09+08:00">2023-05-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="村民-干部"><a href="#村民-干部" class="headerlink" title="村民 干部"></a>村民 干部</h2><p>今天的面试题:<br>村里新来一位干部，5位村民分别听到关于这位干部的如下情况：</p>
+<p>(1)姓莫，中年，女干部，精通会计;</p>
+<p>(2)姓徐，中年，男干部，懂建筑设计;</p>
+<p>(3)姓刘，青年，男干部，熟悉农业生产技术;</p>
+<p>(4)姓吕，青年，男干部，懂建筑设计;</p>
+<p>(5)姓莫，老年，男干部，熟悉农业生产技术。</p>
+<p>每位村民听到的四项情况中各只有一项正确。这位新来的干部是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">假设精通农业，则不姓刘、莫，不为青、老，不为男，</span><br><span class="line">	则姓徐、吕，为中，为女</span><br><span class="line">	则为徐中女、吕中女，则(1)命中2个条件，不符合</span><br><span class="line">	</span><br><span class="line">假设精通建筑，则不姓徐、吕，不为中、青，不为男，</span><br><span class="line">	则姓刘、莫，为老，为女</span><br><span class="line">	则为刘老女、莫老女，</span><br><span class="line">	莫老女时，(5)命中2个条件，不符合</span><br><span class="line">	刘老女时，符合</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="计算字符出现的次数，字符之间用分号间隔"><a href="#计算字符出现的次数，字符之间用分号间隔" class="headerlink" title="计算字符出现的次数，字符之间用分号间隔"></a>计算字符出现的次数，字符之间用分号间隔</h2><p>例如HelloWorld，输出H-1;e-1;l-3;o-2;d-1</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">countAndPrint</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">        Map&lt;Character, Integer&gt; map = <span class="keyword">new</span> LinkedHashMap&lt;&gt;();</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">// 计数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; input.length(); i++) &#123;</span><br><span class="line">            Character ch = input.charAt(i);</span><br><span class="line">            <span class="keyword">if</span> (!map.containsKey(ch)) &#123;</span><br><span class="line">                map.put(ch, <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                map.put(ch, map.get(ch) + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 遍历map并添加到list中</span></span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;Character, Integer&gt; entry : map.entrySet()) &#123;</span><br><span class="line">            list.add(entry.getKey() + <span class="string">&quot;-&quot;</span> + entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">        String res = StringUtils.join(list, <span class="string">&quot;;&quot;</span>);</span><br><span class="line">        System.out.println(res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        countAndPrint(<span class="string">&quot;HelloWorld&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为要顺序的输出，所以用到LinkedHashMap</p>
+<p>方法二：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">countAndPrint2</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> len = (<span class="keyword">int</span>) <span class="string">&#x27;z&#x27;</span>;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 默认初始化为0</span></span><br><span class="line">       <span class="keyword">int</span>[] num = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">       Set&lt;Character&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">       List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; input.length(); i++) &#123;</span><br><span class="line">           <span class="keyword">char</span> ch = input.charAt(i);</span><br><span class="line">           num[ch] += <span class="number">1</span>;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; input.length(); i++) &#123;</span><br><span class="line">           <span class="keyword">char</span> ch = input.charAt(i);</span><br><span class="line">           <span class="keyword">if</span> (!set.contains(ch)) &#123;</span><br><span class="line">               list.add(ch + <span class="string">&quot;-&quot;</span> + num[ch]);</span><br><span class="line">           &#125;</span><br><span class="line">           set.add(ch);</span><br><span class="line">       &#125;</span><br><span class="line">       String res = StringUtils.join(list, <span class="string">&quot;;&quot;</span>);</span><br><span class="line">       System.out.println(res);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="redis的数据类型"><a href="#redis的数据类型" class="headerlink" title="redis的数据类型"></a>redis的数据类型</h2><p>List、Hash、Set</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建并初始化</span></span><br><span class="line">$ LPUSH list1 5 6 7 8 9</span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line">$ LRANGE list1 0 -1</span><br><span class="line">9</span><br><span class="line">8</span><br><span class="line">7</span><br><span class="line">6</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p>list是一个栈，操作是lpush、rpush、lpop、rpop</p>
+<p>lpush表示list push、lrange表示list range</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">set</span> username naruto</span><br><span class="line">$ get username</span><br><span class="line">naruto</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="hmset-表示hash-multiple-set"><a href="#hmset-表示hash-multiple-set" class="headerlink" title="hmset 表示hash multiple set"></a>hmset 表示hash multiple set</h3><p>可以一次插入多个键值对</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建并初始化</span></span><br><span class="line">$ hmset student01 name <span class="string">&quot;naruto&quot;</span> age 18</span><br><span class="line"><span class="comment"># 获取键值</span></span><br><span class="line">$ hget student01 name</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="hset-表示hash-set"><a href="#hset-表示hash-set" class="headerlink" title="hset 表示hash set"></a>hset 表示hash set</h3><p>与hmset相比，一次只能插入一个键值对</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建并初始化</span></span><br><span class="line">$ hset student01 name <span class="string">&quot;naruto&quot;</span></span><br><span class="line">$ hset student02 age 18</span><br><span class="line"><span class="comment"># 获取键值</span></span><br><span class="line">$ hget student01 name</span><br></pre></td></tr></table></figure>
+
+<h3 id="set-表示无序集合"><a href="#set-表示无序集合" class="headerlink" title="set 表示无序集合"></a>set 表示无序集合</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd student_name naruto</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd student_name <span class="string">&quot;sasuke&quot;</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd student_name sakura</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; smembers student_name</span><br><span class="line">1) <span class="string">&quot;sakura&quot;</span></span><br><span class="line">2) <span class="string">&quot;naruto&quot;</span></span><br><span class="line">3) <span class="string">&quot;sasuke&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到并没有按照我们添加的顺序进行打印，所以是无序集合</p>
+<h3 id="zset-表示有序集合"><a href="#zset-表示有序集合" class="headerlink" title="zset 表示有序集合"></a>zset 表示有序集合</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zadd roles 1 大蛇</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd roles 2 八神奄</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd roles 2 隆</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd roles 3 草薙京</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zrange roles 0 10</span><br><span class="line">大蛇</span><br><span class="line">八神奄</span><br><span class="line">隆</span><br><span class="line">草薙京</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zrange roles 0 10 withscores</span><br><span class="line">大蛇</span><br><span class="line">1</span><br><span class="line">八神奄</span><br><span class="line">2</span><br><span class="line">隆</span><br><span class="line">2</span><br><span class="line">草薙京</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="hashmap的属性"><a href="#hashmap的属性" class="headerlink" title="hashmap的属性"></a>hashmap的属性</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">int</span> threshold;</span><br><span class="line"><span class="comment">// 存放键值对</span></span><br><span class="line"><span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</span><br><span class="line"></span><br><span class="line">The number of key-value mappings contained in <span class="keyword">this</span> map.</span><br><span class="line"><span class="keyword">transient</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 是缓存</span></span><br><span class="line"><span class="comment">// Holds cached entrySet(). Note that AbstractMap fields are used for keySet() and values().</span></span><br><span class="line"><span class="keyword">transient</span> Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;</span><br></pre></td></tr></table></figure>
+
+<p>threshold阈值</p>
+<p>threshold表示当HashMap的size大于threshold时会执行resize操作。<br>threshold=capacity*loadFactor</p>
+<h2 id="hashmap的方法"><a href="#hashmap的方法" class="headerlink" title="hashmap的方法"></a>hashmap的方法</h2><p>isEmpty()</p>
+<p>containsKey()，containsValue()</p>
+<p>entrySet()</p>
+<p>put()</p>
+<p>putAll()</p>
+<p>remove()</p>
+<p>keys()，values()</p>
+<p>clear()</p>
+<p>get()</p>
+<h2 id="hashmap用到的设计模式"><a href="#hashmap用到的设计模式" class="headerlink" title="hashmap用到的设计模式"></a>hashmap用到的设计模式</h2><p>Nodes</p>
+<p>组合模式、代理模式</p>
+<h3 id="composite"><a href="#composite" class="headerlink" title="composite"></a>composite</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lin.composite;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">OrganizationComponmet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> String des;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(OrganizationComponmet organizationComponmet)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(OrganizationComponmet organizationComponmet)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">OrganizationComponmet</span><span class="params">(String name, String des)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.des = des;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> des;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDes</span><span class="params">(String des)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.des = des;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</span><br><span class="line">       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="University"><a href="#University" class="headerlink" title="University"></a>University</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lin.composite;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">University</span> <span class="keyword">extends</span> <span class="title">OrganizationComponmet</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;OrganizationComponmet&gt; organizationComponmets = <span class="keyword">new</span> ArrayList&lt;OrganizationComponmet&gt;();</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">University</span><span class="params">(String name, String des)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name, des);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(OrganizationComponmet organizationComponmet)</span> </span>&#123;</span><br><span class="line">        organizationComponmets.add(organizationComponmet);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(OrganizationComponmet organizationComponmet)</span> </span>&#123;</span><br><span class="line">        organizationComponmets.remove(organizationComponmet);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getDes();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.getName();</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">        System.out.println(<span class="string">&quot;---------------------&quot;</span> + getName() + <span class="string">&quot;--------------------&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (OrganizationComponmet organizationComponmet : organizationComponmets) &#123;</span><br><span class="line">            organizationComponmet.print();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="College"><a href="#College" class="headerlink" title="College"></a>College</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lin.composite;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">College</span> <span class="keyword">extends</span> <span class="title">OrganizationComponmet</span></span>&#123;</span><br><span class="line"></span><br><span class="line">List&lt;OrganizationComponmet&gt; organizationComponmets = <span class="keyword">new</span> ArrayList&lt;OrganizationComponmet&gt;();</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">College</span><span class="params">(String name, String des)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name, des);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(OrganizationComponmet organizationComponmet)</span> </span>&#123;</span><br><span class="line">        organizationComponmets.add(organizationComponmet);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(OrganizationComponmet organizationComponmet)</span> </span>&#123;</span><br><span class="line">        organizationComponmets.remove(organizationComponmet);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getDes();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.getName();</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">        System.out.println(<span class="string">&quot;---------------------&quot;</span> + getName() + <span class="string">&quot;--------------------&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (OrganizationComponmet organizationComponmet : organizationComponmets) &#123;</span><br><span class="line">            organizationComponmet.print();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Department"><a href="#Department" class="headerlink" title="Department"></a>Department</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lin.composite;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Department</span> <span class="keyword">extends</span> <span class="title">OrganizationComponmet</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Department</span><span class="params">(String name, String des)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(name, des);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getDes();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.getName();</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(getName());</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lin.composite;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        OrganizationComponmet university = <span class="keyword">new</span> University(<span class="string">&quot;波大&quot;</span>, <span class="string">&quot;美国大学&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        OrganizationComponmet college1 = <span class="keyword">new</span> College(<span class="string">&quot;计算机学院&quot;</span>, <span class="string">&quot;计算机&quot;</span>);</span><br><span class="line">        OrganizationComponmet college2 = <span class="keyword">new</span> College(<span class="string">&quot;中文学院&quot;</span>, <span class="string">&quot;中文&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        university.add(college1);</span><br><span class="line">        university.add(college2);</span><br><span class="line">        </span><br><span class="line">        OrganizationComponmet department1 = <span class="keyword">new</span> Department(<span class="string">&quot;软件工程专业&quot;</span>, <span class="string">&quot;软件&quot;</span>);</span><br><span class="line">        OrganizationComponmet department2 = <span class="keyword">new</span> Department(<span class="string">&quot;大数据专业&quot;</span>, <span class="string">&quot;大数据&quot;</span>);</span><br><span class="line">        OrganizationComponmet department3 = <span class="keyword">new</span> Department(<span class="string">&quot;汉语言专业&quot;</span>, <span class="string">&quot;汉语言&quot;</span>);</span><br><span class="line">        OrganizationComponmet department4 = <span class="keyword">new</span> Department(<span class="string">&quot;中华文化专业&quot;</span>, <span class="string">&quot;中华文化&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        college1.add(department1);</span><br><span class="line">        college1.add(department2);</span><br><span class="line">        college2.add(department3);</span><br><span class="line">        college2.add(department4);</span><br><span class="line">        </span><br><span class="line">        university.print();</span><br><span class="line">        System.out.println(<span class="string">&quot;--------------------------------------------&quot;</span>);</span><br><span class="line">        college1.print();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p><img src="https://p.ipic.vip/sk2cbk.jpg" alt="74922d10b7121f73e972951901eb44c2"></p>
+<p><img src="https://p.ipic.vip/x26tn2.jpg" alt="92205c7628d7b345f2b6e6f2a17e21e2"></p>
+<p>Map的put、putall交给AbstractHashMap实现，再交给HashMap实现，而结点的管理交给Node来实现。</p>
+<h3 id="什么是组合模式？"><a href="#什么是组合模式？" class="headerlink" title="什么是组合模式？"></a>什么是组合模式？</h3><p>大部分国家的军队都采用层次结构管理。 每支部队包括几个师， 师由旅构成， 旅由团构成， 团可以继续划分为排。 最后， 每个排由一小队实实在在的士兵组成。 军事命令由最高层下达， 通过每个层级传递， 直到每位士兵都知道自己应该服从的命令。</p>
+<img src="https://p.ipic.vip/e3fx1k.jpg" alt="0d636cc347c14d64bac869bfc7d49268" style="zoom: 33%;" />
+
+<ol>
+<li><p><strong>组件</strong> （Component） 接口描述了树中简单项目和复杂项目所共有的操作。</p>
+</li>
+<li><p><strong>叶节点</strong> （Leaf） 是树的基本结构， 它不包含子项目。</p>
+<p> 一般情况下， 叶节点最终会完成大部分的实际工作， 因为它们无法将工作指派给其他部分。</p>
+</li>
+<li><p><strong>容器</strong> （Container）——又名 “组合 （Composite）”——是包含叶节点或其他容器等子项目的单位。 容器不知道其子项目所属的具体类， 它只通过通用的组件接口与其子项目交互。</p>
+<p> 容器接收到请求后会将工作分配给自己的子项目， 处理中间结果， 然后将最终结果返回给客户端。</p>
+</li>
+<li><p><strong>客户端</strong> （Client） 通过组件接口与所有项目交互。 因此， 客户端能以相同方式与树状结构中的简单或复杂项目交互。</p>
+</li>
+</ol>
+<p>而Map也是一样，先让AbstractHashMap完成一些事情，再将剩下的任务交给HashMap完成，HashMap又将一部分任务交给Node完成，Node是容器。</p>
+<h2 id="和-的区别"><a href="#和-的区别" class="headerlink" title="${}和#{}的区别"></a>${}和#{}的区别</h2><p>#{}是预编译，${}是字符串替换</p>
+<h2 id="mybatis有什么好处"><a href="#mybatis有什么好处" class="headerlink" title="mybatis有什么好处"></a>mybatis有什么好处</h2><ul>
+<li>sql参数注入、返回</li>
+<li>动态sql</li>
+</ul>
+<h2 id="mybatis注入支持的数据类型"><a href="#mybatis注入支持的数据类型" class="headerlink" title="mybatis注入支持的数据类型"></a>mybatis注入支持的数据类型</h2><p>基本数据类型：整型、浮点、字符串</p>
+<p>复杂数据类型：Map、引用</p>
+<table>
+<thead>
+<tr>
+<th>java</th>
+<th>sql</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>Integer</td>
+<td>Integer</td>
+<td></td>
+</tr>
+<tr>
+<td>BigDecimal</td>
+<td>numeric</td>
+<td></td>
+</tr>
+<tr>
+<td>date</td>
+<td>date</td>
+<td></td>
+</tr>
+<tr>
+<td>calendar</td>
+<td>timestamp</td>
+<td></td>
+</tr>
+<tr>
+<td>byte[]</td>
+<td>blob</td>
+<td></td>
+</tr>
+<tr>
+<td>Double</td>
+<td>double</td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里parameterType是Map</span></span><br><span class="line">&lt;sql id=<span class="string">&quot;Base_Column_List&quot;</span> &gt; </span><br><span class="line"> id, car_dept_name, car_maker_name, icon,car_maker_py,hot_type </span><br><span class="line"> &lt;/sql&gt; </span><br><span class="line"> &lt;select id=<span class="string">&quot;selectByPrimaryKey&quot;</span> resultMap=<span class="string">&quot;BaseResultMap&quot;</span> parameterType=<span class="string">&quot;java.lang.Long&quot;</span> &gt; </span><br><span class="line"> select </span><br><span class="line"> &lt;include refid=<span class="string">&quot;Base_Column_List&quot;</span> /&gt; </span><br><span class="line"> from common_car_make </span><br><span class="line"> where id = #&#123;id,jdbcType=BIGINT&#125; </span><br><span class="line"> &lt;/select&gt; </span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// parameterType是自定义引用类型</span></span><br><span class="line">&lt;update id=<span class="string">&quot;updateByPrimaryKeySelective&quot;</span> parameterType=<span class="string">&quot;com.illuca.entity.Student&quot;</span> &gt; </span><br><span class="line"> update student </span><br><span class="line"> &lt;set &gt; </span><br><span class="line">  &lt;<span class="keyword">if</span> test=<span class="string">&quot;studentName != null&quot;</span> &gt; </span><br><span class="line">  student_name = #&#123;studentName,jdbcType=VARCHAR&#125;, </span><br><span class="line">  &lt;/<span class="keyword">if</span>&gt; </span><br><span class="line">  &lt;<span class="keyword">if</span> test=<span class="string">&quot;score != null&quot;</span> &gt; </span><br><span class="line">  score = #&#123;score,jdbcType=VARCHAR&#125;</span><br><span class="line"> &lt;/set&gt; </span><br><span class="line"> where student_id = #&#123;studentId,jdbcType=BIGINT&#125; </span><br><span class="line"> &lt;/update&gt; </span><br></pre></td></tr></table></figure>
+
+<h2 id="删除A中存在但B中不存在的记录"><a href="#删除A中存在但B中不存在的记录" class="headerlink" title="删除A中存在但B中不存在的记录"></a>删除A中存在但B中不存在的记录</h2><p>delete from A where tagetColumn not in ( select targetColumn from B)</p>
+<h2 id="网关解决什么问题？什么是熔断？"><a href="#网关解决什么问题？什么是熔断？" class="headerlink" title="网关解决什么问题？什么是熔断？"></a>网关解决什么问题？什么是熔断？</h2><p>解决路由问题</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2021/08/30/8.30_%E9%9D%A2%E8%AF%95%E4%B8%8A%E6%B5%B7%E5%90%8C%E4%BD%99%E7%A7%91%E6%8A%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="illuca">
+      <meta itemprop="description" content="illuca 's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="illuca">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/30/8.30_%E9%9D%A2%E8%AF%95%E4%B8%8A%E6%B5%B7%E5%90%8C%E4%BD%99%E7%A7%91%E6%8A%80/" class="post-title-link" itemprop="url">同余科技</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-08-30 00:00:00" itemprop="dateCreated datePublished" datetime="2021-08-30T00:00:00+08:00">2021-08-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-12 21:59:08" itemprop="dateModified" datetime="2023-05-12T21:59:08+08:00">2023-05-12</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="多线程在项目中有运用么？"><a href="#多线程在项目中有运用么？" class="headerlink" title="多线程在项目中有运用么？"></a>多线程在项目中有运用么？</h2><h2 id="后端单元测试包，生成假数据"><a href="#后端单元测试包，生成假数据" class="headerlink" title="后端单元测试包，生成假数据"></a>后端单元测试包，生成假数据</h2><p>Mock</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> WebApplicationContext webApplicationContext;</span><br><span class="line"><span class="keyword">private</span> MockMvc mockMvc;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在每个测试方法执行之前都初始化MockMvc对象</span></span><br><span class="line"><span class="meta">@BeforeEach</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setupMockMvc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DisplayName(&quot;测试根据Id获取User&quot;)</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//perform,执行一个RequestBuilders请求，会自动执行SpringMVC的流程并映射到相应的控制器执行处理</span></span><br><span class="line">    mockMvc.perform(MockMvcRequestBuilders</span><br><span class="line">        <span class="comment">//构造一个get请求</span></span><br><span class="line">        .get(<span class="string">&quot;/user/1&quot;</span>)</span><br><span class="line">        <span class="comment">//请求类型 json</span></span><br><span class="line">        .contentType(MediaType.APPLICATION_JSON))</span><br><span class="line">        <span class="comment">// 期待返回的状态码是4XX，因为我们并没有写/user/&#123;id&#125;的get接口</span></span><br><span class="line">        .andExpect(MockMvcResultMatchers.status().is4xxClientError());</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="jwt在项目中应用"><a href="#jwt在项目中应用" class="headerlink" title="jwt在项目中应用"></a>jwt在项目中应用</h2><p>生成token</p>
+<p>TOKEN分为3个部分=头部 负载  签证</p>
+<p>头部声明jwt和所用算法</p>
+<p>负载包含用户信息</p>
+<p>用加密算法生成signature</p>
+<h2 id="nacos作用"><a href="#nacos作用" class="headerlink" title="nacos作用"></a>nacos作用</h2><p>负载均衡 注册中心 </p>
+<h2 id="redis项目中应用"><a href="#redis项目中应用" class="headerlink" title="redis项目中应用"></a>redis项目中应用</h2><h2 id="单点登录"><a href="#单点登录" class="headerlink" title="单点登录"></a>单点登录</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2021/08/27/8.27_%E5%BE%AE%E8%90%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -887,117 +1179,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2021/08/16/%E7%A6%8F%E7%8C%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="illuca">
-      <meta itemprop="description" content="illuca 's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="illuca">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/16/%E7%A6%8F%E7%8C%AB/" class="post-title-link" itemprop="url">杭州福猫</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-08-16 00:00:00" itemprop="dateCreated datePublished" datetime="2021-08-16T00:00:00+08:00">2021-08-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-13 17:42:13" itemprop="dateModified" datetime="2023-05-13T17:42:13+08:00">2023-05-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="杭州福猫公司-vue生命周期-数据库范式-事务"><a href="#杭州福猫公司-vue生命周期-数据库范式-事务" class="headerlink" title="杭州福猫公司 vue生命周期 数据库范式 事务"></a>杭州福猫公司 vue生命周期 数据库范式 事务</h1><h2 id="前端-element-ui"><a href="#前端-element-ui" class="headerlink" title="前端 element ui"></a>前端 element ui</h2><p>upload组件 action 和url上传方式</p>
-<p><img src="https://p.ipic.vip/2lr4y9.jpg" alt="4085ad38b151df4abf941eff34d6e3f8"></p>
-<p>单页面的生命周期hook</p>
-<p><img src="https://p.ipic.vip/utnehc.jpg" alt="52d9ab0cef4daa34c0b5aa688571c1db"></p>
-<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h3><p>第一范式是指电话号码不能有手机和电话两种值，强调列的原子性。所以电话号码就应该分为两个原子列 手机电话和固定电话列</p>
-<p>第二范式<br>必须要有主键</p>
-<p>第三范式<br>普通列必须完全依赖主键</p>
-<p>第四范式</p>
-<p>索引<br>解决大量多表联查方法：分成多个月，名字的时效性</p>
-<p>单例模式</p>
-<p><img src="https://p.ipic.vip/mhll49.jpg" alt="008i3skNly1gu2q7gf6f0j60qu06amxu02"></p>
-<img src="https://p.ipic.vip/h0ao4t.png" alt="image-20230513194010803" style="zoom: 33%;" />
-
-<h2 id="事务的特性和spring的事务传播特性"><a href="#事务的特性和spring的事务传播特性" class="headerlink" title="事务的特性和spring的事务传播特性"></a>事务的特性和spring的事务传播特性</h2><p><code>ACID</code><br><strong>原子性（Atomicity）</strong>、<strong>一致性（Consistency）</strong>、<strong>隔离性（Isolation）</strong>、<strong>持久性（Durability）</strong>。<br><strong>这个是数据库事物的核心</strong>，它是数据库最基本的特性。这条特性看起来简单，但是理解起来还是比较复杂的。</p>
-<p>它的书面定义是：数据库<strong>一致性</strong>（Database Consistency）是指事务执行的结果必须是使数据库从一个一致性状态变到另一个一致性状态。<br>它分为两个方面：<strong>一致读</strong> 和 <strong>一致写</strong><br>一致读：事务读取数据只能从一个状态中读取，不能从2个或者2个以上状态读取。<br>一致写：事务执行的数据变更只能基于上一个一致的状态，且只能体现在一个状态中。<br>具体解释请认真参看并理解 知乎 如何理解数据库事务中的一致性的概念？徐志斌的回答</p>
-<h3 id="使用-transactional后如何回滚，传统方式如何回滚"><a href="#使用-transactional后如何回滚，传统方式如何回滚" class="headerlink" title="使用@transactional后如何回滚，传统方式如何回滚"></a>使用@transactional后如何回滚，传统方式如何回滚</h3><p>先开启@EnableTransactionManagement，后在Service中@transactional</p>
-<p><img src="https://p.ipic.vip/x1ts8g.png" alt="image-20230513194130164"></p>
-<p><img src="https://p.ipic.vip/mwyxbd.png" alt="image-20230513194159457"></p>
-<h3 id="传播行为"><a href="#传播行为" class="headerlink" title="传播行为"></a>传播行为</h3><p>默认的事务传播行为是Propagation.REQUIRED，也就是说：如果当前存在事务，则加入该事务，如果当前不存在事务，则创建一个新的事务。<br>思寒就是用的require</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Service </span><br><span class="line">public class UserService2 &#123; </span><br><span class="line">	@Autowired private UserService userService; </span><br><span class="line">	</span><br><span class="line">	@Transactional </span><br><span class="line">	public void inserBatch() &#123; </span><br><span class="line">		for (int i = 0; i &lt; 10; i++) &#123; </span><br><span class="line">			if (i == 9) &#123; </span><br><span class="line">				throw new RuntimeException(); </span><br><span class="line">			&#125; </span><br><span class="line">			userService.insert(); </span><br><span class="line">		&#125; </span><br><span class="line">	 &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个函数插入了10次  在第九次有异常<br>按理说前面8次应该正常执行,但是并没有 数据库中没有数据<br>这就是最省事的 一旦整个函数中有异常 就直接回滚<br>2. supports<br>如果当前存在事务，则加入该事务；如果当前不存在事务，则以非事务的方式继续运行。也就是说，该模式是否支持事务，看调用它的方法是否有事务支持。测试代码如下：<br>UserService</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(propagation = Propagation.SUPPORTS)</span> </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span> </span>&#123; </span><br><span class="line">		UserEntity user = <span class="keyword">new</span> UserEntity(); </span><br><span class="line">		user.setUsername(“happyjava”); </span><br><span class="line">		user.setPassword(“<span class="number">123456</span>”); </span><br><span class="line">		userRepo.save(user); </span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-<p>UserService2</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertWithoutTx</span><span class="params">()</span> </span>&#123; </span><br><span class="line">	userService.insert(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>按理说insert是一个事务应该回滚 但是最终没有回滚</p>
-<h2 id="隔离性"><a href="#隔离性" class="headerlink" title="隔离性"></a>隔离性</h2><p>多个事务同时运行 可能会有 脏读 幻读 不可重复读等问题<br>为了防止<br>需要将事务隔离<br>隔离方法有 </p>
-<ol>
-<li>默认 </li>
-<li>读-未提交: 一个事务A可以读取一个未提交的事务</li>
-<li>读-提交</li>
-<li>重复读: 读取时 不允许修改</li>
-<li>序列化</li>
-</ol>
-<p>读-未提交<br><strong>Read uncommitted</strong><br>读未提交，顾名思义，就是一个事务可以读取另一个未提交事务的数据。<br>事例：老板要给程序员发工资，程序员的工资是3.6万/月。但是发工资时老板不小心按错了数字，按成3.9万/月，该钱已经打到程序员的户口，但是事务还没有提交，就在这时，程序员去查看自己这个月的工资，发现比往常多了3千元，以为涨工资了非常高兴。但是老板及时发现了不对，马上回滚差点就提交了的事务，将数字改成3.6万再提交。<br>分析：实际程序员这个月的工资还是3.6万，但是程序员看到的是3.9万。他看到的是老板还没提交事务时的数据。这就是脏读。</p>
-<p>那怎么解决脏读呢？Read committed！读提交，能解决脏读问题。</p>
-<p>例子读-提交<br>你拿着银行卡去充游戏 看到有100万 但是你付款时发现没钱了<br>因为你老婆把你钱那去买钻石了</p>
-<p>例子 重复读<br>你和同学同时去银行取同一张卡的钱</p>
-<p>串行化<br>隔离脏数据 旧数据</p>
-<p>持久性（Durability）<br>就是说任何执行成功的事务修改后的数据都要保证永久的保存在数据库系统中，能够时刻记录系统的状态，并且保证发生故障后能够恢复</p>
-<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>四种线程创建方式: Runnable接口, callable接口, futureTask</p>
-<p>生命周期: new 就绪 阻塞 运行 Dead</p>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>举例常用运行时常:IOException,ArrithmeticException,NullPointerException<br>运行时都是RuntimeException子类 一般由于逻辑引起 可以避免 可以不管它<br>Throwable祖先 Error Exception子类<br>Exception等于RuntimeException+非运行时</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1063,7 +1248,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
