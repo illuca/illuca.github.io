@@ -28,7 +28,7 @@
 <meta property="og:description" content="You are given a 0-indexed integer array tasks, where tasks[i] represents the difficulty level of a task. In each round, you can complete either 2 or 3 tasks of the same difficulty level. Return the mi">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-29T06:57:20.000Z">
-<meta property="article:modified_time" content="2023-06-29T04:58:09.755Z">
+<meta property="article:modified_time" content="2023-06-29T05:35:09.864Z">
 <meta property="article:author" content="illuca">
 <meta property="article:tag" content="leetcode greedy">
 <meta name="twitter:card" content="summary">
@@ -175,7 +175,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-06-29 14:57:20 / Modified: 12:58:09" itemprop="dateCreated datePublished" datetime="2023-06-29T14:57:20+08:00">2023-06-29</time>
+              <time title="Created: 2023-06-29 14:57:20 / Modified: 13:35:09" itemprop="dateCreated datePublished" datetime="2023-06-29T14:57:20+08:00">2023-06-29</time>
             </span>
 
           
@@ -204,6 +204,15 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getRounds</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> round=<span class="number">0</span>;</span><br><span class="line">        <span class="comment">//if value is 1, then return -1</span></span><br><span class="line">        <span class="keyword">if</span>(value==<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//if value is odd, then it consists of value/3 number of 3&#x27;s + one 2&#x27;s.</span></span><br><span class="line">        <span class="comment">//if value is even, it consists of even number of 3 + y number of 2&#x27;s.</span></span><br><span class="line">        <span class="comment">//[5,5,5,5] takes as many as 3&#x27;s, but [5,5,5][5] is not valid</span></span><br><span class="line">        <span class="comment">//we can split one 3&#x27;s, and it becomes [5,5] [5,5]</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">ceil</span>(value/<span class="number">3.0</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minimumRounds</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; tasks)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//traverse the tasks, and cal num and its occurrance times</span></span><br><span class="line">        <span class="comment">//iterate dict, for each level,we need 3x+2y rounds.</span></span><br><span class="line">        map&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; dict;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> task:tasks)&#123;</span><br><span class="line">            dict[task]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it=dict.<span class="built_in">begin</span>();it!=dict.<span class="built_in">end</span>();it++)&#123;</span><br><span class="line">            <span class="keyword">int</span> curr=<span class="built_in">getRounds</span>(it-&gt;second);</span><br><span class="line">            <span class="keyword">if</span>(curr==<span class="number">-1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                res+=curr;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
+
+<p><strong>Correctness</strong></p>
+<p>We should take as many 3’s as possible. If at any step, we takes </p>
+<p><strong>Time complexity</strong></p>
+<p>Say tasks has n elements.</p>
+<p>We put every element of tasks into dict and each insertion takes O(1) expected time. It will take O(n) expected time.</p>
+<p>We iterate every pair of dict, which will take O(n) time.</p>
+<p>Overall, the time complexity is O(n) time.</p>
+
     </div>
 
     
@@ -224,7 +233,10 @@
     <a href="/2023/06/03/COMP9319-week1-notes-1/" rel="prev" title="COMP9319 week1 notes">
       <i class="fa fa-chevron-left"></i> COMP9319 week1 notes
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/29/Greedy-Candies/" rel="next" title="Greedy--Candies">
+      Greedy--Candies <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -296,12 +308,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
