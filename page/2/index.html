@@ -147,6 +147,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/22/744-Find-Smallest-Letter-Greater-Than-Target/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="illuca">
+      <meta itemprop="description" content="illuca 's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="illuca">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/22/744-Find-Smallest-Letter-Greater-Than-Target/" class="post-title-link" itemprop="url">744. Find Smallest Letter Greater Than Target</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-05-21 23:34:56" itemprop="dateCreated datePublished" datetime="2023-05-21T23:34:56+08:00">2023-05-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-22 11:40:46" itemprop="dateModified" datetime="2023-05-22T11:40:46+08:00">2023-05-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/">https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/</a></p>
+<p>You are given an array of characters <code>letters</code> that is sorted in <strong>non-decreasing order</strong>, and a character <code>target</code>. There are <strong>at least two different</strong> characters in <code>letters</code>.</p>
+<p>Return <em>the smallest character in</em> <code>letters</code> <em>that is lexicographically greater than</em> <code>target</code>. If such a character does not exist, return the first character in <code>letters</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: letters = [&quot;c&quot;,&quot;f&quot;,&quot;j&quot;], target = &quot;a&quot;</span><br><span class="line">Output: &quot;c&quot;</span><br><span class="line">Explanation: The smallest character that is lexicographically greater than &#x27;a&#x27; in letters is &#x27;c&#x27;.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: letters = [&quot;c&quot;,&quot;f&quot;,&quot;j&quot;], target = &quot;c&quot;</span><br><span class="line">Output: &quot;f&quot;</span><br><span class="line">Explanation: The smallest character that is lexicographically greater than &#x27;c&#x27; in letters is &#x27;f&#x27;.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: letters = [&quot;x&quot;,&quot;x&quot;,&quot;y&quot;,&quot;y&quot;], target = &quot;z&quot;</span><br><span class="line">Output: &quot;x&quot;</span><br><span class="line">Explanation: There are no characters in letters that is lexicographically greater than &#x27;z&#x27; so we return letters[0].</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>2 &lt;= letters.length &lt;= 104</code></li>
+<li><code>letters[i]</code> is a lowercase English letter.</li>
+<li><code>letters</code> is sorted in <strong>non-decreasing</strong> order.</li>
+<li><code>letters</code> contains at least two different characters.</li>
+<li><code>target</code> is a lowercase English letter.</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">nextGreatestLetter</span><span class="params">(vector&lt;<span class="keyword">char</span>&gt;&amp; letters, <span class="keyword">char</span> target)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">//idea</span></span><br><span class="line">        <span class="comment">//use binary search to find the char that greater than target.</span></span><br><span class="line">        <span class="comment">//if target is less than [i] then check right part.</span></span><br><span class="line">        <span class="comment">//if target equals [i] then check if [i+1] greater than target, then return [i+1]. but check i+1 overflow first.</span></span><br><span class="line">        <span class="comment">//if target greater than [i] then check if [i-1] equals target</span></span><br><span class="line">        <span class="keyword">int</span> N=letters.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> low=<span class="number">0</span>, high=N<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> mid=high&gt;&gt;<span class="number">1</span>;low&lt;=high;)&#123;</span><br><span class="line">            <span class="keyword">if</span>(target==letters[mid])&#123;</span><br><span class="line">                <span class="keyword">if</span>(mid+<span class="number">1</span>&lt;N&amp;&amp;target&lt;letters[mid+<span class="number">1</span>]) &#123;</span><br><span class="line">                    <span class="keyword">return</span> letters[mid+<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// check right part</span></span><br><span class="line">                low=mid+<span class="number">1</span>;</span><br><span class="line">                mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(target&lt;letters[mid]) &#123;</span><br><span class="line">                <span class="comment">//ensure [mid] is the first to be greater than target</span></span><br><span class="line">                <span class="keyword">if</span>(mid<span class="number">-1</span>&gt;=<span class="number">0</span>&amp;&amp;target&gt;=letters[mid<span class="number">-1</span>])&#123;</span><br><span class="line">                    <span class="keyword">return</span> letters[mid];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(mid==<span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> letters[<span class="number">0</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//check left</span></span><br><span class="line">                high=mid<span class="number">-1</span>;</span><br><span class="line">                mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">// target&gt;letters[mid]</span></span><br><span class="line">                <span class="comment">//check right</span></span><br><span class="line">                low=mid+<span class="number">1</span>;</span><br><span class="line">                mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> letters[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Of course you can use <code>upper_bound</code>.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> it = <span class="built_in">upper_bound</span>(letters.<span class="built_in">begin</span>(), letters.<span class="built_in">end</span>(), target);</span><br><span class="line"><span class="keyword">if</span>(it == letters.<span class="built_in">end</span>()) &#123;</span><br><span class="line">  <span class="keyword">return</span> letters[<span class="number">0</span>];</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> *it;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Or even just one line</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> letters[(<span class="built_in">upper_bound</span>(letters.<span class="built_in">begin</span>(), letters.<span class="built_in">end</span>(), target)-letters.<span class="built_in">begin</span>())%letters.<span class="built_in">size</span>()];</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/21/214.%20Shortest%20Palindrome/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -925,111 +1017,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2021/09/02/9.2_%E4%B8%8A%E6%B5%B7%E9%BC%8E%E7%AD%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="illuca">
-      <meta itemprop="description" content="illuca 's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="illuca">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/02/9.2_%E4%B8%8A%E6%B5%B7%E9%BC%8E%E7%AD%96/" class="post-title-link" itemprop="url">上海鼎策</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-09-02 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-02T00:00:00+08:00">2021-09-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-13 17:27:59" itemprop="dateModified" datetime="2023-05-13T17:27:59+08:00">2023-05-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="银行贷款，分期归还"><a href="#银行贷款，分期归还" class="headerlink" title="银行贷款，分期归还"></a>银行贷款，分期归还</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Double&gt; <span class="title">getRepayment</span><span class="params">(Double allMoney,<span class="keyword">int</span> numberOfMonths)</span> </span>&#123;</span><br><span class="line">    Double money = allMoney / numberOfMonths;</span><br><span class="line">    List&lt;Double&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;numberOMonths-<span class="number">1</span>;i++) &#123;</span><br><span class="line">        res.add(money);</span><br><span class="line">    &#125;</span><br><span class="line">    Double lastMonthMoney = allMoney - (numberOfMonths-<span class="number">1</span>)*money;</span><br><span class="line">    res.add(lastMonthMoney);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>考虑小数问题</p>
-<h2 id="归笼与未归笼"><a href="#归笼与未归笼" class="headerlink" title="归笼与未归笼"></a>归笼与未归笼</h2><p>如果0&lt;count&lt;total，就是部分归笼，count=0就是未归笼，count=total就是归笼。要求编写sql语句达成如下效果：</p>
-<p>原表：</p>
-<img src="https://p.ipic.vip/kn66dj.png" alt="image-20230513192643628" style="zoom: 33%;" />
-
-<p>经过查询输出：</p>
-<img src="https://p.ipic.vip/47kxor.png" alt="image-20230513192719499" style="zoom:50%;" />
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> database ShangHaiDingCe;</span><br><span class="line"></span><br><span class="line">use ShangHaiDingCe;</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> sheep;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> sheep (</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">    total <span class="type">int</span>,</span><br><span class="line">    number <span class="type">int</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> sheep (id, total, number) <span class="keyword">values</span> (<span class="keyword">null</span>,<span class="number">10</span>,<span class="number">4</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> sheep (id, total, number) <span class="keyword">values</span> (<span class="keyword">null</span>,<span class="number">10</span>,<span class="number">10</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> sheep (id, total, number) <span class="keyword">values</span> (<span class="keyword">null</span>,<span class="number">10</span>,<span class="number">0</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> sheep (id, total, number) <span class="keyword">values</span> (<span class="keyword">null</span>,<span class="number">10</span>,<span class="number">8</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> sheep (id, total, number) <span class="keyword">values</span> (<span class="keyword">null</span>,<span class="number">10</span>,<span class="number">7</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> sheep (id, total, number) <span class="keyword">values</span> (<span class="keyword">null</span>,<span class="number">10</span>,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> sheep;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id,total,number,</span><br><span class="line">       <span class="keyword">case</span></span><br><span class="line">            <span class="keyword">when</span> number<span class="operator">=</span><span class="number">0</span> <span class="keyword">then</span> <span class="string">&#x27;未归笼&#x27;</span></span><br><span class="line">            <span class="keyword">when</span> number<span class="operator">=</span>total <span class="keyword">then</span> <span class="string">&#x27;归笼&#x27;</span></span><br><span class="line">            <span class="keyword">else</span> <span class="string">&#x27;部分归笼&#x27;</span></span><br><span class="line">       <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">as</span> <span class="string">&#x27;STATUS&#x27;</span></span><br><span class="line"><span class="keyword">from</span> sheep;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="linux解压命令"><a href="#linux解压命令" class="headerlink" title="linux解压命令"></a>linux解压命令</h2><p> tar -zxv -f apache-tomcat-8.0.29.tar.gz </p>
-<h2 id="部署tomcat服务器"><a href="#部署tomcat服务器" class="headerlink" title="部署tomcat服务器"></a>部署tomcat服务器</h2><p><strong>方法一：</strong></p>
-<p>解压tomcat <code>tar -zxv -f apache-tomcat-8.0.29.tar.gz </code></p>
-<p>进入tomcat目录</p>
-<p>开放端口8080</p>
-<p>启动tomcat <code>./tomcat/bin/start.sh </code></p>
-<p>可以通过ip:8080访问tomcat主页</p>
-<p>war包通过xftp上传到webapps下</p>
-<p>可以通过ip:8080/war包名称访问项目</p>
-<p><strong>方法二：</strong></p>
-<p>解压tomcat</p>
-<p>开放端口</p>
-<p>将tomcat配置为系统服务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建Tomcat8服务文件</span></span><br><span class="line">$ vi /usr/lib/systemd/system/tomcat8.service</span><br><span class="line"></span><br><span class="line"><span class="comment">#tomcat8.service文件内容：</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=Tomcat8</span><br><span class="line">After=syslog.target network.target remote-fs.target nss-lookup.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line"></span><br><span class="line">ExecStart=/usr/tomcat/tomcat8/bin/startup.sh</span><br><span class="line">ExecReload=/usr/tomcat/tomcat8/bin/startup.sh</span><br><span class="line">ExecStop=/usr/tomcat/tomcat8/bin/shutdown.sh</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置Tomcat8开机启动</span></span><br><span class="line">$ systemctl <span class="built_in">enable</span> tomcat8</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动tomcat8服务</span></span><br><span class="line">$ systemctl start tomcat8</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="实时查看tomcat日志"><a href="#实时查看tomcat日志" class="headerlink" title="实时查看tomcat日志"></a>实时查看tomcat日志</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1099,12 +1086,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
