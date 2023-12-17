@@ -20,22 +20,24 @@
     var CONFIG = {"hostname":"illuca.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="1234567891011121314151617181920212223242526from collections import Counterclass Solution:    def permuteUnique(self, A: List[int]) -&gt; List[List[int]]:        def backtrack(l):            if len(l)&#x3D;">
+  <meta name="description" content="12345678910111213class Solution:    def subarraySum(self, A: List[int], k: int) -&gt; int:        N&#x3D;len(A)        D&#x3D;defaultdict(int)        S&#x3D;0        ans&#x3D;0        D[0]&#x3D;1        for i in range(N):">
 <meta property="og:type" content="article">
-<meta property="og:title" content="47. Permutations II">
-<meta property="og:url" content="https://illuca.github.io/2023/12/15/47-Permutations-II/index.html">
+<meta property="og:title" content="560. Subarray Sum Equals K">
+<meta property="og:url" content="https://illuca.github.io/2023/12/18/560-Subarray-Sum-Equals-K/index.html">
 <meta property="og:site_name" content="Yuan">
-<meta property="og:description" content="1234567891011121314151617181920212223242526from collections import Counterclass Solution:    def permuteUnique(self, A: List[int]) -&gt; List[List[int]]:        def backtrack(l):            if len(l)&#x3D;">
+<meta property="og:description" content="12345678910111213class Solution:    def subarraySum(self, A: List[int], k: int) -&gt; int:        N&#x3D;len(A)        D&#x3D;defaultdict(int)        S&#x3D;0        ans&#x3D;0        D[0]&#x3D;1        for i in range(N):">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-12-14T14:12:33.000Z">
-<meta property="article:modified_time" content="2023-12-14T11:38:08.631Z">
+<meta property="article:published_time" content="2023-12-17T14:17:09.000Z">
+<meta property="article:modified_time" content="2023-12-17T11:20:00.232Z">
 <meta property="article:author" content="Yuan">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="medium">
-<meta property="article:tag" content="backtrack">
+<meta property="article:tag" content="hash">
+<meta property="article:tag" content="prefix-sum">
+<meta property="article:tag" content="array">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://illuca.github.io/2023/12/15/47-Permutations-II/">
+<link rel="canonical" href="https://illuca.github.io/2023/12/18/560-Subarray-Sum-Equals-K/">
 
 
 <script id="page-configurations">
@@ -48,7 +50,7 @@
   };
 </script>
 
-  <title>47. Permutations II | Yuan</title>
+  <title>560. Subarray Sum Equals K | Yuan</title>
   
 
 
@@ -153,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/15/47-Permutations-II/">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/18/560-Subarray-Sum-Equals-K/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -166,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          47. Permutations II
+          560. Subarray Sum Equals K
         </h1>
 
         <div class="post-meta">
@@ -177,7 +179,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-12-14 22:12:33 / Modified: 19:38:08" itemprop="dateCreated datePublished" datetime="2023-12-14T22:12:33+08:00">2023-12-14</time>
+              <time title="Created: 2023-12-17 22:17:09 / Modified: 19:20:00" itemprop="dateCreated datePublished" datetime="2023-12-17T22:17:09+08:00">2023-12-17</time>
             </span>
 
           
@@ -191,11 +193,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">permuteUnique</span>(<span class="params">self, A: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">backtrack</span>(<span class="params">l</span>):</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(l)==N:</span><br><span class="line">                ret.append(l[:])</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            S=<span class="built_in">set</span>()</span><br><span class="line">            <span class="keyword">for</span> a <span class="keyword">in</span> A:</span><br><span class="line">                <span class="keyword">if</span> a <span class="keyword">not</span> <span class="keyword">in</span> S:</span><br><span class="line">                    S.add(a)</span><br><span class="line">                    <span class="keyword">if</span> C[a]!=<span class="number">0</span>:</span><br><span class="line">                        C[a]-=<span class="number">1</span></span><br><span class="line">                        l.append(a)</span><br><span class="line">                        backtrack(l)</span><br><span class="line">                        l.pop()</span><br><span class="line">                        C[a]+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> A:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        N=<span class="built_in">len</span>(A)</span><br><span class="line">        C=Counter(A)</span><br><span class="line">        <span class="built_in">print</span>(C)</span><br><span class="line">        ret=[]</span><br><span class="line">        backtrack([])</span><br><span class="line">        <span class="keyword">return</span> ret</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">permuteUnique</span>(<span class="params">self, A: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">l,a</span>):</span></span><br><span class="line">            i=<span class="number">0</span></span><br><span class="line">            res=[]</span><br><span class="line">            <span class="keyword">while</span> i&lt;=<span class="built_in">len</span>(l):</span><br><span class="line">                new=l[:i]+[a]+l[i:]</span><br><span class="line">                <span class="keyword">if</span> new <span class="keyword">not</span> <span class="keyword">in</span> newll <span class="keyword">and</span> new <span class="keyword">not</span> <span class="keyword">in</span> res:</span><br><span class="line">                    <span class="built_in">print</span>(new)</span><br><span class="line">                    res.append(new)</span><br><span class="line">                <span class="keyword">if</span> i&lt;<span class="built_in">len</span>(l) <span class="keyword">and</span> l[i]==a:</span><br><span class="line">                    i+=<span class="number">2</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    i+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">        ll=[[]]</span><br><span class="line">        A.sort()</span><br><span class="line">        N=<span class="built_in">len</span>(A)</span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> A:</span><br><span class="line">            newll=[]</span><br><span class="line">            <span class="keyword">for</span> l <span class="keyword">in</span> ll:</span><br><span class="line">                newll.extend(f(l,a))</span><br><span class="line">            <span class="comment"># print(newll)</span></span><br><span class="line">            ll=newll</span><br><span class="line">        <span class="keyword">return</span> ll</span><br></pre></td></tr></table></figure>
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">subarraySum</span>(<span class="params">self, A: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        N=<span class="built_in">len</span>(A)</span><br><span class="line">        D=defaultdict(<span class="built_in">int</span>)</span><br><span class="line">        S=<span class="number">0</span></span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        D[<span class="number">0</span>]=<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">            S+=A[i]</span><br><span class="line">            <span class="keyword">if</span> S-k <span class="keyword">in</span> D:</span><br><span class="line">                ans+=D[S-k]</span><br><span class="line">            D[S]+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -208,7 +206,9 @@
           <div class="post-tags">
               <a href="/tags/leetcode/" rel="tag"># leetcode</a>
               <a href="/tags/medium/" rel="tag"># medium</a>
-              <a href="/tags/backtrack/" rel="tag"># backtrack</a>
+              <a href="/tags/hash/" rel="tag"># hash</a>
+              <a href="/tags/prefix-sum/" rel="tag"># prefix-sum</a>
+              <a href="/tags/array/" rel="tag"># array</a>
           </div>
 
         
@@ -217,13 +217,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/12/14/31-Next-Permutation/" rel="prev" title="31. Next Permutation">
-      <i class="fa fa-chevron-left"></i> 31. Next Permutation
+    <a href="/2023/12/17/438-Find-All-Anagrams-in-a-String/" rel="prev" title="438. Find All Anagrams in a String">
+      <i class="fa fa-chevron-left"></i> 438. Find All Anagrams in a String
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/12/15/128-Longest-Consecutive-Sequence/" rel="next" title="128. Longest Consecutive Sequence">
-      128. Longest Consecutive Sequence <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
