@@ -147,6 +147,277 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/22/278-First-Bad-Version/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/22/278-First-Bad-Version/" class="post-title-link" itemprop="url">278. First Bad Version</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-05-22 13:40:13" itemprop="dateCreated datePublished" datetime="2023-05-22T13:40:13+08:00">2023-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-02 17:26:01" itemprop="dateModified" datetime="2023-11-02T17:26:01+08:00">2023-11-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/first-bad-version/description/">https://leetcode.com/problems/first-bad-version/description/</a></p>
+<p>You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check. Since each version is developed based on the previous version, all the versions after a bad version are also bad.</p>
+<p>Suppose you have <code>n</code> versions <code>[1, 2, ..., n]</code> and you want to find out the first bad one, which causes all the following ones to be bad.</p>
+<p>You are given an API <code>bool isBadVersion(version)</code> which returns whether <code>version</code> is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 5, bad = 4</span><br><span class="line">Output: 4</span><br><span class="line">Explanation:</span><br><span class="line">call isBadVersion(3) -&gt; false</span><br><span class="line">call isBadVersion(5) -&gt; true</span><br><span class="line">call isBadVersion(4) -&gt; true</span><br><span class="line">Then 4 is the first bad version.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 1, bad = 1</span><br><span class="line">Output: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= bad &lt;= n &lt;= 231 - 1</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The API isBadVersion is defined for you.</span></span><br><span class="line"><span class="comment">// bool isBadVersion(int version);</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">firstBadVersion</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//i am a manager and has a team developing a product.</span></span><br><span class="line">        <span class="comment">//the latest product fails. Because the new version is based on previous version. So i need to find the earliest version that fails.</span></span><br><span class="line">        <span class="comment">//i can use isBadVersion to check if it is bad.</span></span><br><span class="line">        <span class="comment">//i can&#x27;t use API for too many times.</span></span><br><span class="line">        <span class="comment">//our product versions is like: [1,2,3....n], is in ascending order</span></span><br><span class="line">        <span class="comment">//check if [i] is bad and [i-1] is good then return [i]</span></span><br><span class="line">            <span class="comment">//if [i-1] is bad also then check left part</span></span><br><span class="line">        <span class="comment">//check if [i] is good and [i+1] is bad then return [i+1]</span></span><br><span class="line">            <span class="comment">//if [i+1] is good also then check right part</span></span><br><span class="line">        <span class="keyword">int</span> low=<span class="number">0</span>,high=n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> mid=low+((high-low)&gt;&gt;<span class="number">1</span>);low&lt;=high;)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">isBadVersion</span>(mid))&#123;</span><br><span class="line">                <span class="keyword">if</span>(mid<span class="number">-1</span>&gt;=<span class="number">0</span>&amp;&amp;!<span class="built_in">isBadVersion</span>(mid<span class="number">-1</span>))&#123;</span><br><span class="line">                    <span class="keyword">return</span> mid;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">//check left</span></span><br><span class="line">                    high=mid<span class="number">-1</span>;</span><br><span class="line">                    mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(mid+<span class="number">1</span>&lt;=n<span class="number">-1</span>&amp;&amp;<span class="built_in">isBadVersion</span>(mid+<span class="number">1</span>))&#123;</span><br><span class="line">                    <span class="keyword">return</span> mid+<span class="number">1</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">//check right</span></span><br><span class="line">                    low=mid+<span class="number">1</span>;</span><br><span class="line">                    mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>It can be more clear.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The API isBadVersion is defined for you.</span></span><br><span class="line"><span class="comment">// bool isBadVersion(int version);</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">firstBadVersion</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">1</span>, right=n;</span><br><span class="line">        <span class="keyword">for</span>(;left&lt;=right;)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid=left+((right-left)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">isBadVersion</span>(mid))&#123;</span><br><span class="line">                <span class="comment">//check left. It may cause empty array.</span></span><br><span class="line">                <span class="comment">//[Bad1,Bad2]-&gt;[]. return left</span></span><br><span class="line">                <span class="comment">//[bad]-&gt;[]. return left</span></span><br><span class="line">                right=mid<span class="number">-1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//check right</span></span><br><span class="line">                <span class="comment">//[good,bad]-&gt;[bad]</span></span><br><span class="line">                left=mid+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      	<span class="comment">// when break, all exit is to return left.</span></span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Another way to think return value is to consider the break condition.</p>
+<p>When not found, right=mid-1 &lt; left. Of course we need the one in the back.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/22/744-Find-Smallest-Letter-Greater-Than-Target/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/22/744-Find-Smallest-Letter-Greater-Than-Target/" class="post-title-link" itemprop="url">744. Find Smallest Letter Greater Than Target</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-05-21 23:34:56" itemprop="dateCreated datePublished" datetime="2023-05-21T23:34:56+08:00">2023-05-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-02 17:25:32" itemprop="dateModified" datetime="2023-11-02T17:25:32+08:00">2023-11-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/">https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/</a></p>
+<p>You are given an array of characters <code>letters</code> that is sorted in <strong>non-decreasing order</strong>, and a character <code>target</code>. There are <strong>at least two different</strong> characters in <code>letters</code>.</p>
+<p>Return <em>the smallest character in</em> <code>letters</code> <em>that is lexicographically greater than</em> <code>target</code>. If such a character does not exist, return the first character in <code>letters</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: letters = [&quot;c&quot;,&quot;f&quot;,&quot;j&quot;], target = &quot;a&quot;</span><br><span class="line">Output: &quot;c&quot;</span><br><span class="line">Explanation: The smallest character that is lexicographically greater than &#x27;a&#x27; in letters is &#x27;c&#x27;.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: letters = [&quot;c&quot;,&quot;f&quot;,&quot;j&quot;], target = &quot;c&quot;</span><br><span class="line">Output: &quot;f&quot;</span><br><span class="line">Explanation: The smallest character that is lexicographically greater than &#x27;c&#x27; in letters is &#x27;f&#x27;.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: letters = [&quot;x&quot;,&quot;x&quot;,&quot;y&quot;,&quot;y&quot;], target = &quot;z&quot;</span><br><span class="line">Output: &quot;x&quot;</span><br><span class="line">Explanation: There are no characters in letters that is lexicographically greater than &#x27;z&#x27; so we return letters[0].</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>2 &lt;= letters.length &lt;= 104</code></li>
+<li><code>letters[i]</code> is a lowercase English letter.</li>
+<li><code>letters</code> is sorted in <strong>non-decreasing</strong> order.</li>
+<li><code>letters</code> contains at least two different characters.</li>
+<li><code>target</code> is a lowercase English letter.</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">nextGreatestLetter</span><span class="params">(vector&lt;<span class="keyword">char</span>&gt;&amp; letters, <span class="keyword">char</span> target)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">//idea</span></span><br><span class="line">        <span class="comment">//use binary search to find the char that greater than target.</span></span><br><span class="line">        <span class="comment">//if target is less than [i] then check right part.</span></span><br><span class="line">        <span class="comment">//if target equals [i] then check if [i+1] greater than target, then return [i+1]. but check i+1 overflow first.</span></span><br><span class="line">        <span class="comment">//if target greater than [i] then check if [i-1] equals target</span></span><br><span class="line">        <span class="keyword">int</span> N=letters.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> low=<span class="number">0</span>, high=N<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> mid=high&gt;&gt;<span class="number">1</span>;low&lt;=high;)&#123;</span><br><span class="line">            <span class="keyword">if</span>(target==letters[mid])&#123;</span><br><span class="line">                <span class="keyword">if</span>(mid+<span class="number">1</span>&lt;N&amp;&amp;target&lt;letters[mid+<span class="number">1</span>]) &#123;</span><br><span class="line">                    <span class="keyword">return</span> letters[mid+<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// check right part</span></span><br><span class="line">                low=mid+<span class="number">1</span>;</span><br><span class="line">                mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(target&lt;letters[mid]) &#123;</span><br><span class="line">                <span class="comment">//ensure [mid] is the first to be greater than target</span></span><br><span class="line">                <span class="keyword">if</span>(mid<span class="number">-1</span>&gt;=<span class="number">0</span>&amp;&amp;target&gt;=letters[mid<span class="number">-1</span>])&#123;</span><br><span class="line">                    <span class="keyword">return</span> letters[mid];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(mid==<span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> letters[<span class="number">0</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//check left</span></span><br><span class="line">                high=mid<span class="number">-1</span>;</span><br><span class="line">                mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">// target&gt;letters[mid]</span></span><br><span class="line">                <span class="comment">//check right</span></span><br><span class="line">                low=mid+<span class="number">1</span>;</span><br><span class="line">                mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> letters[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Of course you can use <code>upper_bound</code>.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> it = <span class="built_in">upper_bound</span>(letters.<span class="built_in">begin</span>(), letters.<span class="built_in">end</span>(), target);</span><br><span class="line"><span class="keyword">if</span>(it == letters.<span class="built_in">end</span>()) &#123;</span><br><span class="line">  <span class="keyword">return</span> letters[<span class="number">0</span>];</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> *it;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Or even just one line</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> letters[(<span class="built_in">upper_bound</span>(letters.<span class="built_in">begin</span>(), letters.<span class="built_in">end</span>(), target)-letters.<span class="built_in">begin</span>())%letters.<span class="built_in">size</span>()];</span><br></pre></td></tr></table></figure>
+
+
+
+<p>[2023-09-26 Tue 14:50]</p>
+<p>This solution is inspired by find max square root of x. We store an intermediate variable.</p>
+<p>Notice that the candidate answer is always in “greater branch”, thus in that branch, we store the candidate mid.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">nextGreatestLetter</span><span class="params">(vector&lt;<span class="keyword">char</span>&gt;&amp; letters, <span class="keyword">char</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> N=letters.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> low=<span class="number">0</span>, high=N<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(low&lt;=high) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid=(low+high)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (letters[mid] == target </span><br><span class="line">                &amp;&amp; mid+<span class="number">1</span> &lt; N &amp;&amp; letters[mid+<span class="number">1</span>] &gt; target) &#123;</span><br><span class="line">                <span class="keyword">return</span> letters[mid+<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (letters[mid]&lt;=target) &#123;</span><br><span class="line">                low=mid+<span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// greater branch</span></span><br><span class="line">                high=mid<span class="number">-1</span>;</span><br><span class="line">                ans=mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//not found</span></span><br><span class="line">        <span class="keyword">if</span>(letters[ans]&lt;=target) &#123;</span><br><span class="line">            ans=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> letters[ans];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/21/214.%20Shortest%20Palindrome/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/21/214.%20Shortest%20Palindrome/" class="post-title-link" itemprop="url">214. Shortest Palindrome</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-05-21 00:00:00" itemprop="dateCreated datePublished" datetime="2023-05-21T00:00:00+08:00">2023-05-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-02 17:24:17" itemprop="dateModified" datetime="2023-11-02T17:24:17+08:00">2023-11-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/shortest-palindrome/">https://leetcode.com/problems/shortest-palindrome/</a></p>
+<p>You are given a string <code>s</code>. You can convert <code>s</code> to a </p>
+<p>palindrome by adding characters in front of it.</p>
+<p>Return <em>the shortest palindrome you can find by performing this transformation</em>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: s = &quot;aacecaaa&quot;</span><br><span class="line">Output: &quot;aaacecaaa&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: s = &quot;abcd&quot;</span><br><span class="line">Output: &quot;dcbabcd&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>0 &lt;= s.length &lt;= 5 * 104</code></li>
+<li><code>s</code> consists of lowercase English letters only.</li>
+</ul>
+<p>Firstly, i use brute method to solve it, but get Time Limit.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> &amp;left, <span class="keyword">int</span> &amp;right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">bool</span> isEven = (left+right)%<span class="number">2</span>==<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(isEven)&#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            left--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">string <span class="title">shortestPalindrome</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//there is a string s. I need to add chs to convert it to a palindrome.</span></span><br><span class="line">        <span class="comment">//I only can add chs in front of s.</span></span><br><span class="line">        <span class="comment">//There many ways to form a palindrome by adding chs. But you must add fewest chs so that you get the shortest palindrome.</span></span><br><span class="line">        <span class="comment">//find the center ch. check if the chs on both sides are equal. Cal the num of chs that equal.</span></span><br><span class="line">        <span class="comment">//it must cannot meet any ch that does not equal</span></span><br><span class="line">        <span class="comment">//loop util one pointer arrives bound</span></span><br><span class="line">        <span class="comment">// init mid and let it close to left end;</span></span><br><span class="line">        <span class="keyword">int</span> n=s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> left, right;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid=n/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">1</span>) &#123;</span><br><span class="line">            left=mid<span class="number">-1</span>;</span><br><span class="line">            right=mid+<span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid<span class="number">-1</span>;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> start=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> pleft=left, pright=right;</span><br><span class="line">            <span class="comment">//initial value for pleft and pright in every loop</span></span><br><span class="line">            <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// loop util pleft arrives bound or appear not equal</span></span><br><span class="line">                <span class="keyword">if</span>(pleft &lt; <span class="number">0</span> || s[pleft]!=s[pright]) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                pleft--;</span><br><span class="line">                pright++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//if left does not arrive bound, then mid--</span></span><br><span class="line">            <span class="keyword">if</span>(pleft&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="built_in">change</span>(left, right);</span><br><span class="line">            &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                start=pright;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// add [start, end].reverse to s</span></span><br><span class="line">        string sub=s.<span class="built_in">substr</span>(start, n<span class="number">-1</span>-start+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;sub.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            s=sub[i]+s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Actually, this problem can be converted to find the longest common part and we only need the last comparison. </p>
+<p>We compare [0:matched]==[i-matched, i]</p>
+<p>We can use KMP to boost the process. Otherwise, every time we fail to match s[matched] and s[i]. We need to set i as N-1 and reset matched as 0.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildArray</span><span class="params">(string &amp;s, vector&lt;<span class="keyword">int</span>&gt; &amp;back)</span> </span>&#123;</span><br><span class="line">        back[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">0</span>, i = <span class="number">1</span>; i &lt; s.<span class="built_in">size</span>();) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[len] == s[i]) &#123;</span><br><span class="line">                <span class="comment">//match then increase both and set table</span></span><br><span class="line">                <span class="comment">// len means the num of matched</span></span><br><span class="line">                back[i] = len + <span class="number">1</span>;</span><br><span class="line">                len++;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (len==<span class="number">0</span>) &#123;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    len = back[len - <span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">shortestPalindrome</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> N = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">back</span><span class="params">(N)</span></span>;</span><br><span class="line">        <span class="built_in">buildArray</span>(s, back);</span><br><span class="line">        <span class="keyword">int</span> matched = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = N - <span class="number">1</span>; i &gt;= <span class="number">0</span>;) &#123;</span><br><span class="line">            <span class="comment">//check if match then increase</span></span><br><span class="line">            <span class="keyword">if</span> (s[matched] == s[i]) &#123;</span><br><span class="line">                matched++;</span><br><span class="line">                i--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//reset matched</span></span><br><span class="line">                <span class="keyword">if</span> (matched==<span class="number">0</span>) &#123;</span><br><span class="line">                    i--;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    matched = back[matched - <span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//sub=[matched:]</span></span><br><span class="line">        string sub = s.<span class="built_in">substr</span>(matched);</span><br><span class="line">        <span class="built_in">reverse</span>(sub.<span class="built_in">begin</span>(),sub.<span class="built_in">end</span>());</span><br><span class="line">        s=sub+s;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/21/704.%20Binary%20Search/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -765,89 +1036,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/03/25/ANZAC-CONTEST-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/25/ANZAC-CONTEST-1/" class="post-title-link" itemprop="url">ANZAC CONTEST 1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-03-25 00:00:00" itemprop="dateCreated datePublished" datetime="2023-03-25T00:00:00+08:00">2023-03-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-02 17:32:55" itemprop="dateModified" datetime="2023-11-02T17:32:55+08:00">2023-11-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="A"><a href="#A" class="headerlink" title="A"></a>A</h1><p><img src="https://p.ipic.vip/e81xxn.png" alt="image-20230514013121971"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unordered_set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N;</span><br><span class="line">    cin &gt;&gt; N;</span><br><span class="line">    <span class="comment">// init an unordered map.</span></span><br><span class="line">    unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; map;</span><br><span class="line">    unordered_set&lt;<span class="keyword">int</span>&gt; values;</span><br><span class="line">    map[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    map[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// keep cal fib until if fib number &gt; N</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">//cal fib util fib number &gt; N</span></span><br><span class="line">        <span class="keyword">int</span> fib = map[i - <span class="number">1</span>] + map[i - <span class="number">2</span>];</span><br><span class="line">        <span class="keyword">if</span> (fib &gt; N) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        map[i] = fib;</span><br><span class="line">        values.<span class="built_in">insert</span>(fib);</span><br><span class="line">        <span class="comment">//cal next</span></span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (values.<span class="built_in">count</span>(i)) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;fizz&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;buzz&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="B"><a href="#B" class="headerlink" title="B"></a>B</h1><p><img src="https://p.ipic.vip/ko3pol.png" alt="image-20230514013012760"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// input two numbers</span></span><br><span class="line">    <span class="comment">// first is the number to insert</span></span><br><span class="line">    <span class="comment">// second is the original number</span></span><br><span class="line">    <span class="comment">// our aim is to insert at a certain location to make the output biggest</span></span><br><span class="line">    <span class="comment">// find the first num that less than number to insert. 789 6-&gt;7896, 749 5-&gt;7549</span></span><br><span class="line">    <span class="comment">// 749 0-&gt;7490</span></span><br><span class="line">    <span class="comment">// 0 0 -&gt;0</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    string number;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    cin &gt;&gt; number;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; result;</span><br><span class="line">    <span class="keyword">bool</span> inserted = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; number.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> curr = number[i] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span> (curr &lt;= x &amp;&amp; !inserted) &#123;</span><br><span class="line">            number.<span class="built_in">insert</span>(i, <span class="built_in">to_string</span>(x));</span><br><span class="line">            inserted = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        result.<span class="built_in">push_back</span>(curr);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!inserted) &#123;</span><br><span class="line">        number.<span class="built_in">push_back</span>(<span class="string">&#x27;0&#x27;</span> + x);</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; number &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><p>Take 20 as example:<br>20=17+3=13+7<br>17-3 has biggest diff.<br>14=11-3=8 step=1<br>8=5+3 step=2<br>5-3=2 step=3</p>
-<p>First we has two pointers, left is 2 and right is x-1;<br>break: if left greater than right or left+right=x and right-left is even.<br>Then set x as right-left and loop again util right-left is 2 or 0.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPrime</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// divide num into 2 part like 11/2+1=6, i=[2,5]</span></span><br><span class="line">    <span class="comment">// 12/2+1=7,i=[2,6]</span></span><br><span class="line">    <span class="comment">// 1/2+1=1</span></span><br><span class="line">    <span class="keyword">if</span> (num==<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; num / <span class="number">2</span> + <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num % i == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getPrime</span><span class="params">(<span class="keyword">int</span> &amp;left, <span class="keyword">int</span> &amp;right, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//loop util right - left is even, otherwise right--.</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">//loop util right is prime</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">isPrime</span>(right)) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        left = x - right;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">isPrime</span>(left) || (right - left) % <span class="number">2</span> != <span class="number">0</span>) &#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">int</span> steps = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">2</span>, right = x - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">getPrime</span>(left, right, x);</span><br><span class="line">        <span class="keyword">int</span> diff = right - left;</span><br><span class="line">        steps++;</span><br><span class="line">        <span class="keyword">if</span> (diff == <span class="number">0</span> || diff == <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            x = diff;</span><br><span class="line">            right = x - <span class="number">1</span>;</span><br><span class="line">            left = <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; steps;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="H"><a href="#H" class="headerlink" title="H"></a>H</h1><p><img src="https://p.ipic.vip/jtxhry.png" alt="image-20230514013149755"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -913,13 +1105,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
