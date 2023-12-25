@@ -147,6 +147,81 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/26/1001-A-B-Format/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/26/1001-A-B-Format/" class="post-title-link" itemprop="url">1001 A+B Format</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-05-26 21:17:20 / Modified: 19:46:11" itemprop="dateCreated datePublished" datetime="2023-05-26T21:17:20+08:00">2023-05-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Calculate <em>a</em>+<em>b</em> and output the sum in standard format – that is, the digits must be separated into groups of three by commas (unless there are less than four digits).</p>
+<h3 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h3><p>Each input file contains one test case. Each case contains a pair of integers <em>a</em> and <em>b</em> where −10^6≤<em>a</em>,<em>b</em>≤10^6. The numbers are separated by a space.</p>
+<h3 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h3><p>For each test case, you should output the sum of <em>a</em> and <em>b</em> in one line. The sum must be written in the standard format.</p>
+<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1000000 9</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-999,991</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Code Size Limit</span><br><span class="line"></span><br><span class="line">16 KB</span><br><span class="line"></span><br><span class="line">Time Limit</span><br><span class="line"></span><br><span class="line">400 ms</span><br><span class="line"></span><br><span class="line">Memory Limit</span><br><span class="line"></span><br><span class="line">64 MB</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Because -10^6&lt;=a,b&lt;=10^6 and the max number of signed integer in c++ is 2^31-1=2147483647 &gt; 10^6, so we can just use int.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a, b;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;a, &amp;b);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> summ = a + b;</span><br><span class="line"><span class="comment">// convert abs(summ) into a string and traverse the string</span></span><br><span class="line"></span><br><span class="line">    string ans = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="comment">//insert , if current pointer is 3 and is not the last ch then ans=&quot;,&quot;+[curr]</span></span><br><span class="line"></span><br><span class="line">    string s = <span class="built_in">to_string</span>(<span class="built_in">abs</span>(summ));</span><br><span class="line">    string flag = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span> (summ &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        flag = <span class="string">&quot;-&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//i=1, len-1, [len-1] is the right=1</span></span><br><span class="line">    <span class="comment">//i=2, len-2, [len-2] is the right=2, two digits</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>, len = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        <span class="keyword">int</span> index = len - i;</span><br><span class="line">        ans = s[index] + ans;</span><br><span class="line">        <span class="keyword">if</span> (i % <span class="number">3</span> == <span class="number">0</span> &amp;&amp; len - i != <span class="number">0</span>) &#123;</span><br><span class="line">            ans = <span class="string">&quot;,&quot;</span> + ans;</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">        <span class="keyword">if</span> (i &gt; len) &#123;</span><br><span class="line">            <span class="comment">//when i=len, [0]</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    ans = flag + ans;</span><br><span class="line">    cout &lt;&lt; ans;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>But actually, to_string give me the sign of a+b, so i don’t need to check if a+b is less than 0. In addition, it use O(n) space, which can be optimised.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> a, b;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;a, &amp;b);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> sum = a + b;</span><br><span class="line">    string s = <span class="built_in">to_string</span>(sum);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//from left to right</span></span><br><span class="line">    <span class="comment">//i=0, from right it is len th</span></span><br><span class="line">    <span class="comment">//i=1, from right it is len-1 th</span></span><br><span class="line">    <span class="comment">//i=len, 0th</span></span><br><span class="line">    <span class="comment">//if [i] is &#x27;-&#x27;, print it</span></span><br><span class="line">    <span class="comment">//else:</span></span><br><span class="line">    <span class="comment">//if len-i is multiple of 4 and len-i is not 0 then print [i] and ,</span></span><br><span class="line">    <span class="keyword">int</span> len = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">            cout &lt;&lt; s[i];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> ((len - i - <span class="number">1</span>) % <span class="number">3</span> == <span class="number">0</span> &amp;&amp; i != len - <span class="number">1</span>) &#123;</span><br><span class="line">                cout &lt;&lt; s[i] &lt;&lt; <span class="string">&quot;,&quot;</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cout &lt;&lt; s[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/26/Segment-Tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -934,90 +1009,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/16/1055.%20Shortest%20Way%20to%20Form%20String/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/16/1055.%20Shortest%20Way%20to%20Form%20String/" class="post-title-link" itemprop="url">1055. Shortest Way to Form String</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-05-16 00:00:00" itemprop="dateCreated datePublished" datetime="2023-05-16T00:00:00+08:00">2023-05-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-18 21:13:01" itemprop="dateModified" datetime="2023-05-18T21:13:01+08:00">2023-05-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/shortest-way-to-form-string/description/">https://leetcode.com/problems/shortest-way-to-form-string/description/</a></p>
-<p>A <strong>subsequence</strong> of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., <code>&quot;ace&quot;</code> is a subsequence of <code>&quot;abcde&quot;</code> while <code>&quot;aec&quot;</code> is not).</p>
-<p>Given two strings <code>source</code> and <code>target</code>, return <em>the minimum number of <strong>subsequences</strong> of</em> <code>source</code> <em>such that their concatenation equals</em> <code>target</code>. If the task is impossible, return <code>-1</code>.</p>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: source = &quot;abc&quot;, target = &quot;abcbc&quot;</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: The target &quot;abcbc&quot; can be formed by &quot;abc&quot; and &quot;bc&quot;, which are subsequences of source &quot;abc&quot;.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: source = &quot;abc&quot;, target = &quot;acdbc&quot;</span><br><span class="line">Output: -1</span><br><span class="line">Explanation: The target string cannot be constructed from the subsequences of source string due to the character &quot;d&quot; in target string.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 3:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: source = &quot;xyz&quot;, target = &quot;xzyxz&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The target string can be constructed as follows &quot;xz&quot; + &quot;y&quot; + &quot;xz&quot;.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><code>1 &lt;= source.length, target.length &lt;= 1000</code></li>
-<li><code>source</code> and <code>target</code> consist of lowercase English letters.</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">shortestWay</span><span class="params">(string source, string target)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//explain subsequence. it is a special string that remain relative position in original string</span></span><br><span class="line">        <span class="comment">//we use sub of source and use them to form target</span></span><br><span class="line">        <span class="comment">//traverse target and for each target[i] try to find matched ch in source. so we need to traverse source.</span></span><br><span class="line">            <span class="comment">//traverse source</span></span><br><span class="line">                <span class="comment">//if find matched ch in source, then increase both string index and try to find next match ch</span></span><br><span class="line">            <span class="comment">//if in current loop, num of matched is 0, then return -1</span></span><br><span class="line">            <span class="comment">//otherwise i+=num of matched</span></span><br><span class="line">        <span class="keyword">int</span> loops=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;target.<span class="built_in">size</span>();)&#123;</span><br><span class="line">            <span class="keyword">int</span> matched=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;source.<span class="built_in">size</span>();j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(target[i+matched]==source[j])&#123;</span><br><span class="line">                    matched++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(matched==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                i+=matched;</span><br><span class="line">                loops++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> loops;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Beats 100% and only one submit no debug. It seems finally i grasp some trick? Amazing.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1087,7 +1078,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
