@@ -147,6 +147,238 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/21/704.%20Binary%20Search/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/21/704.%20Binary%20Search/" class="post-title-link" itemprop="url">704. Binary Search</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-05-21 00:00:00" itemprop="dateCreated datePublished" datetime="2023-05-21T00:00:00+08:00">2023-05-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-22 11:40:50" itemprop="dateModified" datetime="2023-05-22T11:40:50+08:00">2023-05-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/binary-search/description/">https://leetcode.com/problems/binary-search/description/</a></p>
+<p>Given an array of integers <code>nums</code> which is sorted in ascending order, and an integer <code>target</code>, write a function to search <code>target</code> in <code>nums</code>. If <code>target</code> exists, then return its index. Otherwise, return <code>-1</code>.</p>
+<p>You must write an algorithm with <code>O(log n)</code> runtime complexity.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [-1,0,3,5,9,12], target = 9</span><br><span class="line">Output: 4</span><br><span class="line">Explanation: 9 exists in nums and its index is 4</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [-1,0,3,5,9,12], target = 2</span><br><span class="line">Output: -1</span><br><span class="line">Explanation: 2 does not exist in nums so return -1</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 104</code></li>
+<li><code>-104 &lt; nums[i], target &lt; 104</code></li>
+<li>All the integers in <code>nums</code> are <strong>unique</strong>.</li>
+<li><code>nums</code> is sorted in ascending order.</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> N=nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> left=<span class="number">0</span>, right=N<span class="number">-1</span>, mid=(right+left)&gt;&gt;<span class="number">1</span>;left &lt;= right;)&#123;</span><br><span class="line">            <span class="comment">//loop util nums[mid]==target</span></span><br><span class="line">            <span class="comment">//if len is 0 then break</span></span><br><span class="line">            <span class="keyword">if</span>(target==nums[mid])&#123;</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(target&lt;nums[mid])&#123;</span><br><span class="line">                right=mid<span class="number">-1</span>;</span><br><span class="line">                mid=(left+right)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                left=mid+<span class="number">1</span>;</span><br><span class="line">                mid=(left+right)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>This problem is easy, but pay attention to <code>mid=(left+right)&gt;&gt;1</code>;</p>
+<p>For this problem, <code>1&lt;=nums.length&lt;=104</code>, so it should be fine. However, if the length is very large, then <code>left+right</code> may be overflow. To solve overflow, we use <code>mid=left+((right-left)&gt;&gt;1);</code> or <code>mid = ((unsigned int)low + (unsigned int)high)) &gt;&gt; 1;</code></p>
+<p>You can find more details on <a target="_blank" rel="noopener" href="https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html</a>.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/20/KMP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/20/KMP/" class="post-title-link" itemprop="url">KMP</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-05-20 00:00:00" itemprop="dateCreated datePublished" datetime="2023-05-20T00:00:00+08:00">2023-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-02 17:20:53" itemprop="dateModified" datetime="2023-11-02T17:20:53+08:00">2023-11-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getLongestCommonPartSize</span><span class="params">(string &amp;pat, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// For each sub string, we have [0, end-1-i], [1+i, end]</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="comment">//check if prefix[m]==suffix[m]</span></span><br><span class="line">        <span class="keyword">int</span> m = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> suffixLen = len - <span class="number">1</span> - i;</span><br><span class="line">        <span class="keyword">for</span> (; m &lt; suffixLen; m++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (pat[m] != pat[<span class="number">1</span> + i + m]) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (m == suffixLen) &#123;</span><br><span class="line">            <span class="comment">// match</span></span><br><span class="line">            <span class="keyword">return</span> m;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">KMPSearch</span><span class="params">(string &amp;pat, string &amp;txt)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//construct suffix table</span></span><br><span class="line">    <span class="comment">//suffix table has the same size as pat</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//ababa</span></span><br><span class="line">    <span class="comment">//0 a</span></span><br><span class="line">    <span class="comment">//0 ab</span></span><br><span class="line">    <span class="comment">//1 aba</span></span><br><span class="line">    <span class="comment">//2 abab</span></span><br><span class="line">    <span class="keyword">int</span> suffix[pat.<span class="built_in">size</span>()];</span><br><span class="line">    suffix[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">    <span class="comment">// we totally have pat.size()-1 sub string</span></span><br><span class="line">    <span class="comment">//i is the size of substring</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">1</span>; len &lt; pat.<span class="built_in">size</span>(); len++) &#123;</span><br><span class="line">        suffix[len] = <span class="built_in">getLongestCommonPartSize</span>(pat, len);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//check if pat[j]==txt[i]</span></span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">0</span>, i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">//break if one of the pointers overflow</span></span><br><span class="line">        <span class="comment">//if match, then both pointer++</span></span><br><span class="line">        <span class="comment">//else: check if can move(big&#x27;s pointer+small&#x27;s size==big&#x27;s size)</span></span><br><span class="line">        <span class="comment">// move pat to where fails</span></span><br><span class="line">        <span class="comment">//set pat&#x27;s p as suffix[p]</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= txt.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (j &gt;= pat.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            cout &lt;&lt; i - pat.<span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">            j = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (pat[j] == txt[i]) &#123;</span><br><span class="line">            j++;</span><br><span class="line">            i++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// check can move</span></span><br><span class="line">            <span class="keyword">if</span> (i + pat.<span class="built_in">size</span>() == txt.<span class="built_in">size</span>()) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (suffix[j] == <span class="number">-1</span>) &#123;</span><br><span class="line">                i++;</span><br><span class="line">                j = <span class="number">0</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                j = suffix[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (j &gt;= pat.<span class="built_in">size</span>()) &#123;</span><br><span class="line">        cout &lt;&lt; i - pat.<span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string txt = <span class="string">&quot;ABABDABACDABABCABAB&quot;</span>;</span><br><span class="line">    string pat = <span class="string">&quot;ABABCABAB&quot;</span>;</span><br><span class="line">    <span class="built_in">KMPSearch</span>(pat, txt);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>The size of pat is M.</p>
+<p>The process of build suffix table is O(M^2), we need to optimize it.</p>
+<p>There are ways of implementing the loop.</p>
+<p>One way is:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//if matched then increase both pointers and set table</span></span><br><span class="line"><span class="comment">//else go back to find previous matched to start</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">0</span>, i=<span class="number">1</span>;i&lt;s.<span class="built_in">size</span>();)&#123;</span><br><span class="line">  <span class="keyword">if</span> (s[len] == s[i]) &#123;</span><br><span class="line">    len++;</span><br><span class="line">    back[i] = len;</span><br><span class="line">    i++;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (len==<span class="number">0</span>) &#123;</span><br><span class="line">      i++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      len = back[len - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Another is:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//loop util find a character matched</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">0</span>, i=<span class="number">1</span>;i&lt;s.<span class="built_in">size</span>();)&#123;</span><br><span class="line">  <span class="keyword">while</span>(len&gt;=<span class="number">1</span>&amp;&amp;s[i]!=s[len])&#123;</span><br><span class="line">    len=back[len<span class="number">-1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(len&lt;<span class="number">1</span>&amp;&amp;s[i]!=s[len]) &#123;</span><br><span class="line">    i++;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">//matched</span></span><br><span class="line">    len++;</span><br><span class="line">    back[i]=len;</span><br><span class="line">    i++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The prefix and suffix are like two eras before and after, all conditions are the same, but at a certain point in time, the latter era B is destroyed. Therefore, era A, at that point, needs to make a different move than B to possibly succeed.</p>
+<p>Era A = [Common Part + Different Part]<br>Era B = [Common Part]</p>
+<p>Well, may be the DFA(deterministic finite automaton) can give me another angle to understand KMP.</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=hBXzOq_1yRk">https://www.youtube.com/watch?v=hBXzOq_1yRk</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/18/2013.%20Detect%20Squares/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/18/2013.%20Detect%20Squares/" class="post-title-link" itemprop="url">2013. Detect Squares</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-05-18 00:00:00 / Modified: 21:11:41" itemprop="dateCreated datePublished" datetime="2023-05-18T00:00:00+08:00">2023-05-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>Note:</strong></p>
+<p>Pay attention to array bound. You’d better plus 1 to array size.</p>
+<p>In this problem, 0&lt;=x,y&lt;=1000. So I should init array size as 1000+1;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DetectSquares</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    map&lt;<span class="keyword">int</span>, vector&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt;&gt; mapY;</span><br><span class="line">    <span class="keyword">int</span> counter[<span class="number">1001</span>][<span class="number">1001</span>]=&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; point)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pointx=point[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> pointy=point[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span>(counter[pointx][pointy] == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">//only insert once</span></span><br><span class="line">            mapY[pointy].<span class="built_in">emplace_back</span>(pointx, pointy);</span><br><span class="line">        &#125;</span><br><span class="line">        counter[pointx][pointy]++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">count</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; query)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> queryx=query[<span class="number">0</span>], queryy=query[<span class="number">1</span>];</span><br><span class="line">        vector&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt; arrY=mapY[query[<span class="number">1</span>]];</span><br><span class="line">        <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="comment">//arry does not have duplicate items</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;arrY.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; p = arrY[i];</span><br><span class="line">            <span class="keyword">int</span> px=p.first,py=p.second;</span><br><span class="line">            <span class="keyword">int</span> edge=<span class="built_in">abs</span>(queryx-px);</span><br><span class="line">            <span class="keyword">if</span>(edge==<span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> y=queryy+edge;</span><br><span class="line">            <span class="keyword">int</span> _y=queryy-edge;</span><br><span class="line">            <span class="keyword">if</span> (y&gt;=<span class="number">0</span> &amp;&amp; y&lt;=<span class="number">1000</span> ) &#123;</span><br><span class="line">                <span class="comment">//up=[queryx,y]</span></span><br><span class="line">                <span class="comment">//upDia=[px,y]</span></span><br><span class="line">                res+= counter[px][py] * counter[queryx][y] * counter[px][y];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (_y&gt;=<span class="number">0</span> &amp;&amp; _y&lt;=<span class="number">1000</span>) &#123;</span><br><span class="line">                <span class="comment">//down=[queryx,_y]</span></span><br><span class="line">                <span class="comment">//downDia=[px,_y]   </span></span><br><span class="line">                res+= counter[px][py] * counter[queryx][_y] * counter[px][_y];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>I think it can be more clear because diagonal point is more special than point with the same x as query. And if we get the diagonal point, it is easier to express two other points.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DetectSquares</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt; points;</span><br><span class="line">    <span class="keyword">int</span> counter[<span class="number">1001</span>][<span class="number">1001</span>]=&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; point)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pointX=point[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> pointY=point[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span>(counter[pointX][pointY] == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">//only insert once</span></span><br><span class="line">            points.<span class="built_in">emplace_back</span>(pointX, pointY);</span><br><span class="line">        &#125;</span><br><span class="line">        counter[pointX][pointY]++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">count</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; query)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> queryX=query[<span class="number">0</span>], queryY=query[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;[diagX, diagY]: points)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">abs</span>(diagX-queryX)!=<span class="built_in">abs</span>(diagY-queryY) || diagX-queryX==<span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//m has the same x as diag and same y as query</span></span><br><span class="line">                <span class="comment">//m(diagX, queryY)</span></span><br><span class="line">                <span class="comment">//n(queryX, diagY)</span></span><br><span class="line">                res+=counter[diagX][queryY]*counter[queryX][diagY]*counter[diagX][diagY];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/16/1055.%20Shortest%20Way%20to%20Form%20String/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -681,13 +913,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
