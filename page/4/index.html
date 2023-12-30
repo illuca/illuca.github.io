@@ -147,6 +147,390 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/09/72-Edit-Distance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/09/72-Edit-Distance/" class="post-title-link" itemprop="url">72. Edit Distance</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-12-09 19:33:14 / Modified: 17:25:44" itemprop="dateCreated datePublished" datetime="2023-12-09T19:33:14+08:00">2023-12-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/edit-distance/">https://leetcode.com/problems/edit-distance/</a></p>
+<p>Given two strings <code>word1</code> and <code>word2</code>, return <em>the minimum number of operations required to convert <code>word1</code> to <code>word2</code></em>.</p>
+<p>You have the following three operations permitted on a word:</p>
+<ul>
+<li>Insert a character</li>
+<li>Delete a character</li>
+<li>Replace a character</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: word1 = &quot;horse&quot;, word2 = &quot;ros&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: </span><br><span class="line">horse -&gt; rorse (replace &#x27;h&#x27; with &#x27;r&#x27;)</span><br><span class="line">rorse -&gt; rose (remove &#x27;r&#x27;)</span><br><span class="line">rose -&gt; ros (remove &#x27;e&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input: word1 = &quot;intention&quot;, word2 = &quot;execution&quot;</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: </span><br><span class="line">intention -&gt; inention (remove &#x27;t&#x27;)</span><br><span class="line">inention -&gt; enention (replace &#x27;i&#x27; with &#x27;e&#x27;)</span><br><span class="line">enention -&gt; exention (replace &#x27;n&#x27; with &#x27;x&#x27;)</span><br><span class="line">exention -&gt; exection (replace &#x27;n&#x27; with &#x27;c&#x27;)</span><br><span class="line">exection -&gt; execution (insert &#x27;u&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>0 &lt;= word1.length, word2.length &lt;= 500</code></li>
+<li><code>word1</code> and <code>word2</code> consist of lowercase English letters</li>
+</ul>
+<p>Let <code>P[i][j]</code> denote the cost of transforming <code>a[0..i-1]</code> to <code>b[0..j-1]</code>.<br>For current operation, we have several choices.</p>
+<p>Assume we have solved <code>P[i-1][j-1]</code>, <code>P[i-1][j]</code>, <code>P[i][j-1]</code>. Now we try to solve <code>P[i][j]</code>.<br>if current operation is delete, then we must have transformed <code>a[0..i-2]</code> to <code>b[0..j-1]</code><br>if current operation is insert, then we must have transformed <code>a[0..i-1]</code> to <code>b[0..j-2]</code><br>Otherwise, then we have transformed <code>a[0..i-1]</code> to <code>b[0..j-1]</code>.<br>If <code>a[i-1]=b[j-1]</code>, then current operation is do nothing.<br>If <code>a[i-1]!=b[j-1]</code>, then current operation is replacement.</p>
+<p>Thus for i∈[1,n], j∈[1,m], we have<br>$$<br>P[i][j]=\begin{cases}<br>    P[i-1][j]+1<br>        &amp;  \<br>    P[i][j-1]+1<br>        &amp;  \<br>    P[i-1][j-1]<br>        &amp; a[i-1]=b[j-1] \<br>    P[i-1][j-1]+1<br>        &amp; a[i-1]!=b[j-1]<br>\end{cases}<br>$$</p>
+<p><strong>Base cases:</strong></p>
+<p>The cost of transforming <code>a[0..i-1]</code> to empty string is always doing deletion i times .</p>
+<p>Thus <code>P[i][0]=i</code> </p>
+<p>The cost of transforming emtpy string to <code>b[0..j-1]</code> is always doing insertion j times.</p>
+<p>Thus <code>P[0][j]=j</code></p>
+<p><strong>Order of Computation and Final Solution</strong></p>
+<p>Before we solve <code>P[i][j]</code>, we need to solve <code>P[i-1][j],P[i][j-1],P[i][j]</code>, thus the order should be increasing order of i and j.</p>
+<p>The final solution is <code>P[n][m]</code></p>
+<p><strong>Time Complexity</strong></p>
+<p>There are <code>n*m</code> subproblems, thus the time complexity is O(nm).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minDistance</span>(<span class="params">self, a: <span class="built_in">str</span>, b: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        n=<span class="built_in">len</span>(a)</span><br><span class="line">        m=<span class="built_in">len</span>(b)</span><br><span class="line">        P=[[<span class="number">0</span>]*(m+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">if</span> m==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> n</span><br><span class="line">        <span class="keyword">if</span> n==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> m</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">            P[i][<span class="number">0</span>]=i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,m+<span class="number">1</span>):</span><br><span class="line">            P[<span class="number">0</span>][j]=j</span><br><span class="line">       </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,m+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> a[i-<span class="number">1</span>]==b[j-<span class="number">1</span>]:</span><br><span class="line">                    P[i][j]=<span class="built_in">min</span>(</span><br><span class="line">                        P[i-<span class="number">1</span>][j]+<span class="number">1</span>, <span class="comment">#delete</span></span><br><span class="line">                        P[i][j-<span class="number">1</span>]+<span class="number">1</span>, <span class="comment">#insert</span></span><br><span class="line">                        P[i-<span class="number">1</span>][j-<span class="number">1</span>]  </span><br><span class="line">                    )</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    P[i][j]=<span class="built_in">min</span>(</span><br><span class="line">                        P[i-<span class="number">1</span>][j]+<span class="number">1</span>,</span><br><span class="line">                        P[i][j-<span class="number">1</span>]+<span class="number">1</span>,</span><br><span class="line">                        P[i-<span class="number">1</span>][j-<span class="number">1</span>]+<span class="number">1</span> <span class="comment">#replace</span></span><br><span class="line">                    )</span><br><span class="line">        <span class="keyword">return</span> P[n][m]</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/11/08/23-Merge-k-Sorted-Lists/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/08/23-Merge-k-Sorted-Lists/" class="post-title-link" itemprop="url">23. Merge k Sorted Lists</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-11-08 01:58:49" itemprop="dateCreated datePublished" datetime="2023-11-08T01:58:49+08:00">2023-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-07 22:59:47" itemprop="dateModified" datetime="2023-11-07T22:59:47+08:00">2023-11-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    create a list ans.</span></span><br><span class="line"><span class="string">    create a array A. A[i] stores the pointer of lists[i]</span></span><br><span class="line"><span class="string">    create a priority queue named Q.</span></span><br><span class="line"><span class="string">    For each pointer i in A, we add A[i].val to Q.</span></span><br><span class="line"><span class="string">    While Q is not empty, do:</span></span><br><span class="line"><span class="string">    get pointer i and value x from Q,</span></span><br><span class="line"><span class="string">    add x to res</span></span><br><span class="line"><span class="string">    after move forward the pointer i, if i is not null,</span></span><br><span class="line"><span class="string">    then add i&#x27;.val, i&#x27; to Q.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mergeKLists</span>(<span class="params">self, lists: <span class="type">List</span>[<span class="type">Optional</span>[ListNode]]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span></span><br><span class="line">        A,Q=[],[]</span><br><span class="line">        ans=ListNode()</span><br><span class="line">        w=ans</span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> lists:</span><br><span class="line">            <span class="keyword">if</span> p <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                A.append(p)</span><br><span class="line">        <span class="keyword">for</span> i,p <span class="keyword">in</span> <span class="built_in">enumerate</span>(A):</span><br><span class="line">            heapq.heappush(Q,(p.val,i,p))</span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(Q) &gt; <span class="number">0</span>:</span><br><span class="line">            x,i,p=heapq.heappop(Q)</span><br><span class="line">            w.<span class="built_in">next</span>=ListNode(x)</span><br><span class="line">            w=w.<span class="built_in">next</span></span><br><span class="line">            p=p.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">if</span> p <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                heapq.heappush(Q,(p.val,i,p))</span><br><span class="line">        <span class="keyword">return</span> ans.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/11/08/46-Permutations/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/08/46-Permutations/" class="post-title-link" itemprop="url">46. Permutations</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-11-08 00:43:47" itemprop="dateCreated datePublished" datetime="2023-11-08T00:43:47+08:00">2023-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-07 23:07:18" itemprop="dateModified" datetime="2023-11-07T23:07:18+08:00">2023-11-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    create a 3D array dp.</span></span><br><span class="line"><span class="string">    let dp[i] denote the permutations with first i elements.</span></span><br><span class="line"><span class="string">    denote size of nums as N</span></span><br><span class="line"><span class="string">    so dp[N] stores the permutations with first N elements.</span></span><br><span class="line"><span class="string">    basic:</span></span><br><span class="line"><span class="string">    dp[0]=[[-1]]</span></span><br><span class="line"><span class="string">    dp[1]=[[nums[0]]]</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">permute</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">insert</span>(<span class="params">l,curr</span>)-&gt;<span class="type">List</span>[<span class="type">List</span>]:</span></span><br><span class="line">            res=[]</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(l)+<span class="number">1</span>):</span><br><span class="line">                res.append(l[:i]+[curr]+l[i:])</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">        N=<span class="built_in">len</span>(nums)</span><br><span class="line">        dp=[[[-<span class="number">1</span>]],[[nums[<span class="number">0</span>]]]]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,N):</span><br><span class="line">            curr=nums[i]</span><br><span class="line">            tmp=[]</span><br><span class="line">            <span class="keyword">for</span> l <span class="keyword">in</span> dp[i]:</span><br><span class="line">                newE:<span class="type">List</span>[<span class="type">List</span>] = insert(l, curr)</span><br><span class="line">                tmp.extend(newE)</span><br><span class="line">            dp.append(tmp)</span><br><span class="line">        <span class="keyword">return</span> dp[N]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">permute</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        first ans is empty</span></span><br><span class="line"><span class="string">        for backtrack, start from [],</span></span><br><span class="line"><span class="string">        for each item in nums, we add it to the end of curr, then do backtrack</span></span><br><span class="line"><span class="string">        each item corresponds to a function call</span></span><br><span class="line"><span class="string">        [1] -&gt; [1,2] -&gt; [1,2,3]</span></span><br><span class="line"><span class="string">            -&gt; [1,3] -&gt; [1,3,2]</span></span><br><span class="line"><span class="string">        [2] -&gt; [2,1] -&gt; [2,1,3]</span></span><br><span class="line"><span class="string">            -&gt; [2,3] -&gt; [2,3,1]</span></span><br><span class="line"><span class="string">        [3] -&gt; [3,1] -&gt; [3,1,2]</span></span><br><span class="line"><span class="string">            -&gt; [3,2] -&gt; [3,2,1]</span></span><br><span class="line"><span class="string">        for each call, we do iteration for nums, so it costs O(n)</span></span><br><span class="line"><span class="string">        during iteration, for each item, we call backtrack, so there are O(n) backtrack</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">backtrack</span>(<span class="params">curr</span>):</span></span><br><span class="line">            <span class="keyword">nonlocal</span> ans</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(curr) == <span class="built_in">len</span>(nums):</span><br><span class="line">                ans.append(curr[:])</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">                <span class="keyword">if</span> num <span class="keyword">not</span> <span class="keyword">in</span> curr:</span><br><span class="line">                    curr.append(num)</span><br><span class="line">                    backtrack(curr)</span><br><span class="line">                    curr.pop()</span><br><span class="line">        ans = []</span><br><span class="line">        backtrack([])</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/06/29/Greedy-Candies/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/29/Greedy-Candies/" class="post-title-link" itemprop="url">Greedy--Candies</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-06-29 18:46:40" itemprop="dateCreated datePublished" datetime="2023-06-29T18:46:40+08:00">2023-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-02 17:32:09" itemprop="dateModified" datetime="2023-11-02T17:32:09+08:00">2023-11-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.hackerrank.com/challenges/candies/problem">https://www.hackerrank.com/challenges/candies/problem</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">candies</span><span class="params">(<span class="keyword">int</span> n, vector&lt;<span class="keyword">int</span>&gt; arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr.<span class="built_in">empty</span>())&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">candies</span><span class="params">(n)</span></span>;</span><br><span class="line">    <span class="keyword">int</span> curr=<span class="number">1</span>;</span><br><span class="line">    candies[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i+<span class="number">1</span>&lt;n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i+<span class="number">1</span>]&gt;arr[i])&#123;</span><br><span class="line">            curr++;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            curr=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        candies[i+<span class="number">1</span>]=curr;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// deal with case like: [5,5,4,3,2]</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i<span class="number">-1</span>]&gt;arr[i] &amp;&amp; candies[i<span class="number">-1</span>]&lt;=candies[i])&#123;</span><br><span class="line">           candies[i<span class="number">-1</span>]=candies[i]+<span class="number">1</span>; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> total=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        total+=candies[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/06/29/2244-Minimum-Rounds-to-Complete-All-Tasks-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/29/2244-Minimum-Rounds-to-Complete-All-Tasks-1/" class="post-title-link" itemprop="url">2244. Minimum Rounds to Complete All Tasks</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-06-29 14:57:20" itemprop="dateCreated datePublished" datetime="2023-06-29T14:57:20+08:00">2023-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-02 17:25:01" itemprop="dateModified" datetime="2023-11-02T17:25:01+08:00">2023-11-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>You are given a <strong>0-indexed</strong> integer array <code>tasks</code>, where <code>tasks[i]</code> represents the difficulty level of a task. In each round, you can complete either 2 or 3 tasks of the <strong>same difficulty level</strong>.</p>
+<p>Return <em>the <strong>minimum</strong> rounds required to complete all the tasks, or</em> <code>-1</code> <em>if it is not possible to complete all the tasks.</em></p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input: tasks = [2,2,3,3,2,4,4,4,4,4]</span><br><span class="line">Output: 4</span><br><span class="line">Explanation: To complete all the tasks, a possible plan is:</span><br><span class="line">- In the first round, you complete 3 tasks of difficulty level 2. </span><br><span class="line">- In the second round, you complete 2 tasks of difficulty level 3. </span><br><span class="line">- In the third round, you complete 3 tasks of difficulty level 4. </span><br><span class="line">- In the fourth round, you complete 2 tasks of difficulty level 4.  </span><br><span class="line">It can be shown that all the tasks cannot be completed in fewer than 4 rounds, so the answer is 4.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: tasks = [2,3,3]</span><br><span class="line">Output: -1</span><br><span class="line">Explanation: There is only 1 task of difficulty level 2, but in each round, you can only complete either 2 or 3 tasks of the same difficulty level. Hence, you cannot complete all the tasks, and the answer is -1.</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getRounds</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> round=<span class="number">0</span>;</span><br><span class="line">        <span class="comment">//if value is 1, then return -1</span></span><br><span class="line">        <span class="keyword">if</span>(value==<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//if value is odd, then it consists of value/3 number of 3&#x27;s + one 2&#x27;s.</span></span><br><span class="line">        <span class="comment">//if value is even, it consists of even number of 3 + y number of 2&#x27;s.</span></span><br><span class="line">        <span class="comment">//[5,5,5,5] takes as many as 3&#x27;s, but [5,5,5][5] is not valid</span></span><br><span class="line">        <span class="comment">//we can split one 3&#x27;s, and it becomes [5,5] [5,5]</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">ceil</span>(value/<span class="number">3.0</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minimumRounds</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; tasks)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//traverse the tasks, and cal num and its occurrance times</span></span><br><span class="line">        <span class="comment">//iterate dict, for each level,we need 3x+2y rounds.</span></span><br><span class="line">        map&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; dict;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> task:tasks)&#123;</span><br><span class="line">            dict[task]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it=dict.<span class="built_in">begin</span>();it!=dict.<span class="built_in">end</span>();it++)&#123;</span><br><span class="line">            <span class="keyword">int</span> curr=<span class="built_in">getRounds</span>(it-&gt;second);</span><br><span class="line">            <span class="keyword">if</span>(curr==<span class="number">-1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                res+=curr;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Correctness</strong></p>
+<p>We should take as many 3’s as possible. If at any step, we takes </p>
+<p><strong>Time complexity</strong></p>
+<p>Say tasks has n elements.</p>
+<p>We put every element of tasks into dict and each insertion takes O(1) expected time. It will take O(n) expected time.</p>
+<p>We iterate every pair of dict, which will take O(n) time.</p>
+<p>Overall, the time complexity is O(n) time.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/06/03/COMP9319/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -592,497 +976,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/23/236-Lowest-Common-Ancestor-of-a-Binary-Tree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/23/236-Lowest-Common-Ancestor-of-a-Binary-Tree/" class="post-title-link" itemprop="url">236. Lowest Common Ancestor of a Binary Tree</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-05-23 13:38:18" itemprop="dateCreated datePublished" datetime="2023-05-23T13:38:18+08:00">2023-05-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-02 17:24:35" itemprop="dateModified" datetime="2023-11-02T17:24:35+08:00">2023-11-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.</p>
-<p>According to the <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Lowest_common_ancestor">definition of LCA on Wikipedia</a>: “The lowest common ancestor is defined between two nodes <code>p</code> and <code>q</code> as the lowest node in <code>T</code> that has both <code>p</code> and <code>q</code> as descendants (where we allow <strong>a node to be a descendant of itself</strong>).”</p>
-<p><strong>Example 1:</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2018/12/14/binarytree.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The LCA of nodes 5 and 1 is 3.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2018/12/14/binarytree.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 3:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: root = [1,2], p = 1, q = 2</span><br><span class="line">Output: 1</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li>The number of nodes in the tree is in the range <code>[2, 105]</code>.</li>
-<li><code>-109 &lt;= Node.val &lt;= 109</code></li>
-<li>All <code>Node.val</code> are <strong>unique</strong>.</li>
-<li><code>p != q</code></li>
-<li><code>p</code> and <code>q</code> will exist in the tree.</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Now you have a binary tree and root is the root of the tree.</span></span><br><span class="line">        <span class="comment">// p and q are the two nodes in this tree. </span></span><br><span class="line">        <span class="comment">// p and q have the common descendant. They have many descendants. But i need to find the lowest one.</span></span><br><span class="line">        <span class="comment">// I should keep finding their parent util their parent in the same level. </span></span><br><span class="line">        <span class="comment">// Every time their parents are int the same level, check if they are the same node.</span></span><br><span class="line">        <span class="comment">// traverse the whole tree and make a parent map=&#123;&#123;node: parent&#125;&#125; and depth[node]=depth.</span></span><br><span class="line">        <span class="comment">// depth of root node is 1, pop and push two new nodes in stack and their depth are previous poped node depth+1</span></span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">NULL</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line">        stack&lt;TreeNode*&gt; s;</span><br><span class="line">        s.<span class="built_in">push</span>(root);</span><br><span class="line">        map&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; depth;</span><br><span class="line">        map&lt;TreeNode*,TreeNode*&gt; parent;</span><br><span class="line">        set&lt;<span class="keyword">int</span>&gt; visited;</span><br><span class="line">        <span class="comment">//init parent, every node&#x27;s parent is itself.</span></span><br><span class="line">        parent[root]=root;</span><br><span class="line">        depth[root-&gt;val]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(!s.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            TreeNode* curr=s.<span class="built_in">top</span>(); s.<span class="built_in">pop</span>();</span><br><span class="line">            visited.<span class="built_in">insert</span>(curr-&gt;val);</span><br><span class="line">            <span class="keyword">int</span> d=depth[curr-&gt;val];</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;right!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">                s.<span class="built_in">push</span>(curr-&gt;right);</span><br><span class="line">                depth[curr-&gt;right-&gt;val]=d+<span class="number">1</span>;</span><br><span class="line">                parent[curr-&gt;right]=curr;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;left!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">                s.<span class="built_in">push</span>(curr-&gt;left);</span><br><span class="line">                depth[curr-&gt;left-&gt;val]=d+<span class="number">1</span>;</span><br><span class="line">                parent[curr-&gt;left]=curr;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//if both p and q are visited, then break in advance</span></span><br><span class="line">            <span class="keyword">if</span>(visited.<span class="built_in">count</span>(p-&gt;val) &amp;&amp; visited.<span class="built_in">count</span>(q-&gt;val)) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode* pParent=p, *qParent=q;</span><br><span class="line">        <span class="comment">//every node has its parent except for the root</span></span><br><span class="line">        <span class="keyword">while</span>(parent[pParent]-&gt;val!=pParent-&gt;val || parent[qParent]-&gt;val!=pParent-&gt;val)&#123;</span><br><span class="line">            <span class="keyword">if</span>(depth[pParent-&gt;val]==depth[qParent-&gt;val]) &#123;</span><br><span class="line">                <span class="keyword">if</span>(pParent-&gt;val==qParent-&gt;val) &#123;</span><br><span class="line">                    <span class="keyword">return</span> pParent;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    pParent=parent[pParent];</span><br><span class="line">                    qParent=parent[qParent];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//if pParent depth &lt; qParent depth, then qParent should be higher</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(depth[pParent-&gt;val]&lt;depth[qParent-&gt;val])&#123;</span><br><span class="line">                qParent=parent[qParent];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                pParent=parent[pParent];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Use recursion can be more efficient because using map in each loop.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//discuss conditions from leaf to root</span></span><br><span class="line">        <span class="comment">// if curr is child of leaf, then return null</span></span><br><span class="line">        <span class="comment">// if curr is a leaf:</span></span><br><span class="line">        <span class="comment">//     if curr finds p or q, then return curr</span></span><br><span class="line">  	    <span class="comment">// if curr is parent of left and right:</span></span><br><span class="line">      		<span class="comment">// if curr finds p or q, then return curr</span></span><br><span class="line">      		<span class="comment">// else:</span></span><br><span class="line">            <span class="comment">// if curr.left finds one and curr.right also finds one, then return curr.	</span></span><br><span class="line">            <span class="comment">// if curr.left finds one and curr.right does not find, then another one may be child of that one or does not exist in curr tree. No matter which condition, return current tree.</span></span><br><span class="line">            <span class="comment">// if right.left finds one and curr.left does not find, the same as above.</span></span><br><span class="line">            <span class="comment">// if no one found, then return NULL;</span></span><br><span class="line">        <span class="keyword">if</span>(!root)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;val==p-&gt;val || root-&gt;val==q-&gt;val)&#123;</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            TreeNode* left=<span class="built_in">lowestCommonAncestor</span>(root-&gt;left, p, q);</span><br><span class="line">            TreeNode* right=<span class="built_in">lowestCommonAncestor</span>(root-&gt;right, p, q);</span><br><span class="line">            <span class="keyword">if</span>(left&amp;&amp;!right)&#123;</span><br><span class="line">                <span class="keyword">return</span> left;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(!left&amp;&amp;right)&#123;</span><br><span class="line">                <span class="keyword">return</span> right;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (left&amp;&amp;right)&#123;</span><br><span class="line">                <span class="keyword">return</span> root;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Note: </p>
-<p>All return value will point to left and right because left and right is the entrance.</p>
-<p>This method is also easy to understand.</p>
-<p>We store the path of root to n1 and root to n2.<br>if path1=[root, n1] and path2=[root, n2], then first mismatch is n1!=n2. The previous node is their LCA.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">findPath</span><span class="params">(TreeNode* root, vector&lt;TreeNode*&gt; &amp;path, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//if curr is child of leaf, then return null</span></span><br><span class="line">        <span class="comment">//if curr is root:</span></span><br><span class="line">            <span class="comment">//insert current val</span></span><br><span class="line">            <span class="comment">//check if current val equals target then return true</span></span><br><span class="line">            <span class="comment">//else:</span></span><br><span class="line">            <span class="comment">//if left child finds, then return true</span></span><br><span class="line">            <span class="comment">//if right finds, then return true</span></span><br><span class="line">            <span class="comment">//if not found, then target does not exist in curr tree, then we should go back and clear our footprint</span></span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> root;</span><br><span class="line">        path.<span class="built_in">push_back</span>(root);</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;val==target)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">bool</span> left=<span class="built_in">findPath</span>(root-&gt;left, path, target);</span><br><span class="line">        <span class="keyword">bool</span> right=<span class="built_in">findPath</span>(root-&gt;right, path, target);</span><br><span class="line">        <span class="keyword">if</span>(left || right)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            path.<span class="built_in">pop_back</span>();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">        vector&lt;TreeNode*&gt;path1;</span><br><span class="line">        vector&lt;TreeNode*&gt;path2;</span><br><span class="line">        <span class="comment">// p and q all exist in the tree, so we don&#x27;t need to check</span></span><br><span class="line">        <span class="built_in">findPath</span>(root,path1,p-&gt;val);</span><br><span class="line">        <span class="built_in">findPath</span>(root,path2,q-&gt;val);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;path1.<span class="built_in">size</span>() &amp;&amp; i&lt;path2.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="comment">//if equal, then continue, else break</span></span><br><span class="line">            <span class="keyword">if</span>(path1[i]-&gt;val!=path2[i]-&gt;val) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> path1[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>Tarjan’s off -line LCA is not efficient in this problem, but i just want to practice.</p>
-<p>You can find more details on <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/tarjans-off-line-lowest-common-ancestors-algorithm/">https://www.geeksforgeeks.org/tarjans-off-line-lowest-common-ancestors-algorithm/</a>.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    unordered_map&lt;TreeNode*, TreeNode*&gt; parent;</span><br><span class="line">    unordered_map&lt;TreeNode*, TreeNode*&gt; child;</span><br><span class="line">    unordered_map&lt;TreeNode*, TreeNode*&gt; sibling;</span><br><span class="line">    unordered_map&lt;TreeNode*, <span class="keyword">bool</span>&gt; visited;</span><br><span class="line">    TreeNode* pp, *qq;</span><br><span class="line">    TreeNode* ans;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//init parent, child, sibling</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">LCA</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">// init parent</span></span><br><span class="line">        parent[root]=root;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//if left and right are not null</span></span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left)&#123;</span><br><span class="line">            child[root]=root-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!root-&gt;left&amp;&amp;root-&gt;right)&#123;</span><br><span class="line">            child[root]=root-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left&amp;&amp;root-&gt;right)&#123;</span><br><span class="line">            sibling[root-&gt;left]=root-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">LCA</span>(root-&gt;left);</span><br><span class="line">        <span class="built_in">LCA</span>(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// x be the parent</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">unionSet</span><span class="params">(TreeNode* x, TreeNode* y)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//find root of x</span></span><br><span class="line">        TreeNode* xroot=<span class="built_in">findSet</span>(x);</span><br><span class="line">        <span class="comment">//find root of y</span></span><br><span class="line">        TreeNode* yroot=<span class="built_in">findSet</span>(y);</span><br><span class="line">        parent[yroot]=xroot;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">findSet</span><span class="params">(TreeNode* x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//keep find the parent util itself</span></span><br><span class="line">        <span class="keyword">while</span>(parent[x]!=x)&#123;</span><br><span class="line">            x=parent[x];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">walk</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//go to leftest and set its parent and ancestor</span></span><br><span class="line">        TreeNode* node=child[root];</span><br><span class="line">        <span class="keyword">while</span>(node) &#123;</span><br><span class="line">            <span class="comment">//walk left</span></span><br><span class="line">            <span class="built_in">walk</span>(node);</span><br><span class="line">            <span class="comment">//union root and node</span></span><br><span class="line">            <span class="built_in">unionSet</span>(root,node);</span><br><span class="line">            <span class="comment">//walk right</span></span><br><span class="line">            node=sibling[node];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// if curr equals one of targets, then set visited</span></span><br><span class="line">        <span class="comment">//     if another target B has been visited, then B&#x27;s ancestor is the LCA</span></span><br><span class="line">        <span class="comment">//         ans=findSet(B);</span></span><br><span class="line">        <span class="comment">//     if another target A has been visited, then A&#x27;s ancestor is the LCA</span></span><br><span class="line">        <span class="comment">//         ans=findSet(A)</span></span><br><span class="line">        <span class="keyword">if</span>(ans) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;val==pp-&gt;val || root-&gt;val==qq-&gt;val) &#123;</span><br><span class="line">            visited[root]=<span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;val==pp-&gt;val &amp;&amp; visited[qq])&#123;</span><br><span class="line">                <span class="comment">// find another qq</span></span><br><span class="line">                ans=<span class="built_in">findSet</span>(qq);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;val==qq-&gt;val &amp;&amp; visited[pp])&#123;</span><br><span class="line">                ans=<span class="built_in">findSet</span>(pp);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//subset[root].child=root-&gt;left</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//init subset</span></span><br><span class="line">        <span class="built_in">LCA</span>(root);</span><br><span class="line">        pp=p; qq=q;</span><br><span class="line">        <span class="built_in">walk</span>(root);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>And then we can use path compression to make it quicker. But i don’t know why leetcode tells me the program gets slower and use more memory.</p>
-<p><img src="https://p.ipic.vip/ak0h7e.png" alt="image-20230524193349050"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    unordered_map&lt;TreeNode*, TreeNode*&gt; parent;</span><br><span class="line">    unordered_map&lt;TreeNode*, TreeNode*&gt; child;</span><br><span class="line">    unordered_map&lt;TreeNode*, TreeNode*&gt; sibling;</span><br><span class="line">    unordered_map&lt;TreeNode*, <span class="keyword">bool</span>&gt; visited;</span><br><span class="line">    TreeNode* pp, *qq;</span><br><span class="line">    TreeNode* ans;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//init parent, child, sibling</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">LCA</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">// init parent</span></span><br><span class="line">        parent[root]=root;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//if left and right are not null</span></span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left)&#123;</span><br><span class="line">            child[root]=root-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!root-&gt;left&amp;&amp;root-&gt;right)&#123;</span><br><span class="line">            child[root]=root-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left&amp;&amp;root-&gt;right)&#123;</span><br><span class="line">            sibling[root-&gt;left]=root-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">LCA</span>(root-&gt;left);</span><br><span class="line">        <span class="built_in">LCA</span>(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// x be the parent</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">unionSet</span><span class="params">(TreeNode* x, TreeNode* y)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//find root of x</span></span><br><span class="line">        TreeNode* xroot=<span class="built_in">findSet</span>(x);</span><br><span class="line">        <span class="comment">//find root of y</span></span><br><span class="line">        TreeNode* yroot=<span class="built_in">findSet</span>(y);</span><br><span class="line">        parent[yroot]=xroot;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">findSet</span><span class="params">(TreeNode* x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//keep find the parent util itself</span></span><br><span class="line">        <span class="keyword">while</span>(parent[x]!=x)&#123;</span><br><span class="line">            x=parent[x];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">walk</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//go to leftest and set its parent and ancestor</span></span><br><span class="line">        TreeNode* node=child[root];</span><br><span class="line">        <span class="keyword">while</span>(node) &#123;</span><br><span class="line">            <span class="comment">//walk left</span></span><br><span class="line">            <span class="built_in">walk</span>(node);</span><br><span class="line">            <span class="comment">//union root and node</span></span><br><span class="line">            <span class="built_in">unionSet</span>(root,node);</span><br><span class="line">            <span class="comment">//walk right</span></span><br><span class="line">            node=sibling[node];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// if curr equals one of targets, then set visited</span></span><br><span class="line">        <span class="comment">//     if another target B has been visited, then B&#x27;s ancestor is the LCA</span></span><br><span class="line">        <span class="comment">//         ans=findSet(B);</span></span><br><span class="line">        <span class="comment">//     if another target A has been visited, then A&#x27;s ancestor is the LCA</span></span><br><span class="line">        <span class="comment">//         ans=findSet(A)</span></span><br><span class="line">        <span class="keyword">if</span>(ans) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;val==pp-&gt;val || root-&gt;val==qq-&gt;val) &#123;</span><br><span class="line">            visited[root]=<span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;val==pp-&gt;val &amp;&amp; visited[qq])&#123;</span><br><span class="line">                <span class="comment">// find another qq</span></span><br><span class="line">                ans=<span class="built_in">findSet</span>(qq);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;val==qq-&gt;val &amp;&amp; visited[pp])&#123;</span><br><span class="line">                ans=<span class="built_in">findSet</span>(pp);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//subset[root].child=root-&gt;left</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//init subset</span></span><br><span class="line">        <span class="built_in">LCA</span>(root);</span><br><span class="line">        pp=p; qq=q;</span><br><span class="line">        <span class="built_in">walk</span>(root);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>I think it is because i use multiple map, i should merge them into a subset.  I think it works as image shows.</p>
-<p><img src="https://p.ipic.vip/2ztqym.png" alt="image-20230524193419613"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    TreeNode* ancestor;</span><br><span class="line">    TreeNode* parent;</span><br><span class="line">    TreeNode* child;</span><br><span class="line">    TreeNode* sibling;</span><br><span class="line">    <span class="keyword">bool</span> visited;</span><br><span class="line">    <span class="keyword">int</span> rank;</span><br><span class="line">&#125; subset;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    unordered_map&lt;TreeNode*, subset&gt; subset;</span><br><span class="line">    TreeNode* pp, *qq;</span><br><span class="line">    TreeNode* ans;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//init parent, child, sibling</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">LCA</span><span class="params">(TreeNode* root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">// init parent</span></span><br><span class="line">        subset[root].ancestor=root;</span><br><span class="line">        subset[root].parent=root;</span><br><span class="line">        subset[root].ancestor=root;</span><br><span class="line">        subset[root].rank=<span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//if left and right are not null</span></span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left)&#123;</span><br><span class="line">            subset[root].child=root-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!root-&gt;left&amp;&amp;root-&gt;right)&#123;</span><br><span class="line">            subset[root].child=root-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left&amp;&amp;root-&gt;right)&#123;</span><br><span class="line">            subset[root-&gt;left].sibling=root-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">LCA</span>(root-&gt;left);</span><br><span class="line">        <span class="built_in">LCA</span>(root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// x be the parent</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">unionSet</span><span class="params">(TreeNode* x, TreeNode* y)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//find root of x</span></span><br><span class="line">        TreeNode* xroot=<span class="built_in">findSet</span>(x);</span><br><span class="line">        <span class="comment">//find root of y</span></span><br><span class="line">        TreeNode* yroot=<span class="built_in">findSet</span>(y);</span><br><span class="line">        <span class="comment">//if rank equal then x be parent</span></span><br><span class="line">        <span class="keyword">if</span>(subset[xroot].rank==subset[yroot].rank)&#123;</span><br><span class="line">            subset[yroot].parent=xroot;</span><br><span class="line">            subset[xroot].rank++;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(subset[xroot].rank&lt;subset[yroot].rank)&#123;</span><br><span class="line">            subset[xroot].parent=yroot;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            subset[yroot].parent=xroot;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//else if node with higher rank be the parent</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">findSet</span><span class="params">(TreeNode* x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//keep find the parent util itself</span></span><br><span class="line">        <span class="keyword">while</span>(subset[x].parent!=x)&#123;</span><br><span class="line">            x=subset[x].parent;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">walk</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//go to leftest and set its parent and ancestor</span></span><br><span class="line">        TreeNode* node=subset[root].child;</span><br><span class="line">        <span class="keyword">while</span>(node) &#123;</span><br><span class="line">            <span class="comment">//walk left</span></span><br><span class="line">            <span class="built_in">walk</span>(node);</span><br><span class="line">            <span class="comment">//union root and node</span></span><br><span class="line">            <span class="built_in">unionSet</span>(root,node);</span><br><span class="line">            <span class="comment">//walk right</span></span><br><span class="line">            subset[<span class="built_in">findSet</span>(node)].ancestor=root;</span><br><span class="line">            node=subset[node].sibling;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// if curr equals one of targets, then set visited</span></span><br><span class="line">        <span class="comment">//     if another target B has been visited, then B&#x27;s ancestor is the LCA</span></span><br><span class="line">        <span class="comment">//         ans=findSet(B);</span></span><br><span class="line">        <span class="comment">//     if another target A has been visited, then A&#x27;s ancestor is the LCA</span></span><br><span class="line">        <span class="comment">//         ans=findSet(A)</span></span><br><span class="line">        <span class="keyword">if</span>(ans) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;val==pp-&gt;val || root-&gt;val==qq-&gt;val) &#123;</span><br><span class="line">            subset[root].visited=<span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;val==pp-&gt;val &amp;&amp; subset[qq].visited)&#123;</span><br><span class="line">                <span class="comment">// find another qq</span></span><br><span class="line">                ans=subset[<span class="built_in">findSet</span>(qq)].ancestor;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;val==qq-&gt;val &amp;&amp; subset[pp].visited)&#123;</span><br><span class="line">                ans=subset[<span class="built_in">findSet</span>(pp)].ancestor;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//subset[root].child=root-&gt;left</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//init subset</span></span><br><span class="line">        <span class="built_in">LCA</span>(root);</span><br><span class="line">        pp=p; qq=q;</span><br><span class="line">        <span class="built_in">walk</span>(root);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>We can also use mutation of tarjan’s LCA. The core is the visited mark.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    TreeNode* ancestor;</span><br><span class="line">    TreeNode* parent;</span><br><span class="line">    <span class="keyword">bool</span> visited;</span><br><span class="line">    <span class="keyword">int</span> rank;</span><br><span class="line">&#125; subset;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    unordered_map&lt;TreeNode*, subset&gt; subset;</span><br><span class="line">    TreeNode* pp, *qq;</span><br><span class="line">    TreeNode* ans;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// x be the parent</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">unionSet</span><span class="params">(TreeNode* x, TreeNode* y)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//find root of x</span></span><br><span class="line">        TreeNode* xroot=<span class="built_in">findSet</span>(x);</span><br><span class="line">        <span class="comment">//find root of y</span></span><br><span class="line">        TreeNode* yroot=<span class="built_in">findSet</span>(y);</span><br><span class="line">        <span class="comment">//if rank equal then x be parent</span></span><br><span class="line">        <span class="keyword">if</span>(subset[xroot].rank==subset[yroot].rank)&#123;</span><br><span class="line">            subset[yroot].parent=xroot;</span><br><span class="line">            subset[xroot].rank++;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(subset[xroot].rank&lt;subset[yroot].rank)&#123;</span><br><span class="line">            subset[xroot].parent=yroot;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            subset[yroot].parent=xroot;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//else if node with higher rank be the parent</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">TreeNode* <span class="title">findSet</span><span class="params">(TreeNode* x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//keep find the parent util itself</span></span><br><span class="line">        <span class="keyword">while</span>(subset[x].parent!=x)&#123;</span><br><span class="line">            x=subset[x].parent;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//init subset[root]</span></span><br><span class="line">        <span class="comment">//go to left child</span></span><br><span class="line">        <span class="comment">//union current and left</span></span><br><span class="line">        <span class="comment">//go to right child</span></span><br><span class="line">        <span class="comment">//union current and right</span></span><br><span class="line">        TreeNode* res=<span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        subset[root].parent=root;</span><br><span class="line">        subset[root].ancestor=root;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;left) &#123;</span><br><span class="line">            res=<span class="built_in">lowestCommonAncestor</span>(root-&gt;left, p, q);</span><br><span class="line">            <span class="built_in">unionSet</span>(root, root-&gt;left);</span><br><span class="line">            subset[<span class="built_in">findSet</span>(root-&gt;left)].ancestor=root;</span><br><span class="line">            <span class="keyword">if</span>(res)&#123;</span><br><span class="line">                <span class="keyword">return</span> res;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root-&gt;right)&#123;</span><br><span class="line">            res=<span class="built_in">lowestCommonAncestor</span>(root-&gt;right, p, q);</span><br><span class="line">            <span class="built_in">unionSet</span>(root, root-&gt;right);</span><br><span class="line">            subset[<span class="built_in">findSet</span>(root-&gt;right)].ancestor=root;</span><br><span class="line">            <span class="keyword">if</span>(res)&#123;</span><br><span class="line">                <span class="keyword">return</span> res;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//if curr find any of targets</span></span><br><span class="line">            <span class="comment">//if curr finds target A and B is visted, then B&#x27;s ancestor is LCA</span></span><br><span class="line">            <span class="comment">//if curr finds target B and A is visited, then A&#x27;s ancestor is LCA</span></span><br><span class="line">        <span class="keyword">if</span>(root-&gt;val==p-&gt;val || root-&gt;val==q-&gt;val) &#123;</span><br><span class="line">            subset[root].visited=<span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;val==p-&gt;val &amp;&amp; subset[root].visited) &#123;</span><br><span class="line">                <span class="keyword">return</span> subset[<span class="built_in">findSet</span>(q)].ancestor;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(root-&gt;val==q-&gt;val &amp;&amp; subset[root].visited) &#123;</span><br><span class="line">                <span class="keyword">return</span> subset[<span class="built_in">findSet</span>(p)].ancestor;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/22/69-Sqrt-x/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/22/69-Sqrt-x/" class="post-title-link" itemprop="url">69. Sqrt(x)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-05-22 14:46:04" itemprop="dateCreated datePublished" datetime="2023-05-22T14:46:04+08:00">2023-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-02 17:24:09" itemprop="dateModified" datetime="2023-11-02T17:24:09+08:00">2023-11-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Given a non-negative integer <code>x</code>, return <em>the square root of</em> <code>x</code> <em>rounded down to the nearest integer</em>. The returned integer should be <strong>non-negative</strong> as well.</p>
-<p>You <strong>must not use</strong> any built-in exponent function or operator.</p>
-<ul>
-<li>For example, do not use <code>pow(x, 0.5)</code> in c++ or <code>x ** 0.5</code> in python.</li>
-</ul>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: x = 4</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: The square root of 4 is 2, so we return 2.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: x = 8</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: The square root of 8 is 2.82842..., and since we round it down to the nearest integer, 2 is returned.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li>0 &lt;= x &lt;= $2^{31}$ - 1</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">mySqrt</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//i have a non-negative integer.</span></span><br><span class="line">        <span class="comment">//non-negative means i can be 0 or greater than 0.</span></span><br><span class="line">        <span class="comment">//i need to find the square root of x and if x is not an integer, then round it down.</span></span><br><span class="line">        <span class="comment">// if x=2, then mid=0+2/2=1</span></span><br><span class="line">        <span class="comment">// mid^2&lt;2, so check right part=[mid,x]=[1,2], left=mid=1, mid=1+2/2=1</span></span><br><span class="line">        <span class="comment">// loop should meet: left+1&lt;=right</span></span><br><span class="line">        <span class="comment">// int left=0, right=x;</span></span><br><span class="line">        <span class="comment">// if x=3,then mid=0+x/2=1</span></span><br><span class="line">        <span class="comment">// 1^2&lt;3, so check right part=[1,3], left=1, mid=2</span></span><br><span class="line">        <span class="comment">// 2^2&gt;3, so check left part=[1,2], right=2, mid=1</span></span><br><span class="line">        <span class="comment">// 1^2&lt;3, so check right part=[1,2]</span></span><br><span class="line">        <span class="keyword">long</span> left=<span class="number">0</span>, right=x;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(;;)&#123;</span><br><span class="line">            <span class="keyword">long</span> mid=left+((right-left)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">long</span> mul=mid*mid;</span><br><span class="line">            <span class="keyword">if</span>(mul==x) &#123;</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(mul&lt;x) &#123;</span><br><span class="line">                <span class="comment">//check right</span></span><br><span class="line">                <span class="keyword">if</span>(left+<span class="number">1</span>==right)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(right*right==x) &#123;</span><br><span class="line">                        <span class="keyword">return</span> right;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> left;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                left=mid;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//check left</span></span><br><span class="line">                <span class="keyword">if</span>(left+<span class="number">1</span>==right) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(right*right==x) &#123;</span><br><span class="line">                        <span class="keyword">return</span> right;</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> left;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                right=mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>If you don’t use <code>long</code>, you can use trick <code>mid==x/mid</code>. But be careful, 0 cannot be denominator.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">mySqrt</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">1</span>, right=x;</span><br><span class="line">        <span class="keyword">for</span>(;left&lt;=right;)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid=left+(right-left)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(mid==x/mid)&#123;</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(mid&gt;x/mid)&#123;</span><br><span class="line">                <span class="comment">//check left</span></span><br><span class="line">                right=mid<span class="number">-1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//check right</span></span><br><span class="line">                left=mid+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//if does not find, then left &gt; right, return smaller one</span></span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>About return value:</p>
-<p>Say we have only two elements: <code>[1,2]</code>. <code>mid</code> is 1, in the front.  <code>right=mid-1</code> cause exit and we want the round down. right &lt; left, so return right.</p>
-<p>Say we have only 1 elements: <code>[1]</code>. <code>mid</code> is 1, in the front. <code>left=mid+1</code> cause exit and we want round down. right &lt; left, so return right.</p>
-<p>[2023-09-26 Tue 14:55]</p>
-<p>Notice that the candidate answer is always in “less branch”, thus we store the mid in that branch.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mySqrt</span>(<span class="params">self, x: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        low = <span class="number">1</span></span><br><span class="line">        high = x</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> low &lt;= high:</span><br><span class="line">            mid = (low + high) // <span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> mid * mid == x:</span><br><span class="line">                <span class="keyword">return</span> mid</span><br><span class="line">            <span class="keyword">elif</span> mid * mid &lt; x:</span><br><span class="line">                low = mid + <span class="number">1</span></span><br><span class="line">                ans = mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                high = mid - <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/22/278-First-Bad-Version/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/22/278-First-Bad-Version/" class="post-title-link" itemprop="url">278. First Bad Version</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-05-22 13:40:13" itemprop="dateCreated datePublished" datetime="2023-05-22T13:40:13+08:00">2023-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-02 17:26:01" itemprop="dateModified" datetime="2023-11-02T17:26:01+08:00">2023-11-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/first-bad-version/description/">https://leetcode.com/problems/first-bad-version/description/</a></p>
-<p>You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check. Since each version is developed based on the previous version, all the versions after a bad version are also bad.</p>
-<p>Suppose you have <code>n</code> versions <code>[1, 2, ..., n]</code> and you want to find out the first bad one, which causes all the following ones to be bad.</p>
-<p>You are given an API <code>bool isBadVersion(version)</code> which returns whether <code>version</code> is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.</p>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 5, bad = 4</span><br><span class="line">Output: 4</span><br><span class="line">Explanation:</span><br><span class="line">call isBadVersion(3) -&gt; false</span><br><span class="line">call isBadVersion(5) -&gt; true</span><br><span class="line">call isBadVersion(4) -&gt; true</span><br><span class="line">Then 4 is the first bad version.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 1, bad = 1</span><br><span class="line">Output: 1</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><code>1 &lt;= bad &lt;= n &lt;= 231 - 1</code></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The API isBadVersion is defined for you.</span></span><br><span class="line"><span class="comment">// bool isBadVersion(int version);</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">firstBadVersion</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//i am a manager and has a team developing a product.</span></span><br><span class="line">        <span class="comment">//the latest product fails. Because the new version is based on previous version. So i need to find the earliest version that fails.</span></span><br><span class="line">        <span class="comment">//i can use isBadVersion to check if it is bad.</span></span><br><span class="line">        <span class="comment">//i can&#x27;t use API for too many times.</span></span><br><span class="line">        <span class="comment">//our product versions is like: [1,2,3....n], is in ascending order</span></span><br><span class="line">        <span class="comment">//check if [i] is bad and [i-1] is good then return [i]</span></span><br><span class="line">            <span class="comment">//if [i-1] is bad also then check left part</span></span><br><span class="line">        <span class="comment">//check if [i] is good and [i+1] is bad then return [i+1]</span></span><br><span class="line">            <span class="comment">//if [i+1] is good also then check right part</span></span><br><span class="line">        <span class="keyword">int</span> low=<span class="number">0</span>,high=n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> mid=low+((high-low)&gt;&gt;<span class="number">1</span>);low&lt;=high;)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">isBadVersion</span>(mid))&#123;</span><br><span class="line">                <span class="keyword">if</span>(mid<span class="number">-1</span>&gt;=<span class="number">0</span>&amp;&amp;!<span class="built_in">isBadVersion</span>(mid<span class="number">-1</span>))&#123;</span><br><span class="line">                    <span class="keyword">return</span> mid;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">//check left</span></span><br><span class="line">                    high=mid<span class="number">-1</span>;</span><br><span class="line">                    mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(mid+<span class="number">1</span>&lt;=n<span class="number">-1</span>&amp;&amp;<span class="built_in">isBadVersion</span>(mid+<span class="number">1</span>))&#123;</span><br><span class="line">                    <span class="keyword">return</span> mid+<span class="number">1</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">//check right</span></span><br><span class="line">                    low=mid+<span class="number">1</span>;</span><br><span class="line">                    mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>It can be more clear.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The API isBadVersion is defined for you.</span></span><br><span class="line"><span class="comment">// bool isBadVersion(int version);</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">firstBadVersion</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">1</span>, right=n;</span><br><span class="line">        <span class="keyword">for</span>(;left&lt;=right;)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid=left+((right-left)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">isBadVersion</span>(mid))&#123;</span><br><span class="line">                <span class="comment">//check left. It may cause empty array.</span></span><br><span class="line">                <span class="comment">//[Bad1,Bad2]-&gt;[]. return left</span></span><br><span class="line">                <span class="comment">//[bad]-&gt;[]. return left</span></span><br><span class="line">                right=mid<span class="number">-1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//check right</span></span><br><span class="line">                <span class="comment">//[good,bad]-&gt;[bad]</span></span><br><span class="line">                left=mid+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      	<span class="comment">// when break, all exit is to return left.</span></span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Another way to think return value is to consider the break condition.</p>
-<p>When not found, right=mid-1 &lt; left. Of course we need the one in the back.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/22/744-Find-Smallest-Letter-Greater-Than-Target/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/22/744-Find-Smallest-Letter-Greater-Than-Target/" class="post-title-link" itemprop="url">744. Find Smallest Letter Greater Than Target</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-05-21 23:34:56" itemprop="dateCreated datePublished" datetime="2023-05-21T23:34:56+08:00">2023-05-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-02 17:25:32" itemprop="dateModified" datetime="2023-11-02T17:25:32+08:00">2023-11-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/">https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/</a></p>
-<p>You are given an array of characters <code>letters</code> that is sorted in <strong>non-decreasing order</strong>, and a character <code>target</code>. There are <strong>at least two different</strong> characters in <code>letters</code>.</p>
-<p>Return <em>the smallest character in</em> <code>letters</code> <em>that is lexicographically greater than</em> <code>target</code>. If such a character does not exist, return the first character in <code>letters</code>.</p>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: letters = [&quot;c&quot;,&quot;f&quot;,&quot;j&quot;], target = &quot;a&quot;</span><br><span class="line">Output: &quot;c&quot;</span><br><span class="line">Explanation: The smallest character that is lexicographically greater than &#x27;a&#x27; in letters is &#x27;c&#x27;.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: letters = [&quot;c&quot;,&quot;f&quot;,&quot;j&quot;], target = &quot;c&quot;</span><br><span class="line">Output: &quot;f&quot;</span><br><span class="line">Explanation: The smallest character that is lexicographically greater than &#x27;c&#x27; in letters is &#x27;f&#x27;.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 3:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: letters = [&quot;x&quot;,&quot;x&quot;,&quot;y&quot;,&quot;y&quot;], target = &quot;z&quot;</span><br><span class="line">Output: &quot;x&quot;</span><br><span class="line">Explanation: There are no characters in letters that is lexicographically greater than &#x27;z&#x27; so we return letters[0].</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><code>2 &lt;= letters.length &lt;= 104</code></li>
-<li><code>letters[i]</code> is a lowercase English letter.</li>
-<li><code>letters</code> is sorted in <strong>non-decreasing</strong> order.</li>
-<li><code>letters</code> contains at least two different characters.</li>
-<li><code>target</code> is a lowercase English letter.</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">nextGreatestLetter</span><span class="params">(vector&lt;<span class="keyword">char</span>&gt;&amp; letters, <span class="keyword">char</span> target)</span> </span>&#123;</span><br><span class="line">      	<span class="comment">//idea</span></span><br><span class="line">        <span class="comment">//use binary search to find the char that greater than target.</span></span><br><span class="line">        <span class="comment">//if target is less than [i] then check right part.</span></span><br><span class="line">        <span class="comment">//if target equals [i] then check if [i+1] greater than target, then return [i+1]. but check i+1 overflow first.</span></span><br><span class="line">        <span class="comment">//if target greater than [i] then check if [i-1] equals target</span></span><br><span class="line">        <span class="keyword">int</span> N=letters.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> low=<span class="number">0</span>, high=N<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> mid=high&gt;&gt;<span class="number">1</span>;low&lt;=high;)&#123;</span><br><span class="line">            <span class="keyword">if</span>(target==letters[mid])&#123;</span><br><span class="line">                <span class="keyword">if</span>(mid+<span class="number">1</span>&lt;N&amp;&amp;target&lt;letters[mid+<span class="number">1</span>]) &#123;</span><br><span class="line">                    <span class="keyword">return</span> letters[mid+<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// check right part</span></span><br><span class="line">                low=mid+<span class="number">1</span>;</span><br><span class="line">                mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(target&lt;letters[mid]) &#123;</span><br><span class="line">                <span class="comment">//ensure [mid] is the first to be greater than target</span></span><br><span class="line">                <span class="keyword">if</span>(mid<span class="number">-1</span>&gt;=<span class="number">0</span>&amp;&amp;target&gt;=letters[mid<span class="number">-1</span>])&#123;</span><br><span class="line">                    <span class="keyword">return</span> letters[mid];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(mid==<span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> letters[<span class="number">0</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//check left</span></span><br><span class="line">                high=mid<span class="number">-1</span>;</span><br><span class="line">                mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">// target&gt;letters[mid]</span></span><br><span class="line">                <span class="comment">//check right</span></span><br><span class="line">                low=mid+<span class="number">1</span>;</span><br><span class="line">                mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> letters[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Of course you can use <code>upper_bound</code>.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> it = <span class="built_in">upper_bound</span>(letters.<span class="built_in">begin</span>(), letters.<span class="built_in">end</span>(), target);</span><br><span class="line"><span class="keyword">if</span>(it == letters.<span class="built_in">end</span>()) &#123;</span><br><span class="line">  <span class="keyword">return</span> letters[<span class="number">0</span>];</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> *it;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Or even just one line</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> letters[(<span class="built_in">upper_bound</span>(letters.<span class="built_in">begin</span>(), letters.<span class="built_in">end</span>(), target)-letters.<span class="built_in">begin</span>())%letters.<span class="built_in">size</span>()];</span><br></pre></td></tr></table></figure>
-
-
-
-<p>[2023-09-26 Tue 14:50]</p>
-<p>This solution is inspired by find max square root of x. We store an intermediate variable.</p>
-<p>Notice that the candidate answer is always in “greater branch”, thus in that branch, we store the candidate mid.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">nextGreatestLetter</span><span class="params">(vector&lt;<span class="keyword">char</span>&gt;&amp; letters, <span class="keyword">char</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> N=letters.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> low=<span class="number">0</span>, high=N<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(low&lt;=high) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid=(low+high)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (letters[mid] == target </span><br><span class="line">                &amp;&amp; mid+<span class="number">1</span> &lt; N &amp;&amp; letters[mid+<span class="number">1</span>] &gt; target) &#123;</span><br><span class="line">                <span class="keyword">return</span> letters[mid+<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (letters[mid]&lt;=target) &#123;</span><br><span class="line">                low=mid+<span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// greater branch</span></span><br><span class="line">                high=mid<span class="number">-1</span>;</span><br><span class="line">                ans=mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//not found</span></span><br><span class="line">        <span class="keyword">if</span>(letters[ans]&lt;=target) &#123;</span><br><span class="line">            ans=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> letters[ans];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/21/214.%20Shortest%20Palindrome/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/21/214.%20Shortest%20Palindrome/" class="post-title-link" itemprop="url">214. Shortest Palindrome</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-05-21 00:00:00" itemprop="dateCreated datePublished" datetime="2023-05-21T00:00:00+08:00">2023-05-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-02 17:24:17" itemprop="dateModified" datetime="2023-11-02T17:24:17+08:00">2023-11-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/shortest-palindrome/">https://leetcode.com/problems/shortest-palindrome/</a></p>
-<p>You are given a string <code>s</code>. You can convert <code>s</code> to a </p>
-<p>palindrome by adding characters in front of it.</p>
-<p>Return <em>the shortest palindrome you can find by performing this transformation</em>.</p>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: s = &quot;aacecaaa&quot;</span><br><span class="line">Output: &quot;aaacecaaa&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: s = &quot;abcd&quot;</span><br><span class="line">Output: &quot;dcbabcd&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><code>0 &lt;= s.length &lt;= 5 * 104</code></li>
-<li><code>s</code> consists of lowercase English letters only.</li>
-</ul>
-<p>Firstly, i use brute method to solve it, but get Time Limit.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> &amp;left, <span class="keyword">int</span> &amp;right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">bool</span> isEven = (left+right)%<span class="number">2</span>==<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(isEven)&#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            left--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">string <span class="title">shortestPalindrome</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//there is a string s. I need to add chs to convert it to a palindrome.</span></span><br><span class="line">        <span class="comment">//I only can add chs in front of s.</span></span><br><span class="line">        <span class="comment">//There many ways to form a palindrome by adding chs. But you must add fewest chs so that you get the shortest palindrome.</span></span><br><span class="line">        <span class="comment">//find the center ch. check if the chs on both sides are equal. Cal the num of chs that equal.</span></span><br><span class="line">        <span class="comment">//it must cannot meet any ch that does not equal</span></span><br><span class="line">        <span class="comment">//loop util one pointer arrives bound</span></span><br><span class="line">        <span class="comment">// init mid and let it close to left end;</span></span><br><span class="line">        <span class="keyword">int</span> n=s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> left, right;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid=n/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">1</span>) &#123;</span><br><span class="line">            left=mid<span class="number">-1</span>;</span><br><span class="line">            right=mid+<span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid<span class="number">-1</span>;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> start=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> pleft=left, pright=right;</span><br><span class="line">            <span class="comment">//initial value for pleft and pright in every loop</span></span><br><span class="line">            <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// loop util pleft arrives bound or appear not equal</span></span><br><span class="line">                <span class="keyword">if</span>(pleft &lt; <span class="number">0</span> || s[pleft]!=s[pright]) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                pleft--;</span><br><span class="line">                pright++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//if left does not arrive bound, then mid--</span></span><br><span class="line">            <span class="keyword">if</span>(pleft&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="built_in">change</span>(left, right);</span><br><span class="line">            &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                start=pright;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// add [start, end].reverse to s</span></span><br><span class="line">        string sub=s.<span class="built_in">substr</span>(start, n<span class="number">-1</span>-start+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;sub.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            s=sub[i]+s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Actually, this problem can be converted to find the longest common part and we only need the last comparison. </p>
-<p>We compare [0:matched]==[i-matched, i]</p>
-<p>We can use KMP to boost the process. Otherwise, every time we fail to match s[matched] and s[i]. We need to set i as N-1 and reset matched as 0.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildArray</span><span class="params">(string &amp;s, vector&lt;<span class="keyword">int</span>&gt; &amp;back)</span> </span>&#123;</span><br><span class="line">        back[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">0</span>, i = <span class="number">1</span>; i &lt; s.<span class="built_in">size</span>();) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[len] == s[i]) &#123;</span><br><span class="line">                <span class="comment">//match then increase both and set table</span></span><br><span class="line">                <span class="comment">// len means the num of matched</span></span><br><span class="line">                back[i] = len + <span class="number">1</span>;</span><br><span class="line">                len++;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (len==<span class="number">0</span>) &#123;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    len = back[len - <span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">shortestPalindrome</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> N = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">back</span><span class="params">(N)</span></span>;</span><br><span class="line">        <span class="built_in">buildArray</span>(s, back);</span><br><span class="line">        <span class="keyword">int</span> matched = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = N - <span class="number">1</span>; i &gt;= <span class="number">0</span>;) &#123;</span><br><span class="line">            <span class="comment">//check if match then increase</span></span><br><span class="line">            <span class="keyword">if</span> (s[matched] == s[i]) &#123;</span><br><span class="line">                matched++;</span><br><span class="line">                i--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//reset matched</span></span><br><span class="line">                <span class="keyword">if</span> (matched==<span class="number">0</span>) &#123;</span><br><span class="line">                    i--;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    matched = back[matched - <span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//sub=[matched:]</span></span><br><span class="line">        string sub = s.<span class="built_in">substr</span>(matched);</span><br><span class="line">        <span class="built_in">reverse</span>(sub.<span class="built_in">begin</span>(),sub.<span class="built_in">end</span>());</span><br><span class="line">        s=sub+s;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1148,13 +1045,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
