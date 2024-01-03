@@ -20,23 +20,23 @@
     var CONFIG = {"hostname":"illuca.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;kth-smallest-element-in-a-bst&#x2F; 12345678910111213141516class Solution:    def __init__(self):        self.k&#x3D;0    def kthSmallest(self, R: Optional[TreeNode], k: int) -&gt;">
+  <meta name="description" content="https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;jump-game&#x2F;?envType&#x3D;study-plan-v2&amp;envId&#x3D;top-100-liked 1234567891011121314151617181920class Solution:    def canJump(self, A: List[int]) -&gt; bool:        def f(i):">
 <meta property="og:type" content="article">
-<meta property="og:title" content="230. Kth Smallest Element in a BST">
-<meta property="og:url" content="https://illuca.github.io/2023/12/21/230-Kth-Smallest-Element-in-a-BST/index.html">
+<meta property="og:title" content="55. Jump Game">
+<meta property="og:url" content="https://illuca.github.io/2024/01/04/55-Jump-Game/index.html">
 <meta property="og:site_name" content="Yuan">
-<meta property="og:description" content="https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;kth-smallest-element-in-a-bst&#x2F; 12345678910111213141516class Solution:    def __init__(self):        self.k&#x3D;0    def kthSmallest(self, R: Optional[TreeNode], k: int) -&gt;">
+<meta property="og:description" content="https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;jump-game&#x2F;?envType&#x3D;study-plan-v2&amp;envId&#x3D;top-100-liked 1234567891011121314151617181920class Solution:    def canJump(self, A: List[int]) -&gt; bool:        def f(i):">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-12-20T15:07:14.000Z">
-<meta property="article:modified_time" content="2023-12-20T12:18:16.078Z">
+<meta property="article:published_time" content="2024-01-03T15:11:09.000Z">
+<meta property="article:modified_time" content="2024-01-03T12:11:44.088Z">
 <meta property="article:author" content="Yuan">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="medium">
-<meta property="article:tag" content="tree">
-<meta property="article:tag" content="inorder">
+<meta property="article:tag" content="greedy">
+<meta property="article:tag" content="dp">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://illuca.github.io/2023/12/21/230-Kth-Smallest-Element-in-a-BST/">
+<link rel="canonical" href="https://illuca.github.io/2024/01/04/55-Jump-Game/">
 
 
 <script id="page-configurations">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>230. Kth Smallest Element in a BST | Yuan</title>
+  <title>55. Jump Game | Yuan</title>
   
 
 
@@ -154,7 +154,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/21/230-Kth-Smallest-Element-in-a-BST/">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/01/04/55-Jump-Game/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -167,7 +167,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          230. Kth Smallest Element in a BST
+          55. Jump Game
         </h1>
 
         <div class="post-meta">
@@ -178,7 +178,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-12-20 23:07:14 / Modified: 20:18:16" itemprop="dateCreated datePublished" datetime="2023-12-20T23:07:14+08:00">2023-12-20</time>
+              <time title="Created: 2024-01-03 23:11:09 / Modified: 20:11:44" itemprop="dateCreated datePublished" datetime="2024-01-03T23:11:09+08:00">2024-01-03</time>
             </span>
 
           
@@ -192,11 +192,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/">https://leetcode.com/problems/kth-smallest-element-in-a-bst/</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.k=<span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">kthSmallest</span>(<span class="params">self, R: <span class="type">Optional</span>[TreeNode], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">C</span>):</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> C:</span><br><span class="line">                <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">            l=f(C.left)</span><br><span class="line">            <span class="keyword">if</span> l!=-<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> l</span><br><span class="line">            <span class="comment"># left not found</span></span><br><span class="line">            self.k+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> self.k==k:</span><br><span class="line">                <span class="keyword">return</span> C.val</span><br><span class="line">            <span class="keyword">return</span> f(C.right)</span><br><span class="line">        <span class="keyword">return</span> f(R)</span><br></pre></td></tr></table></figure>
-
-<p>It can be improved to deal with node with negative values:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.k=<span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">kthSmallest</span>(<span class="params">self, R: <span class="type">Optional</span>[TreeNode], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">C</span>):</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> C:</span><br><span class="line">                <span class="keyword">return</span> C</span><br><span class="line">            l=f(C.left)</span><br><span class="line">            <span class="keyword">if</span> l:</span><br><span class="line">                <span class="keyword">return</span> l</span><br><span class="line">            <span class="comment"># left not found</span></span><br><span class="line">            self.k+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> self.k==k:</span><br><span class="line">                <span class="keyword">return</span> C</span><br><span class="line">            <span class="keyword">return</span> f(C.right)</span><br><span class="line">        <span class="keyword">return</span> f(R).val</span><br></pre></td></tr></table></figure>
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game/?envType=study-plan-v2&amp;envId=top-100-liked">https://leetcode.cn/problems/jump-game/?envType=study-plan-v2&amp;envId=top-100-liked</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">canJump</span>(<span class="params">self, A: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">bool</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">i</span>):</span></span><br><span class="line">            <span class="keyword">if</span> memo[i]==<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">if</span> memo[i]==-<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">if</span> memo[i]==<span class="number">0</span>:</span><br><span class="line">                M=<span class="built_in">min</span>(i+A[i],target)</span><br><span class="line">                <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(i+<span class="number">1</span>,M+<span class="number">1</span>):</span><br><span class="line">                    <span class="keyword">if</span> f(x):</span><br><span class="line">                        memo[i]=<span class="literal">True</span></span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">                memo[i]=-<span class="number">1</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        memo=[<span class="number">0</span>]*<span class="built_in">len</span>(A)</span><br><span class="line">        target=<span class="built_in">len</span>(A)-<span class="number">1</span></span><br><span class="line">        memo[-<span class="number">1</span>]=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> f(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -209,8 +206,8 @@
           <div class="post-tags">
               <a href="/tags/leetcode/" rel="tag"># leetcode</a>
               <a href="/tags/medium/" rel="tag"># medium</a>
-              <a href="/tags/tree/" rel="tag"># tree</a>
-              <a href="/tags/inorder/" rel="tag"># inorder</a>
+              <a href="/tags/greedy/" rel="tag"># greedy</a>
+              <a href="/tags/dp/" rel="tag"># dp</a>
           </div>
 
         
@@ -219,13 +216,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/12/21/98-Validate-Binary-Search-Tree/" rel="prev" title="98. Validate Binary Search Tree">
-      <i class="fa fa-chevron-left"></i> 98. Validate Binary Search Tree
+    <a href="/2024/01/04/347-Top-K-Frequent-Elements/" rel="prev" title="347. Top K Frequent Elements">
+      <i class="fa fa-chevron-left"></i> 347. Top K Frequent Elements
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/12/21/199-Binary-Tree-Right-Side-View/" rel="next" title="199. Binary Tree Right Side View">
-      199. Binary Tree Right Side View <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
