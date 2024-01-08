@@ -147,6 +147,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/06/29/2244-Minimum-Rounds-to-Complete-All-Tasks-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/29/2244-Minimum-Rounds-to-Complete-All-Tasks-1/" class="post-title-link" itemprop="url">2244. Minimum Rounds to Complete All Tasks</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-06-29 14:57:20" itemprop="dateCreated datePublished" datetime="2023-06-29T14:57:20+08:00">2023-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-02 17:25:01" itemprop="dateModified" datetime="2023-11-02T17:25:01+08:00">2023-11-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>You are given a <strong>0-indexed</strong> integer array <code>tasks</code>, where <code>tasks[i]</code> represents the difficulty level of a task. In each round, you can complete either 2 or 3 tasks of the <strong>same difficulty level</strong>.</p>
+<p>Return <em>the <strong>minimum</strong> rounds required to complete all the tasks, or</em> <code>-1</code> <em>if it is not possible to complete all the tasks.</em></p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input: tasks = [2,2,3,3,2,4,4,4,4,4]</span><br><span class="line">Output: 4</span><br><span class="line">Explanation: To complete all the tasks, a possible plan is:</span><br><span class="line">- In the first round, you complete 3 tasks of difficulty level 2. </span><br><span class="line">- In the second round, you complete 2 tasks of difficulty level 3. </span><br><span class="line">- In the third round, you complete 3 tasks of difficulty level 4. </span><br><span class="line">- In the fourth round, you complete 2 tasks of difficulty level 4.  </span><br><span class="line">It can be shown that all the tasks cannot be completed in fewer than 4 rounds, so the answer is 4.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: tasks = [2,3,3]</span><br><span class="line">Output: -1</span><br><span class="line">Explanation: There is only 1 task of difficulty level 2, but in each round, you can only complete either 2 or 3 tasks of the same difficulty level. Hence, you cannot complete all the tasks, and the answer is -1.</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getRounds</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> round=<span class="number">0</span>;</span><br><span class="line">        <span class="comment">//if value is 1, then return -1</span></span><br><span class="line">        <span class="keyword">if</span>(value==<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//if value is odd, then it consists of value/3 number of 3&#x27;s + one 2&#x27;s.</span></span><br><span class="line">        <span class="comment">//if value is even, it consists of even number of 3 + y number of 2&#x27;s.</span></span><br><span class="line">        <span class="comment">//[5,5,5,5] takes as many as 3&#x27;s, but [5,5,5][5] is not valid</span></span><br><span class="line">        <span class="comment">//we can split one 3&#x27;s, and it becomes [5,5] [5,5]</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">ceil</span>(value/<span class="number">3.0</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minimumRounds</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; tasks)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//traverse the tasks, and cal num and its occurrance times</span></span><br><span class="line">        <span class="comment">//iterate dict, for each level,we need 3x+2y rounds.</span></span><br><span class="line">        map&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; dict;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> task:tasks)&#123;</span><br><span class="line">            dict[task]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it=dict.<span class="built_in">begin</span>();it!=dict.<span class="built_in">end</span>();it++)&#123;</span><br><span class="line">            <span class="keyword">int</span> curr=<span class="built_in">getRounds</span>(it-&gt;second);</span><br><span class="line">            <span class="keyword">if</span>(curr==<span class="number">-1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                res+=curr;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Correctness</strong></p>
+<p>We should take as many 3’s as possible. If at any step, we takes </p>
+<p><strong>Time complexity</strong></p>
+<p>Say tasks has n elements.</p>
+<p>We put every element of tasks into dict and each insertion takes O(1) expected time. It will take O(n) expected time.</p>
+<p>We iterate every pair of dict, which will take O(n) time.</p>
+<p>Overall, the time complexity is O(n) time.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/06/03/COMP9319/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -992,93 +1079,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/21/214.%20Shortest%20Palindrome/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/21/214.%20Shortest%20Palindrome/" class="post-title-link" itemprop="url">214. Shortest Palindrome</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-05-21 00:00:00" itemprop="dateCreated datePublished" datetime="2023-05-21T00:00:00+08:00">2023-05-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-02 17:24:17" itemprop="dateModified" datetime="2023-11-02T17:24:17+08:00">2023-11-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/shortest-palindrome/">https://leetcode.com/problems/shortest-palindrome/</a></p>
-<p>You are given a string <code>s</code>. You can convert <code>s</code> to a </p>
-<p>palindrome by adding characters in front of it.</p>
-<p>Return <em>the shortest palindrome you can find by performing this transformation</em>.</p>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: s = &quot;aacecaaa&quot;</span><br><span class="line">Output: &quot;aaacecaaa&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: s = &quot;abcd&quot;</span><br><span class="line">Output: &quot;dcbabcd&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><code>0 &lt;= s.length &lt;= 5 * 104</code></li>
-<li><code>s</code> consists of lowercase English letters only.</li>
-</ul>
-<p>Firstly, i use brute method to solve it, but get Time Limit.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> &amp;left, <span class="keyword">int</span> &amp;right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">bool</span> isEven = (left+right)%<span class="number">2</span>==<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(isEven)&#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            left--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">string <span class="title">shortestPalindrome</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//there is a string s. I need to add chs to convert it to a palindrome.</span></span><br><span class="line">        <span class="comment">//I only can add chs in front of s.</span></span><br><span class="line">        <span class="comment">//There many ways to form a palindrome by adding chs. But you must add fewest chs so that you get the shortest palindrome.</span></span><br><span class="line">        <span class="comment">//find the center ch. check if the chs on both sides are equal. Cal the num of chs that equal.</span></span><br><span class="line">        <span class="comment">//it must cannot meet any ch that does not equal</span></span><br><span class="line">        <span class="comment">//loop util one pointer arrives bound</span></span><br><span class="line">        <span class="comment">// init mid and let it close to left end;</span></span><br><span class="line">        <span class="keyword">int</span> n=s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> left, right;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid=n/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(n%<span class="number">2</span>==<span class="number">1</span>) &#123;</span><br><span class="line">            left=mid<span class="number">-1</span>;</span><br><span class="line">            right=mid+<span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            left=mid<span class="number">-1</span>;</span><br><span class="line">            right=mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> start=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> pleft=left, pright=right;</span><br><span class="line">            <span class="comment">//initial value for pleft and pright in every loop</span></span><br><span class="line">            <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// loop util pleft arrives bound or appear not equal</span></span><br><span class="line">                <span class="keyword">if</span>(pleft &lt; <span class="number">0</span> || s[pleft]!=s[pright]) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                pleft--;</span><br><span class="line">                pright++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//if left does not arrive bound, then mid--</span></span><br><span class="line">            <span class="keyword">if</span>(pleft&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="built_in">change</span>(left, right);</span><br><span class="line">            &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                start=pright;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// add [start, end].reverse to s</span></span><br><span class="line">        string sub=s.<span class="built_in">substr</span>(start, n<span class="number">-1</span>-start+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;sub.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            s=sub[i]+s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Actually, this problem can be converted to find the longest common part and we only need the last comparison. </p>
-<p>We compare [0:matched]==[i-matched, i]</p>
-<p>We can use KMP to boost the process. Otherwise, every time we fail to match s[matched] and s[i]. We need to set i as N-1 and reset matched as 0.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">buildArray</span><span class="params">(string &amp;s, vector&lt;<span class="keyword">int</span>&gt; &amp;back)</span> </span>&#123;</span><br><span class="line">        back[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> len = <span class="number">0</span>, i = <span class="number">1</span>; i &lt; s.<span class="built_in">size</span>();) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s[len] == s[i]) &#123;</span><br><span class="line">                <span class="comment">//match then increase both and set table</span></span><br><span class="line">                <span class="comment">// len means the num of matched</span></span><br><span class="line">                back[i] = len + <span class="number">1</span>;</span><br><span class="line">                len++;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (len==<span class="number">0</span>) &#123;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    len = back[len - <span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">string <span class="title">shortestPalindrome</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="keyword">return</span> s;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> N = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">back</span><span class="params">(N)</span></span>;</span><br><span class="line">        <span class="built_in">buildArray</span>(s, back);</span><br><span class="line">        <span class="keyword">int</span> matched = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = N - <span class="number">1</span>; i &gt;= <span class="number">0</span>;) &#123;</span><br><span class="line">            <span class="comment">//check if match then increase</span></span><br><span class="line">            <span class="keyword">if</span> (s[matched] == s[i]) &#123;</span><br><span class="line">                matched++;</span><br><span class="line">                i--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//reset matched</span></span><br><span class="line">                <span class="keyword">if</span> (matched==<span class="number">0</span>) &#123;</span><br><span class="line">                    i--;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    matched = back[matched - <span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//sub=[matched:]</span></span><br><span class="line">        string sub = s.<span class="built_in">substr</span>(matched);</span><br><span class="line">        <span class="built_in">reverse</span>(sub.<span class="built_in">begin</span>(),sub.<span class="built_in">end</span>());</span><br><span class="line">        s=sub+s;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1148,7 +1148,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

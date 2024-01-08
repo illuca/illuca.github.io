@@ -20,17 +20,22 @@
     var CONFIG = {"hostname":"illuca.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Challenge is the only redemption">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yuan">
-<meta property="og:url" content="https://illuca.github.io/tags/PAT/index.html">
+  <meta name="description" content="Solution1: hash table 123456789101112131415161718192021222324252627class Solution:    def copyRandomList(self, head: &amp;#x27;Optional[Node]&amp;#x27;) -&gt; &amp;#x27;Optional[Node]&amp;#x27;:        if not head:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="138. Copy List with Random Pointer">
+<meta property="og:url" content="https://illuca.github.io/2024/01/09/138-Copy-List-with-Random-Pointer/index.html">
 <meta property="og:site_name" content="Yuan">
-<meta property="og:description" content="Challenge is the only redemption">
+<meta property="og:description" content="Solution1: hash table 123456789101112131415161718192021222324252627class Solution:    def copyRandomList(self, head: &amp;#x27;Optional[Node]&amp;#x27;) -&gt; &amp;#x27;Optional[Node]&amp;#x27;:        if not head:">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-01-08T16:01:39.000Z">
+<meta property="article:modified_time" content="2024-01-08T13:02:06.760Z">
 <meta property="article:author" content="Yuan">
+<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="medium">
+<meta property="article:tag" content="linked list">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://illuca.github.io/tags/PAT/">
+<link rel="canonical" href="https://illuca.github.io/2024/01/09/138-Copy-List-with-Random-Pointer/">
 
 
 <script id="page-configurations">
@@ -38,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Tag: PAT | Yuan</title>
+  <title>138. Copy List with Random Pointer | Yuan</title>
   
 
 
@@ -141,71 +146,90 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">PAT
-          <small>Tag</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/01/09/138-Copy-List-with-Random-Pointer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          138. Copy List with Random Pointer
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-01-09 00:01:39" itemprop="dateCreated datePublished" datetime="2024-01-09T00:01:39+08:00">2024-01-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-08 21:02:06" itemprop="dateModified" datetime="2024-01-08T21:02:06+08:00">2024-01-08</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
-    </div>
+        <p>Solution1: hash table</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">copyRandomList</span>(<span class="params">self, head: <span class="string">&#x27;Optional[Node]&#x27;</span></span>) -&gt; &#x27;<span class="type">Optional</span>[Node]&#x27;:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        D=&#123;&#125;</span><br><span class="line">        p=head</span><br><span class="line">        k=<span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> p:</span><br><span class="line">            D[p]=k</span><br><span class="line">            p=p.<span class="built_in">next</span></span><br><span class="line">            k+=<span class="number">1</span></span><br><span class="line">        p=head</span><br><span class="line">        A=[]</span><br><span class="line">        <span class="keyword">while</span> p:</span><br><span class="line">            A.append(ListNode(p.val))</span><br><span class="line">            p=p.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line">        p=head</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(A)):</span><br><span class="line">            <span class="keyword">if</span> i&lt;<span class="built_in">len</span>(A)-<span class="number">1</span>:</span><br><span class="line">                A[i].<span class="built_in">next</span>=A[i+<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> p.random <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                A[i].random=<span class="literal">None</span></span><br><span class="line">            <span class="keyword">elif</span> p.random:</span><br><span class="line">                A[i].random=A[D[p.random]]</span><br><span class="line">            p=p.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> A[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2023-05-26T23:47:19+08:00"
-              content="2023-05-26">
-          05-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/05/27/1002-A-B-for-Polynomials/" itemprop="url">
-            <span itemprop="name">1002 A+B for Polynomials</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2023-05-26T21:17:20+08:00"
-              content="2023-05-26">
-          05-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/05/26/1001-A-B-Format/" itemprop="url">
-            <span itemprop="name">1001 A+B Format</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+              <a href="/tags/medium/" rel="tag"># medium</a>
+              <a href="/tags/linked-list/" rel="tag"># linked list</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/09/24-Swap-Nodes-in-Pairs/" rel="prev" title="24. Swap Nodes in Pairs">
+      <i class="fa fa-chevron-left"></i> 24. Swap Nodes in Pairs
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
