@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"illuca.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="The difference betweeen online and physical is that you can talk with your peers after lecture. Raymond Wong also don’t like the course name. The course misses a lecturer and he becomes the one.compre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="COMP9319 week1 notes">
+<meta property="og:url" content="https://illuca.github.io/2023/06/03/COMP9319/index.html">
+<meta property="og:site_name" content="Yuan">
+<meta property="og:description" content="The difference betweeen online and physical is that you can talk with your peers after lecture. Raymond Wong also don’t like the course name. The course misses a lecturer and he becomes the one.compre">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-03T08:49:23.000Z">
+<meta property="article:modified_time" content="2024-01-09T04:46:06.579Z">
+<meta property="article:author" content="Yuan">
+<meta property="article:tag" content="UNSW">
+<meta property="article:tag" content="notes">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://illuca.github.io/2023/06/03/COMP9319/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>COMP9319 week1 notes | Yuan</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Yuan</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/06/03/COMP9319/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          COMP9319 week1 notes
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-06-03 16:49:23" itemprop="dateCreated datePublished" datetime="2023-06-03T16:49:23+08:00">2023-06-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-09 12:46:06" itemprop="dateModified" datetime="2024-01-09T12:46:06+08:00">2024-01-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>The difference betweeen online and physical is that you can talk with your peers after lecture.</p>
+<p>Raymond Wong also don’t like the course name. The course misses a lecturer and he becomes the one.<br>compression - bad<br>search      - ok</p>
+<p>compression and search means after making the data small, you can still search.</p>
+<p>the teacher of 6714 also resign and Raymond Wong becomes the lecturer.</p>
+<p>Even though you may did really bad in other cse courses, but if you are interested in it, you have the potential to learn it well.</p>
+<h1 id="Compression"><a href="#Compression" class="headerlink" title="Compression"></a>Compression</h1><p>There are two types of compression, one is lossless and another is lossy.<br>Lossy does not mean bad, in some time, we like information loss, such as a photo blur the backgroudn.<br>But in this course, we consider all info is valuable and focus on lossless compression.</p>
+<p>What is compression?<br>Firstly, we code the data into a special format, which reduce the total number of bits needed to represent the data.</p>
+<p>Input data -&gt; Encode -&gt; Store in networks -&gt; Decode -&gt; Ouput data<br>After then, we encode it and get the data back.</p>
+<p>compression ratio is uncompressed size divide compressed size</p>
+<p>space savings = 1 - 1/compression ratio</p>
+<p>Example:<br>There is a file with 30bits, which is also the uncompressed size.<br>After compression, it becomes 10bits, which is also the compressed size.<br>Then the compression ratio is 30/10=3:1<br>Space savings is 1-1/3=2/3</p>
+<h1 id="first-assignment"><a href="#first-assignment" class="headerlink" title="first assignment"></a>first assignment</h1><p>raaabbccccdabbbbeee$</p>
+<p>encoder part of teacher’s solution is 150 lines and the decoder part is 160 lines.</p>
+<p>$ represents the end of file, you cannot see it in a file. Here, teacher likes $ and he uses $ to mark the end.</p>
+<p>So it is r1a3b2c4d1a4e3</p>
+<p>But it is still not enough, because the original only has one r which takes up 1bit and after compression, the result is r1 taking up 2 bits.<br>It is not compression but expanding.</p>
+<p>And 2 is also funny, rr becomes r2. You save no space but only make the text unreadable. </p>
+<p>The rule is that you don’t change things unless you do some stuff. </p>
+<p>So you do nothing unless there are 3 duplicate characters. </p>
+<p>But here is another problem. What if the orignal text is rrccr2?<br>It can’t be r2c2r2.</p>
+<p>You have to make a rule. The start of duplicate symbol and end of it.</p>
+<p>Solution:<br>Every character is stored in bytes.<br>If the first bit is 0, then the remaining bits represents a character. Otherwise, the remaining bits is the length of previous character.</p>
+<p>So the text becomes ByteByteByteByteByte.</p>
+<p>Here is another problem, we have only 7bits to represent the length. So the value of length ranges from 0~127. Then what if the length is 100000000000000000?</p>
+<p>We can use two or more bytes to represent length.<br>But why not just say 100 billion instead?</p>
+<p>Scheme2:<br>AAA -&gt; A=3<br>Because A and AA won’t be changed.<br>Then if the length is 130, you are safe. Because 130-&gt;127</p>
+<p>Sometimes, If you consider further improve, you go backward because of the complexity will influence the efficiency of the algorithm.</p>
+<h1 id="problem-runs-are-usally-small"><a href="#problem-runs-are-usally-small" class="headerlink" title="problem: runs are usally small"></a>problem: runs are usally small</h1><p>Because in a word, the duplicate character seldom appears. There is few word that have 3 duplicate characters in it.</p>
+<h1 id="a-glimpse-of-BWT-RLE"><a href="#a-glimpse-of-BWT-RLE" class="headerlink" title="a glimpse of BWT+RLE"></a>a glimpse of BWT+RLE</h1><p>it will be introduced in week3.<br>It may only cost you 5 minutes to implement the BWT. But it will cost you a week to know why it works.</p>
+<h1 id="HTTP-compression"><a href="#HTTP-compression" class="headerlink" title="HTTP compression"></a>HTTP compression</h1><p>When the browser request a page, the server compresses the html page using gzip and send the compressed data to the browser.<br>HTTP/1.1 200 OK<br>Content-Type: text/html; charset=UTF-8<br>Content-Encoding: gzip</p>
+<p>Then the browser using gzip to decode it, get the content and render the page.</p>
+<h1 id="technology"><a href="#technology" class="headerlink" title="technology"></a>technology</h1><p>Technology has a very short lifetime, you either make the money or you just get away.</p>
+<p>If you work in Amazon, you will use compression techniques because there are messaging queues over there. If you can make the messges 10 times smaller then the queue can hold 10 times more messages.</p>
+<p>If you’re the application programmer, you never use it in your career. But if you’re a platform programmer, you do care bout it.</p>
+<h1 id="Storwize"><a href="#Storwize" class="headerlink" title="Storwize"></a>Storwize</h1><p>The big companies make efforts to develop green energy not because they love the earth. But the electricity is expensive. For labor cost, you can fire them but for electricity, you have to mantain the equipment every month. The clients’ data is stored in those equipments.</p>
+<p>Less to store, less power used.</p>
+<p>But if you ask a student not studying 9319, he probably will say that who cares about compression? I can double my portable hard drives.</p>
+<p>Server -&gt; switches -&gt; IBM real-time compression equipment -&gt; storage</p>
+<p>For a hard drive, it is considered as good if it can fill every 50000 during test.<br>But for google who must own 50000 hard drives, every second the hard drive may fail even they are brand new.<br>And this is why you need big data to store it.</p>
+<h1 id="Anti-virus"><a href="#Anti-virus" class="headerlink" title="Anti-virus"></a>Anti-virus</h1><p>There is a company called cement tech.<br>It stores anti-virus defnition in their amazon cloud.<br>Every time the user downloads from the server, the server will check if the content has virus. So it has to be compressed otherwise the bandwith is huge, costing too much money.</p>
+<p>You may think why not they build their own cloud? Because it will be more expensive. You just pay for the short-time use for a storage service.</p>
+<p>So this is why when you download a software or update operating system, after downloading successfully, you have to wait for a long time. Because they decompress their softwares small to save money and expanding the data from decompression takes a long time.</p>
+<h1 id="SD-card"><a href="#SD-card" class="headerlink" title="SD card"></a>SD card</h1><p>Now the mobile phone has 256g, then you need to search the information up to 256g. Then computation cost is huge.</p>
+<h1 id="Microsoft"><a href="#Microsoft" class="headerlink" title="Microsoft"></a>Microsoft</h1><p>STAC is a company to invent the compression. If you were born 30 years ago, you could found that company easily.<br>Their product is less than 5000 lines, including interfaces and pages.<br>The Microsoft dispatched technical staffs to check if the company really had something. And they were shocked because the product only had 5000 lines. So the Microsoft don’t pay for it but copy it after they came back.<br>Although the staff in STAC are just undergraduate, but they found a good lawyer and finally won the case.</p>
+<h1 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h1><p>Sometimes, you add extra info during compression.</p>
+<p>After first run of gzip, the file gets smaller.<br>But after we changed the compressed file and change its name, we use gzip to compress it again. The file gets bigger.</p>
+<p>It is because if it cannot make it smaller, so it add overhead only.</p>
+<h1 id="similarity-measure"><a href="#similarity-measure" class="headerlink" title="similarity measure"></a>similarity measure</h1><p>If things are more repetitive or redundant, you will compress more.<br>If we compress two images together getting less compression ratio than compressing them seperately, it means there are lots of overlap between them, just like the duplicate character.</p>
+<p>Some people came out these ideas 20 years ago. They built a company but failed because they couldn’t make a theory into a good product.</p>
+<h1 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE"></a>NOTE</h1><p>Change your perspective for information, which is vital for this course.<br>You can go to ~cs9319/wk1 on cse.<br>There are two txt, eg1.txt and eg2.txt, both with the same size 80B.<br>eg1.txt has more repetitive characters then eg2.txt.<br>So the previous file’s compressed size is smaller.</p>
+<h1 id="sunny-day-and-rainy-day"><a href="#sunny-day-and-rainy-day" class="headerlink" title="sunny day and rainy day"></a>sunny day and rainy day</h1><p>We can use bit 1 to represent rainy day and 0 for sunny day.<br>This is what eg1.bin does and you can use xxd -b eg1.bin to look at it.</p>
+<h2 id="you-can-make-it-more-efficient-using-running-and-coding"><a href="#you-can-make-it-more-efficient-using-running-and-coding" class="headerlink" title="you can make it more efficient using running and coding"></a>you can make it more efficient using running and coding</h2><p>Running and coding is the only algorithm you have ever learnt.<br>If bit 0 represents sunny day, we use the first bit to represent if it is sunny or rainy.<br>So 00000000 00000111 can be marked as 0[13] 0[3].</p>
+<h2 id="even-even-even-more-efficient-by-losing-info"><a href="#even-even-even-more-efficient-by-losing-info" class="headerlink" title="even even even more efficient by losing info"></a>even even even more efficient by losing info</h2><p>You can just say S80. Because in normal case it is sunny. You just need to record the main info.</p>
+<h1 id="sunny-day-cloudy-day-and-rainy-day"><a href="#sunny-day-cloudy-day-and-rainy-day" class="headerlink" title="sunny day, cloudy day and rainy day"></a>sunny day, cloudy day and rainy day</h1><p>Sunny day is marked as     00.<br>Rainy day is marked as  01.<br>Cloudy day is marked as 10.</p>
+<h1 id="probability"><a href="#probability" class="headerlink" title="probability"></a>probability</h1><h2 id="more-sunny-days-than-rainy-and-cloudy"><a href="#more-sunny-days-than-rainy-and-cloudy" class="headerlink" title="more sunny days than rainy and cloudy"></a>more sunny days than rainy and cloudy</h2><p>Then we should use less bits to represent sunny and more bit to represent rainy.</p>
+<p>So they can be marked as:<br>S:     0<br>R:    10<br>C:    11</p>
+<h1 id="ASCII-Code"><a href="#ASCII-Code" class="headerlink" title="ASCII Code"></a>ASCII Code</h1><p>Since there is more A than Z in an English book. Why they are encoded with the same bit length?<br>A: 65<br>Z: 90</p>
+<h2 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h2><p>It uses between 1 to 4 byte.<br>If you use xxd to see the file with Chinese characters. It will use less bits to represent common Chinese characters.</p>
+<p>But i test it, all characters are 6*4=24bit in utf-8.</p>
+<h2 id="use-bits-to-mark-the-end-of-file"><a href="#use-bits-to-mark-the-end-of-file" class="headerlink" title="use bits to mark the end of file"></a>use bits to mark the end of file</h2><p>If you don’t use EOF, then the last byte may be 00000000. But this byte does mean 8 sunny days, it does not represent anything.</p>
+<p>So there is the solution:<br>S:   0<br>R:   10<br>C:      110<br>EOF: 111</p>
+<h1 id="problem-of-RLE"><a href="#problem-of-RLE" class="headerlink" title="problem of RLE"></a>problem of RLE</h1><p>RLE stands for run-length encoding.<br>Most documents don’t have many runs.</p>
+<h1 id="BWT"><a href="#BWT" class="headerlink" title="BWT"></a>BWT</h1><p>If you use BWT to compress a file. The file is smaller.<br>And then you use gzip to compress it again. The file gets bigger, which means the gzip also uses BWT.</p>
+<h2 id="efficient-search"><a href="#efficient-search" class="headerlink" title="efficient search"></a>efficient search</h2><p>BWT cannot only do compression but also can do search after BWT compression.<br>And its search only costs constant time, which means the search is independent of file size.<br>If after BWT, the file is 1MB the search costs 1 sec.<br>Then if another file is 1GB after BWT, the search still costs only 1 sec.</p>
+<h1 id="what-is-COMP9319"><a href="#what-is-COMP9319" class="headerlink" title="what is COMP9319?"></a>what is COMP9319?</h1><ul>
+<li><p>how different compression algorithms work</p>
+<p>  We only learn classic algorithms because all new algorithms are derived from those. After you learn the classic ones, you can learn others new by yourself easily.</p>
+<p>  We also cares about small device not only care about big companies devices. Because the final end is the user, is our computer. If you can make your program quicker in your device, then you can make millons of computers running faster.</p>
+<p>  Algorithm is the money. If you figure out an algorithm which can make file smaller, then what you are doing is saving money.</p>
+</li>
+<li><p>how to search without index?</p>
+<p>  If the search is slow, you can use database to create index using btree or hash table. You just only to type one command to do it.<br>  But what is the cost?<br>  You have to maintain the index when you update data you need to update the index as well. Index is not cheap. It works well only when you are rich and can buy many servers.<br>  Don’t build index unless it is necessary because you need to load more from the disk to memory and CPU need to compute more to decode the index.<br>  So how to use minimum index and do the maximum efficiency for search? That’s what the course will discuss.</p>
+</li>
+</ul>
+<h1 id="course-info"><a href="#course-info" class="headerlink" title="course info"></a>course info</h1><p>Friday 2 hours live</p>
+<ul>
+<li>3 hours pre-recorded</li>
+</ul>
+<h1 id="Raymond-Wong"><a href="#Raymond-Wong" class="headerlink" title="Raymond Wong"></a>Raymond Wong</h1><p>Areas: database, information retrieval, big data SYSTEM</p>
+<ul>
+<li>TEXT mining</li>
+</ul>
+<p>He is a system person but not in theory.</p>
+<h1 id="live-lectures"><a href="#live-lectures" class="headerlink" title="live lectures"></a>live lectures</h1><p>He will interact with students except week1 because in week1 students have no idea about what to ask.<br>Possible questions:</p>
+<ul>
+<li><p>How do you implement this?</p>
+</li>
+<li><p>exercises<br>Exams are similar to exercises.  </p>
+</li>
+</ul>
+<h1 id="consulations"><a href="#consulations" class="headerlink" title="consulations"></a>consulations</h1><p>You can see the schedule in webcms. </p>
+<p>Online:<br>    Tuesday 13:30 and Wednesday 20:00 for week2-5, 7-11<br>    moodle collaborate blackboard<br>In person:<br>    Friday 14:00 for week3-5, 7-11<br>    K-E12-114-BUS114</p>
+<h1 id="two-assignments"><a href="#two-assignments" class="headerlink" title="two assignments"></a>two assignments</h1><p>If you think the assignment is not difficult enough, you can ask for an advanced project with 2 sub assignments.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UNSW/" rel="tag"># UNSW</a>
+              <a href="/tags/notes/" rel="tag"># notes</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/28/ANZAC-CONTEST-4/" rel="prev" title="ANZAC CONTEST 4">
+      <i class="fa fa-chevron-left"></i> ANZAC CONTEST 4
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/29/2244-Minimum-Rounds-to-Complete-All-Tasks-1/" rel="next" title="2244. Minimum Rounds to Complete All Tasks">
+      2244. Minimum Rounds to Complete All Tasks <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Compression"><span class="nav-number">1.</span> <span class="nav-text">Compression</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#first-assignment"><span class="nav-number">2.</span> <span class="nav-text">first assignment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#problem-runs-are-usally-small"><span class="nav-number">3.</span> <span class="nav-text">problem: runs are usally small</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#a-glimpse-of-BWT-RLE"><span class="nav-number">4.</span> <span class="nav-text">a glimpse of BWT+RLE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-compression"><span class="nav-number">5.</span> <span class="nav-text">HTTP compression</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#technology"><span class="nav-number">6.</span> <span class="nav-text">technology</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Storwize"><span class="nav-number">7.</span> <span class="nav-text">Storwize</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Anti-virus"><span class="nav-number">8.</span> <span class="nav-text">Anti-virus</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SD-card"><span class="nav-number">9.</span> <span class="nav-text">SD card</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Microsoft"><span class="nav-number">10.</span> <span class="nav-text">Microsoft</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gzip"><span class="nav-number">11.</span> <span class="nav-text">gzip</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#similarity-measure"><span class="nav-number">12.</span> <span class="nav-text">similarity measure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NOTE"><span class="nav-number">13.</span> <span class="nav-text">NOTE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sunny-day-and-rainy-day"><span class="nav-number">14.</span> <span class="nav-text">sunny day and rainy day</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#you-can-make-it-more-efficient-using-running-and-coding"><span class="nav-number">14.1.</span> <span class="nav-text">you can make it more efficient using running and coding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#even-even-even-more-efficient-by-losing-info"><span class="nav-number">14.2.</span> <span class="nav-text">even even even more efficient by losing info</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sunny-day-cloudy-day-and-rainy-day"><span class="nav-number">15.</span> <span class="nav-text">sunny day, cloudy day and rainy day</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#probability"><span class="nav-number">16.</span> <span class="nav-text">probability</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#more-sunny-days-than-rainy-and-cloudy"><span class="nav-number">16.1.</span> <span class="nav-text">more sunny days than rainy and cloudy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ASCII-Code"><span class="nav-number">17.</span> <span class="nav-text">ASCII Code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UTF-8"><span class="nav-number">17.1.</span> <span class="nav-text">UTF-8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#use-bits-to-mark-the-end-of-file"><span class="nav-number">17.2.</span> <span class="nav-text">use bits to mark the end of file</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#problem-of-RLE"><span class="nav-number">18.</span> <span class="nav-text">problem of RLE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BWT"><span class="nav-number">19.</span> <span class="nav-text">BWT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#efficient-search"><span class="nav-number">19.1.</span> <span class="nav-text">efficient search</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-COMP9319"><span class="nav-number">20.</span> <span class="nav-text">what is COMP9319?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#course-info"><span class="nav-number">21.</span> <span class="nav-text">course info</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Raymond-Wong"><span class="nav-number">22.</span> <span class="nav-text">Raymond Wong</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#live-lectures"><span class="nav-number">23.</span> <span class="nav-text">live lectures</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#consulations"><span class="nav-number">24.</span> <span class="nav-text">consulations</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#two-assignments"><span class="nav-number">25.</span> <span class="nav-text">two assignments</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yuan</p>
+  <div class="site-description" itemprop="description">Challenge is the only redemption</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/illuca" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;illuca" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/xlucax" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;xlucax" rel="noopener" target="_blank"><i class="fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
