@@ -147,6 +147,153 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/01/01/152-Maximum-Product-Subarray/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/01/152-Maximum-Product-Subarray/" class="post-title-link" itemprop="url">152. Maximum Product Subarray</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-01-01 23:18:29" itemprop="dateCreated datePublished" datetime="2024-01-01T23:18:29+08:00">2024-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-09 12:43:33" itemprop="dateModified" datetime="2024-01-09T12:43:33+08:00">2024-01-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/maximum-product-subarray/description/">https://leetcode.com/problems/maximum-product-subarray/description/</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProduct</span>(<span class="params">self, A: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> A:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        m=M=A[<span class="number">0</span>]</span><br><span class="line">        Z=M</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(A)):</span><br><span class="line">            m,M=<span class="built_in">min</span>(A[i],m*A[i],M*A[i]),<span class="built_in">max</span>(A[i],m*A[i],M*A[i])</span><br><span class="line">            Z=<span class="built_in">max</span>(Z,M)</span><br><span class="line">            <span class="built_in">print</span>(m,M)</span><br><span class="line">        <span class="keyword">return</span> Z</span><br></pre></td></tr></table></figure>
+
+<p>Solution2: Kadane’s algorithm:</p>
+<p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/">https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/</a></p>
+<p>Once we meet zero, we reset our accumulated product.</p>
+<p>If the number of negative is even, then one forward loop will produce the maximum.</p>
+<p>If the number of positive is odd, then both forward loop and backward loop will produce a maximum.</p>
+<p>The forward loop will ignore the last negative number while the backward loop will ignore the first negative number.</p>
+<p>We select the larger one.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProduct</span>(<span class="params">self, A: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        C=<span class="number">1</span></span><br><span class="line">        M=A[<span class="number">0</span>]</span><br><span class="line">        <span class="comment"># forward loop</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(A)):</span><br><span class="line">            C=C*A[i]</span><br><span class="line">            M=<span class="built_in">max</span>(M,C)</span><br><span class="line">            <span class="keyword">if</span> A[i]==<span class="number">0</span>:</span><br><span class="line">                C=<span class="number">1</span></span><br><span class="line">        C=<span class="number">1</span></span><br><span class="line">        <span class="comment"># backward loop</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(A)-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            C=C*A[i]</span><br><span class="line">            M=<span class="built_in">max</span>(M,C)</span><br><span class="line">            <span class="keyword">if</span> A[i]==<span class="number">0</span>:</span><br><span class="line">                C=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> M</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/31/139-Word-Break/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/31/139-Word-Break/" class="post-title-link" itemprop="url">139. Word Break</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-12-31 23:47:30" itemprop="dateCreated datePublished" datetime="2023-12-31T23:47:30+08:00">2023-12-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-09 12:47:04" itemprop="dateModified" datetime="2024-01-09T12:47:04+08:00">2024-01-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/word-break/description/">https://leetcode.com/problems/word-break/description/</a></p>
+<p>It is similar to money change.</p>
+<p>Note: </p>
+<p>P[i] denotes whether substring up to i can be constructed by the word list.</p>
+<p>It is obvious that empty string is always able to be contructed. Thus P[0]=True.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wordBreak</span>(<span class="params">self, s: <span class="built_in">str</span>, W: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="built_in">bool</span>:</span></span><br><span class="line">        N=<span class="built_in">len</span>(s)</span><br><span class="line">        P=[<span class="literal">False</span>]*(N+<span class="number">1</span>)</span><br><span class="line">        P[<span class="number">0</span>]=<span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,N+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> w <span class="keyword">in</span> W:</span><br><span class="line">                <span class="keyword">if</span> i-<span class="built_in">len</span>(w)&gt;=<span class="number">0</span> <span class="keyword">and</span> s[i-<span class="built_in">len</span>(w):i]==w:</span><br><span class="line">                    P[i]=P[i] <span class="keyword">or</span> P[i-<span class="built_in">len</span>(w)]</span><br><span class="line">        <span class="keyword">return</span> P[-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/30/322-Coin-Change/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -667,141 +814,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/26/207-Course-Schedule/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/26/207-Course-Schedule/" class="post-title-link" itemprop="url">207. Course Schedule</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-12-26 17:20:23" itemprop="dateCreated datePublished" datetime="2023-12-26T17:20:23+08:00">2023-12-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-09 12:46:25" itemprop="dateModified" datetime="2024-01-09T12:46:25+08:00">2024-01-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">canFinish</span>(<span class="params">self, N: <span class="built_in">int</span>, G: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">bool</span>:</span></span><br><span class="line">        IN=[<span class="number">0</span>]*N</span><br><span class="line">        OUT=[[]*N <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(N)]</span><br><span class="line">        <span class="keyword">for</span> g <span class="keyword">in</span> G:</span><br><span class="line">            fst,snd=g</span><br><span class="line">            IN[fst]+=<span class="number">1</span></span><br><span class="line">            OUT[snd].append(fst)</span><br><span class="line">        Q=deque()</span><br><span class="line"></span><br><span class="line">        seen=<span class="number">0</span></span><br><span class="line">        <span class="comment">#find all nodes with indegree=0 and store them in Q</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(IN)):</span><br><span class="line">            <span class="keyword">if</span> IN[i]==<span class="number">0</span>:</span><br><span class="line">                Q.append(i)</span><br><span class="line">        <span class="keyword">while</span> Q:</span><br><span class="line">            a=Q.popleft()</span><br><span class="line">            seen+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> b <span class="keyword">in</span> OUT[a]:</span><br><span class="line">                IN[b]-=<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> IN[b]==<span class="number">0</span>:</span><br><span class="line">                    Q.append(b)</span><br><span class="line">        <span class="built_in">print</span>(seen)</span><br><span class="line">        <span class="keyword">return</span> seen==N</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/25/994-Rotting-Oranges/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/25/994-Rotting-Oranges/" class="post-title-link" itemprop="url">994. Rotting Oranges</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-12-25 23:47:45" itemprop="dateCreated datePublished" datetime="2023-12-25T23:47:45+08:00">2023-12-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-09 12:48:54" itemprop="dateModified" datetime="2024-01-09T12:48:54+08:00">2024-01-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/rotting-oranges/">https://leetcode.com/problems/rotting-oranges/</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">orangesRotting</span>(<span class="params">self, G: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">i,j,k</span>):</span></span><br><span class="line">            <span class="keyword">for</span> x,y <span class="keyword">in</span> [(i+<span class="number">1</span>,j),(i-<span class="number">1</span>,j),(i,j+<span class="number">1</span>),(i,j-<span class="number">1</span>)]:</span><br><span class="line">                <span class="keyword">if</span> <span class="number">0</span>&lt;=x&lt;M <span class="keyword">and</span> <span class="number">0</span>&lt;=y&lt;N <span class="keyword">and</span> G[x][y]==<span class="number">1</span>:</span><br><span class="line">                    Q.append((x,y,k+<span class="number">1</span>))</span><br><span class="line">                    G[x][y]=<span class="number">0</span></span><br><span class="line"></span><br><span class="line">        M=<span class="built_in">len</span>(G)</span><br><span class="line">        N=<span class="built_in">len</span>(G[<span class="number">0</span>])</span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        Q=deque()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                <span class="keyword">if</span> G[i][j]==<span class="number">2</span>:</span><br><span class="line">                    Q.append((i,j,<span class="number">0</span>))  </span><br><span class="line">        <span class="keyword">while</span> Q:</span><br><span class="line">            i,j,k=Q.popleft()</span><br><span class="line">            ans=<span class="built_in">max</span>(ans,k)</span><br><span class="line">            f(i,j,k)          </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                <span class="keyword">if</span> G[i][j]==<span class="number">1</span>:</span><br><span class="line">                    ans=-<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -871,13 +883,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

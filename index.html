@@ -147,6 +147,132 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/02/11/97-Interleaving-String/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/02/11/97-Interleaving-String/" class="post-title-link" itemprop="url">97. Interleaving String</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-02-11 15:49:53 / Modified: 17:27:19" itemprop="dateCreated datePublished" datetime="2024-02-11T15:49:53+08:00">2024-02-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/interleaving-string/?envType=study-plan-v2&amp;envId=top-interview-150">https://leetcode.com/problems/interleaving-string/?envType=study-plan-v2&amp;envId=top-interview-150</a></p>
+<p>Solution1:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isInterleave</span>(<span class="params">self, s1: <span class="built_in">str</span>, s2: <span class="built_in">str</span>, s3: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span></span><br><span class="line"><span class="meta">        @cache</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">i,j,k</span>):</span></span><br><span class="line">            <span class="keyword">if</span> i&lt;<span class="built_in">len</span>(s1) <span class="keyword">and</span> j&lt;<span class="built_in">len</span>(s2):</span><br><span class="line">                <span class="keyword">if</span> s1[i]==s3[k] <span class="keyword">and</span> s2[j]==s3[k]:</span><br><span class="line">                    <span class="keyword">return</span> f(i+<span class="number">1</span>,j,k+<span class="number">1</span>) <span class="keyword">or</span> f(i,j+<span class="number">1</span>,k+<span class="number">1</span>)</span><br><span class="line">                <span class="keyword">if</span> s1[i]==s3[k]:</span><br><span class="line">                    <span class="keyword">return</span> f(i+<span class="number">1</span>,j,k+<span class="number">1</span>)</span><br><span class="line">                <span class="keyword">if</span> s2[j]==s3[k]:</span><br><span class="line">                    <span class="keyword">return</span> f(i,j+<span class="number">1</span>,k+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">if</span> i&lt;<span class="built_in">len</span>(s1):</span><br><span class="line">                <span class="keyword">return</span> s1[i]==s3[k] <span class="keyword">and</span> f(i+<span class="number">1</span>,j,k+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">if</span> j&lt;<span class="built_in">len</span>(s2):</span><br><span class="line">                <span class="keyword">return</span> s2[j]==s3[k] <span class="keyword">and</span> f(i,j+<span class="number">1</span>,k+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(s1)+<span class="built_in">len</span>(s2)!=<span class="built_in">len</span>(s3):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> f(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Solution2:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isInterleave</span>(<span class="params">self, s1: <span class="built_in">str</span>, s2: <span class="built_in">str</span>, s3: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(s1) + <span class="built_in">len</span>(s2) != <span class="built_in">len</span>(s3):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        dp = [[<span class="literal">False</span>] * (<span class="built_in">len</span>(s2) + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s1) + <span class="number">1</span>)]</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s1)+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s2)+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> i&gt;=<span class="number">1</span>:</span><br><span class="line">                    dp[i][j]|=dp[i-<span class="number">1</span>][j] <span class="keyword">and</span> s1[i-<span class="number">1</span>]==s3[i+j-<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">if</span> j&gt;=<span class="number">1</span>:</span><br><span class="line">                    dp[i][j]|=dp[i][j-<span class="number">1</span>] <span class="keyword">and</span> s2[j-<span class="number">1</span>]==s3[i+j-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="built_in">len</span>(s1)][<span class="built_in">len</span>(s2)]</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/01/16/64-Minimum-Path-Sum/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/16/64-Minimum-Path-Sum/" class="post-title-link" itemprop="url">64. Minimum Path Sum</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-01-16 01:50:55 / Modified: 01:55:28" itemprop="dateCreated datePublished" datetime="2024-01-16T01:50:55+08:00">2024-01-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/minimum-path-sum/description/">https://leetcode.com/problems/minimum-path-sum/description/</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minPathSum</span>(<span class="params">self, G: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        Z=[[<span class="number">0</span>]*<span class="built_in">len</span>(G[<span class="number">0</span>]) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(G))]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(G)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(G[<span class="number">0</span>])):</span><br><span class="line">                <span class="keyword">if</span> i==<span class="number">0</span> <span class="keyword">and</span> j==<span class="number">0</span>:</span><br><span class="line">                    Z[i][j]=G[i][j]</span><br><span class="line">                <span class="keyword">elif</span> i==<span class="number">0</span>:</span><br><span class="line">                    Z[i][j]=Z[i][j-<span class="number">1</span>]+G[i][j]</span><br><span class="line">                <span class="keyword">elif</span> j==<span class="number">0</span>:</span><br><span class="line">                    Z[i][j]=Z[i-<span class="number">1</span>][j]+G[i][j]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    Z[i][j]=<span class="built_in">min</span>(Z[i-<span class="number">1</span>][j],Z[i][j-<span class="number">1</span>])+G[i][j]</span><br><span class="line">        <span class="keyword">return</span> Z[-<span class="number">1</span>][-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/01/16/62-Unique-Paths/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -669,136 +795,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/01/08/142-Linked-List-Cycle-II/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/01/08/142-Linked-List-Cycle-II/" class="post-title-link" itemprop="url">142. Linked List Cycle II</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2024-01-08 18:46:05 / Modified: 16:53:28" itemprop="dateCreated datePublished" datetime="2024-01-08T18:46:05+08:00">2024-01-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/linked-list-cycle-ii/">https://leetcode.com/problems/linked-list-cycle-ii/</a></p>
-<p>Solution1: hash table</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">detectCycle</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span></span><br><span class="line">        D=&#123;&#125;</span><br><span class="line">        p=head</span><br><span class="line">        k=<span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> p:</span><br><span class="line">            <span class="keyword">if</span> p <span class="keyword">in</span> D:</span><br><span class="line">                <span class="keyword">return</span> p</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                D[p]=k</span><br><span class="line">                k+=<span class="number">1</span></span><br><span class="line">                p=p.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
-
-<p>Solution2: Floyd’s cycle-finding algorithm</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">detectCycle</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span></span><br><span class="line">        slow=head</span><br><span class="line">        fast=head</span><br><span class="line">        <span class="keyword">while</span> slow <span class="keyword">and</span> fast:</span><br><span class="line">            slow=slow.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">if</span> fast.<span class="built_in">next</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                fast=<span class="literal">None</span></span><br><span class="line">            <span class="keyword">elif</span> fast.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                fast=fast.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">if</span> slow==fast:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="comment"># pattern match exit of loop</span></span><br><span class="line">        <span class="keyword">if</span> fast <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">elif</span> fast <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            fast=head</span><br><span class="line">            <span class="keyword">while</span> slow!=fast:</span><br><span class="line">                slow=slow.<span class="built_in">next</span></span><br><span class="line">                fast=fast.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">return</span> slow</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">detectCycle</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span></span><br><span class="line">        slow=head</span><br><span class="line">        fast=head</span><br><span class="line">        <span class="keyword">while</span> fast <span class="keyword">and</span> fast.<span class="built_in">next</span>:</span><br><span class="line">            slow=slow.<span class="built_in">next</span></span><br><span class="line">            fast=fast.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">if</span> slow==fast:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="comment"># because our while has two exit, so we need to discuss</span></span><br><span class="line">        <span class="keyword">if</span> fast <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> fast.<span class="built_in">next</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">elif</span> fast <span class="keyword">and</span> fast.<span class="built_in">next</span>:</span><br><span class="line">            fast=head</span><br><span class="line">            <span class="keyword">while</span> fast!=slow:</span><br><span class="line">                fast=fast.<span class="built_in">next</span></span><br><span class="line">                slow=slow.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">return</span> fast</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/01/08/208-Implement-Trie-Prefix-Tree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/01/08/208-Implement-Trie-Prefix-Tree/" class="post-title-link" itemprop="url">208. Implement Trie (Prefix Tree)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2024-01-08 18:24:11 / Modified: 15:24:45" itemprop="dateCreated datePublished" datetime="2024-01-08T18:24:11+08:00">2024-01-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/implement-trie-prefix-tree/description/">https://leetcode.com/problems/implement-trie-prefix-tree/description/</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,ch</span>):</span></span><br><span class="line">        self.ch=ch</span><br><span class="line">        self.children=&#123;&#125;</span><br><span class="line">        self.isEnd=<span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Trie</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.root=TreeNode(<span class="string">&quot;&quot;</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert</span>(<span class="params">self, W: <span class="built_in">str</span></span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">        C=self.root</span><br><span class="line">        <span class="keyword">for</span> w <span class="keyword">in</span> W:</span><br><span class="line">            <span class="keyword">if</span> w <span class="keyword">in</span> C.children:</span><br><span class="line">                C=C.children[w]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                C.children[w]=TreeNode(w)</span><br><span class="line">                C=C.children[w]</span><br><span class="line">        C.isEnd=<span class="literal">True</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">search</span>(<span class="params">self, W: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span></span><br><span class="line">        C=self.root</span><br><span class="line">        <span class="keyword">for</span> w <span class="keyword">in</span> W:</span><br><span class="line">            <span class="keyword">if</span> w <span class="keyword">in</span> C.children:</span><br><span class="line">                C=C.children[w]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> C.isEnd</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">startsWith</span>(<span class="params">self, W: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span></span><br><span class="line">        C=self.root</span><br><span class="line">        <span class="keyword">for</span> w <span class="keyword">in</span> W:</span><br><span class="line">            <span class="keyword">if</span> w <span class="keyword">in</span> C.children:</span><br><span class="line">                C=C.children[w]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -868,13 +864,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
