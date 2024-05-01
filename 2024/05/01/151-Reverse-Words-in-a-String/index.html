@@ -20,22 +20,21 @@
     var CONFIG = {"hostname":"illuca.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;longest-consecutive-sequence&#x2F; 12345678910111213141516171819202122class Solution:    def longestConsecutive(self, A: List[int]) -&gt; int:        if not A:            retu">
+  <meta name="description" content="1234567891011121314151617181920function reverseWords(s: string): string &amp;#123;    let tmp&#x3D;[]    let A&#x3D;[]    for(let i&#x3D;0;i&lt;s.length;i++)&amp;#123;        if(s[i]&#x3D;&#x3D;&#x3D;&amp;#x27; &amp;#x27;)&amp;#123;            if(tmp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="128. Longest Consecutive Sequence">
-<meta property="og:url" content="https://illuca.github.io/2023/12/15/128-Longest-Consecutive-Sequence/index.html">
+<meta property="og:title" content="151. Reverse Words in a String">
+<meta property="og:url" content="https://illuca.github.io/2024/05/01/151-Reverse-Words-in-a-String/index.html">
 <meta property="og:site_name" content="Yuan">
-<meta property="og:description" content="https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;longest-consecutive-sequence&#x2F; 12345678910111213141516171819202122class Solution:    def longestConsecutive(self, A: List[int]) -&gt; int:        if not A:            retu">
+<meta property="og:description" content="1234567891011121314151617181920function reverseWords(s: string): string &amp;#123;    let tmp&#x3D;[]    let A&#x3D;[]    for(let i&#x3D;0;i&lt;s.length;i++)&amp;#123;        if(s[i]&#x3D;&#x3D;&#x3D;&amp;#x27; &amp;#x27;)&amp;#123;            if(tmp">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-12-15T10:02:52.000Z">
-<meta property="article:modified_time" content="2023-12-15T07:03:55.093Z">
+<meta property="article:published_time" content="2024-04-30T15:02:59.000Z">
+<meta property="article:modified_time" content="2024-04-30T13:20:12.918Z">
 <meta property="article:author" content="Yuan">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="medium">
-<meta property="article:tag" content="greedy">
+<meta property="article:tag" content="string">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://illuca.github.io/2023/12/15/128-Longest-Consecutive-Sequence/">
+<link rel="canonical" href="https://illuca.github.io/2024/05/01/151-Reverse-Words-in-a-String/">
 
 
 <script id="page-configurations">
@@ -48,7 +47,7 @@
   };
 </script>
 
-  <title>128. Longest Consecutive Sequence | Yuan</title>
+  <title>151. Reverse Words in a String | Yuan</title>
   
 
 
@@ -153,7 +152,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/15/128-Longest-Consecutive-Sequence/">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/01/151-Reverse-Words-in-a-String/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -166,7 +165,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          128. Longest Consecutive Sequence
+          151. Reverse Words in a String
         </h1>
 
         <div class="post-meta">
@@ -177,7 +176,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-12-15 18:02:52 / Modified: 15:03:55" itemprop="dateCreated datePublished" datetime="2023-12-15T18:02:52+08:00">2023-12-15</time>
+              <time title="Created: 2024-04-30 23:02:59 / Modified: 21:20:12" itemprop="dateCreated datePublished" datetime="2024-04-30T23:02:59+08:00">2024-04-30</time>
             </span>
 
           
@@ -191,13 +190,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/longest-consecutive-sequence/">https://leetcode.com/problems/longest-consecutive-sequence/</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestConsecutive</span>(<span class="params">self, A: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> A:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        S=<span class="built_in">set</span>(A)</span><br><span class="line">        M=<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> A:</span><br><span class="line">            <span class="keyword">if</span> a <span class="keyword">in</span> S:</span><br><span class="line">                S.discard(a)</span><br><span class="line">                k=<span class="number">1</span></span><br><span class="line">                i=<span class="number">1</span></span><br><span class="line">                <span class="keyword">while</span> a+i <span class="keyword">in</span> S:</span><br><span class="line">                    k+=<span class="number">1</span></span><br><span class="line">                    S.discard(a+i)</span><br><span class="line">                    i+=<span class="number">1</span></span><br><span class="line">                i=<span class="number">1</span></span><br><span class="line">                <span class="keyword">while</span> a-i <span class="keyword">in</span> S:</span><br><span class="line">                    k+=<span class="number">1</span></span><br><span class="line">                    S.discard(a-i)</span><br><span class="line">                    i+=<span class="number">1</span></span><br><span class="line">                M=<span class="built_in">max</span>(M,k)</span><br><span class="line">        <span class="keyword">return</span> M</span><br></pre></td></tr></table></figure>
-
-
-
-<p>It can be simplified:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestConsecutive</span>(<span class="params">self, A: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> A:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        S=<span class="built_in">set</span>(A)</span><br><span class="line">        M=<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">if</span> a-<span class="number">1</span> <span class="keyword">not</span> <span class="keyword">in</span> S:</span><br><span class="line">                k=<span class="number">1</span></span><br><span class="line">                i=<span class="number">1</span></span><br><span class="line">                <span class="keyword">while</span> a+i <span class="keyword">in</span> S:</span><br><span class="line">                    k+=<span class="number">1</span></span><br><span class="line">                    i+=<span class="number">1</span></span><br><span class="line">                M=<span class="built_in">max</span>(M,k)</span><br><span class="line">        <span class="keyword">return</span> M</span><br></pre></td></tr></table></figure>
+        <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reverseWords</span>(<span class="params">s: <span class="built_in">string</span></span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> tmp=[]</span><br><span class="line">    <span class="keyword">let</span> A=[]</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;s.length;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i]===<span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(tmp.length&gt;<span class="number">0</span>) &#123;</span><br><span class="line">                A.push(tmp.join(<span class="string">&#x27;&#x27;</span>))</span><br><span class="line">                tmp=[]</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s[i]!==<span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">            tmp.push(s[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(tmp.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        A.push(tmp.join(<span class="string">&#x27;&#x27;</span>))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> A.reverse().join(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -209,8 +202,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/leetcode/" rel="tag"># leetcode</a>
-              <a href="/tags/medium/" rel="tag"># medium</a>
-              <a href="/tags/greedy/" rel="tag"># greedy</a>
+              <a href="/tags/string/" rel="tag"># string</a>
           </div>
 
         
@@ -219,13 +211,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/12/15/47-Permutations-II/" rel="prev" title="47. Permutations II">
-      <i class="fa fa-chevron-left"></i> 47. Permutations II
+    <a href="/2024/05/01/6-Zigzag-Conversion/" rel="prev" title="6. Zigzag Conversion">
+      <i class="fa fa-chevron-left"></i> 6. Zigzag Conversion
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/12/15/15-3Sum/" rel="next" title="15. 3Sum">
-      15. 3Sum <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     

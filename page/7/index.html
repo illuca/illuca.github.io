@@ -147,6 +147,78 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/11/08/46-Permutations/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/08/46-Permutations/" class="post-title-link" itemprop="url">46. Permutations</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-11-08 00:43:47" itemprop="dateCreated datePublished" datetime="2023-11-08T00:43:47+08:00">2023-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-07 23:07:18" itemprop="dateModified" datetime="2023-11-07T23:07:18+08:00">2023-11-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    create a 3D array dp.</span></span><br><span class="line"><span class="string">    let dp[i] denote the permutations with first i elements.</span></span><br><span class="line"><span class="string">    denote size of nums as N</span></span><br><span class="line"><span class="string">    so dp[N] stores the permutations with first N elements.</span></span><br><span class="line"><span class="string">    basic:</span></span><br><span class="line"><span class="string">    dp[0]=[[-1]]</span></span><br><span class="line"><span class="string">    dp[1]=[[nums[0]]]</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">permute</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">insert</span>(<span class="params">l,curr</span>)-&gt;<span class="type">List</span>[<span class="type">List</span>]:</span></span><br><span class="line">            res=[]</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(l)+<span class="number">1</span>):</span><br><span class="line">                res.append(l[:i]+[curr]+l[i:])</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">        N=<span class="built_in">len</span>(nums)</span><br><span class="line">        dp=[[[-<span class="number">1</span>]],[[nums[<span class="number">0</span>]]]]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,N):</span><br><span class="line">            curr=nums[i]</span><br><span class="line">            tmp=[]</span><br><span class="line">            <span class="keyword">for</span> l <span class="keyword">in</span> dp[i]:</span><br><span class="line">                newE:<span class="type">List</span>[<span class="type">List</span>] = insert(l, curr)</span><br><span class="line">                tmp.extend(newE)</span><br><span class="line">            dp.append(tmp)</span><br><span class="line">        <span class="keyword">return</span> dp[N]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">permute</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        first ans is empty</span></span><br><span class="line"><span class="string">        for backtrack, start from [],</span></span><br><span class="line"><span class="string">        for each item in nums, we add it to the end of curr, then do backtrack</span></span><br><span class="line"><span class="string">        each item corresponds to a function call</span></span><br><span class="line"><span class="string">        [1] -&gt; [1,2] -&gt; [1,2,3]</span></span><br><span class="line"><span class="string">            -&gt; [1,3] -&gt; [1,3,2]</span></span><br><span class="line"><span class="string">        [2] -&gt; [2,1] -&gt; [2,1,3]</span></span><br><span class="line"><span class="string">            -&gt; [2,3] -&gt; [2,3,1]</span></span><br><span class="line"><span class="string">        [3] -&gt; [3,1] -&gt; [3,1,2]</span></span><br><span class="line"><span class="string">            -&gt; [3,2] -&gt; [3,2,1]</span></span><br><span class="line"><span class="string">        for each call, we do iteration for nums, so it costs O(n)</span></span><br><span class="line"><span class="string">        during iteration, for each item, we call backtrack, so there are O(n) backtrack</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">backtrack</span>(<span class="params">curr</span>):</span></span><br><span class="line">            <span class="keyword">nonlocal</span> ans</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(curr) == <span class="built_in">len</span>(nums):</span><br><span class="line">                ans.append(curr[:])</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">                <span class="keyword">if</span> num <span class="keyword">not</span> <span class="keyword">in</span> curr:</span><br><span class="line">                    curr.append(num)</span><br><span class="line">                    backtrack(curr)</span><br><span class="line">                    curr.pop()</span><br><span class="line">        ans = []</span><br><span class="line">        backtrack([])</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/06/29/Greedy-Candies/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -962,91 +1034,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/22/278-First-Bad-Version/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/22/278-First-Bad-Version/" class="post-title-link" itemprop="url">278. First Bad Version</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-05-22 13:40:13" itemprop="dateCreated datePublished" datetime="2023-05-22T13:40:13+08:00">2023-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-02 17:26:01" itemprop="dateModified" datetime="2023-11-02T17:26:01+08:00">2023-11-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/first-bad-version/description/">https://leetcode.com/problems/first-bad-version/description/</a></p>
-<p>You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check. Since each version is developed based on the previous version, all the versions after a bad version are also bad.</p>
-<p>Suppose you have <code>n</code> versions <code>[1, 2, ..., n]</code> and you want to find out the first bad one, which causes all the following ones to be bad.</p>
-<p>You are given an API <code>bool isBadVersion(version)</code> which returns whether <code>version</code> is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.</p>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 5, bad = 4</span><br><span class="line">Output: 4</span><br><span class="line">Explanation:</span><br><span class="line">call isBadVersion(3) -&gt; false</span><br><span class="line">call isBadVersion(5) -&gt; true</span><br><span class="line">call isBadVersion(4) -&gt; true</span><br><span class="line">Then 4 is the first bad version.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 1, bad = 1</span><br><span class="line">Output: 1</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><code>1 &lt;= bad &lt;= n &lt;= 231 - 1</code></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The API isBadVersion is defined for you.</span></span><br><span class="line"><span class="comment">// bool isBadVersion(int version);</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">firstBadVersion</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//i am a manager and has a team developing a product.</span></span><br><span class="line">        <span class="comment">//the latest product fails. Because the new version is based on previous version. So i need to find the earliest version that fails.</span></span><br><span class="line">        <span class="comment">//i can use isBadVersion to check if it is bad.</span></span><br><span class="line">        <span class="comment">//i can&#x27;t use API for too many times.</span></span><br><span class="line">        <span class="comment">//our product versions is like: [1,2,3....n], is in ascending order</span></span><br><span class="line">        <span class="comment">//check if [i] is bad and [i-1] is good then return [i]</span></span><br><span class="line">            <span class="comment">//if [i-1] is bad also then check left part</span></span><br><span class="line">        <span class="comment">//check if [i] is good and [i+1] is bad then return [i+1]</span></span><br><span class="line">            <span class="comment">//if [i+1] is good also then check right part</span></span><br><span class="line">        <span class="keyword">int</span> low=<span class="number">0</span>,high=n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> mid=low+((high-low)&gt;&gt;<span class="number">1</span>);low&lt;=high;)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">isBadVersion</span>(mid))&#123;</span><br><span class="line">                <span class="keyword">if</span>(mid<span class="number">-1</span>&gt;=<span class="number">0</span>&amp;&amp;!<span class="built_in">isBadVersion</span>(mid<span class="number">-1</span>))&#123;</span><br><span class="line">                    <span class="keyword">return</span> mid;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">//check left</span></span><br><span class="line">                    high=mid<span class="number">-1</span>;</span><br><span class="line">                    mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(mid+<span class="number">1</span>&lt;=n<span class="number">-1</span>&amp;&amp;<span class="built_in">isBadVersion</span>(mid+<span class="number">1</span>))&#123;</span><br><span class="line">                    <span class="keyword">return</span> mid+<span class="number">1</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">//check right</span></span><br><span class="line">                    low=mid+<span class="number">1</span>;</span><br><span class="line">                    mid=low+((high-low)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>It can be more clear.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The API isBadVersion is defined for you.</span></span><br><span class="line"><span class="comment">// bool isBadVersion(int version);</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">firstBadVersion</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">1</span>, right=n;</span><br><span class="line">        <span class="keyword">for</span>(;left&lt;=right;)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid=left+((right-left)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">isBadVersion</span>(mid))&#123;</span><br><span class="line">                <span class="comment">//check left. It may cause empty array.</span></span><br><span class="line">                <span class="comment">//[Bad1,Bad2]-&gt;[]. return left</span></span><br><span class="line">                <span class="comment">//[bad]-&gt;[]. return left</span></span><br><span class="line">                right=mid<span class="number">-1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//check right</span></span><br><span class="line">                <span class="comment">//[good,bad]-&gt;[bad]</span></span><br><span class="line">                left=mid+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      	<span class="comment">// when break, all exit is to return left.</span></span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Another way to think return value is to consider the break condition.</p>
-<p>When not found, right=mid-1 &lt; left. Of course we need the one in the back.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1116,7 +1103,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
