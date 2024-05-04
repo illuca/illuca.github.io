@@ -147,6 +147,281 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/26/994-Rotting-Oranges/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/26/994-Rotting-Oranges/" class="post-title-link" itemprop="url">994. Rotting Oranges</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-12-25 23:47:45" itemprop="dateCreated datePublished" datetime="2023-12-25T23:47:45+08:00">2023-12-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-09 12:48:54" itemprop="dateModified" datetime="2024-01-09T12:48:54+08:00">2024-01-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/rotting-oranges/">https://leetcode.com/problems/rotting-oranges/</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">orangesRotting</span>(<span class="params">self, G: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">i,j,k</span>):</span></span><br><span class="line">            <span class="keyword">for</span> x,y <span class="keyword">in</span> [(i+<span class="number">1</span>,j),(i-<span class="number">1</span>,j),(i,j+<span class="number">1</span>),(i,j-<span class="number">1</span>)]:</span><br><span class="line">                <span class="keyword">if</span> <span class="number">0</span>&lt;=x&lt;M <span class="keyword">and</span> <span class="number">0</span>&lt;=y&lt;N <span class="keyword">and</span> G[x][y]==<span class="number">1</span>:</span><br><span class="line">                    Q.append((x,y,k+<span class="number">1</span>))</span><br><span class="line">                    G[x][y]=<span class="number">0</span></span><br><span class="line"></span><br><span class="line">        M=<span class="built_in">len</span>(G)</span><br><span class="line">        N=<span class="built_in">len</span>(G[<span class="number">0</span>])</span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        Q=deque()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                <span class="keyword">if</span> G[i][j]==<span class="number">2</span>:</span><br><span class="line">                    Q.append((i,j,<span class="number">0</span>))  </span><br><span class="line">        <span class="keyword">while</span> Q:</span><br><span class="line">            i,j,k=Q.popleft()</span><br><span class="line">            ans=<span class="built_in">max</span>(ans,k)</span><br><span class="line">            f(i,j,k)          </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                <span class="keyword">if</span> G[i][j]==<span class="number">1</span>:</span><br><span class="line">                    ans=-<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/25/25-Reverse-Nodes-in-k-Group/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/25/25-Reverse-Nodes-in-k-Group/" class="post-title-link" itemprop="url">25. Reverse Nodes in k-Group</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-12-25 18:36:24 / Modified: 15:43:29" itemprop="dateCreated datePublished" datetime="2023-12-25T18:36:24+08:00">2023-12-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/reverse-nodes-in-k-group/description/">https://leetcode.com/problems/reverse-nodes-in-k-group/description/</a></p>
+<p>Note: In reverse function, we cannot use p is not end.next to decide whether to break because during reverse, the node that end points to will be inserted after head.</p>
+<p>Since node of pointer end is changing its position, thus it won’t help us terminate the loop.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverseKGroup</span>(<span class="params">self, H: <span class="type">Optional</span>[ListNode], k: <span class="built_in">int</span></span>) -&gt; <span class="type">Optional</span>[ListNode]:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">moveToHead</span>(<span class="params">h,prev,p</span>):</span></span><br><span class="line">            prev.<span class="built_in">next</span>=p.<span class="built_in">next</span></span><br><span class="line">            p.<span class="built_in">next</span>=h.<span class="built_in">next</span></span><br><span class="line">            h.<span class="built_in">next</span>=p</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">nextK</span>(<span class="params">h</span>):</span></span><br><span class="line">            p=h</span><br><span class="line">            counter=<span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span> p:</span><br><span class="line">                p=p.<span class="built_in">next</span></span><br><span class="line">                counter+=<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> counter&gt;=k:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">return</span> p</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">reverse</span>(<span class="params">h,end</span>):</span></span><br><span class="line">            prev=h.<span class="built_in">next</span></span><br><span class="line">            p=prev.<span class="built_in">next</span></span><br><span class="line">            counter=<span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> counter!=k:</span><br><span class="line">                moveToHead(h,prev,p)</span><br><span class="line">                p=prev.<span class="built_in">next</span></span><br><span class="line">                counter+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> prev</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> H <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        dummy=ListNode(-<span class="number">1</span>)</span><br><span class="line">        dummy.<span class="built_in">next</span>=H</span><br><span class="line">        h=dummy</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            end=nextK(h)</span><br><span class="line">            <span class="keyword">if</span> end <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            h=reverse(h,end)</span><br><span class="line">        <span class="keyword">return</span> dummy.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/25/200-Number-of-Islands/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/25/200-Number-of-Islands/" class="post-title-link" itemprop="url">200. Number of Islands</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-12-24 21:52:38" itemprop="dateCreated datePublished" datetime="2023-12-24T21:52:38+08:00">2023-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-09 12:46:33" itemprop="dateModified" datetime="2024-01-09T12:46:33+08:00">2024-01-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/number-of-islands/">https://leetcode.com/problems/number-of-islands/</a></p>
+<p>Solution1: DFS</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">numIslands</span>(<span class="params">self, G: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">i,j</span>):</span></span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span>&lt;=i&lt;M <span class="keyword">and</span> <span class="number">0</span>&lt;=j&lt;N <span class="keyword">and</span> G[i][j]==<span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                G[i][j]=<span class="string">&#x27;0&#x27;</span></span><br><span class="line">                f(i-<span class="number">1</span>,j)</span><br><span class="line">                f(i+<span class="number">1</span>,j)</span><br><span class="line">                f(i,j-<span class="number">1</span>)</span><br><span class="line">                f(i,j+<span class="number">1</span>)</span><br><span class="line">        M=<span class="built_in">len</span>(G)</span><br><span class="line">        N=<span class="built_in">len</span>(G[<span class="number">0</span>])</span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                <span class="keyword">if</span> G[i][j]==<span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                    f(i,j)</span><br><span class="line">                    ans+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+<p>Solution2: BFS</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">numIslands</span>(<span class="params">self, G: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">i,j</span>):</span></span><br><span class="line">            <span class="keyword">nonlocal</span> Q,G</span><br><span class="line">            <span class="keyword">for</span> i,j <span class="keyword">in</span> [(i+<span class="number">1</span>,j),(i-<span class="number">1</span>,j),(i,j+<span class="number">1</span>),(i,j-<span class="number">1</span>)]:</span><br><span class="line">                <span class="keyword">if</span> <span class="number">0</span>&lt;=i&lt;M <span class="keyword">and</span> <span class="number">0</span>&lt;=j&lt;N <span class="keyword">and</span> G[i][j]==<span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                    G[i][j]=<span class="number">0</span></span><br><span class="line">                    Q.append((i,j))</span><br><span class="line">        M=<span class="built_in">len</span>(G)</span><br><span class="line">        N=<span class="built_in">len</span>(G[<span class="number">0</span>])</span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        Q=deque()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                <span class="keyword">if</span> G[i][j]==<span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                    ans+=<span class="number">1</span></span><br><span class="line">                    G[i][j]=<span class="string">&#x27;0&#x27;</span></span><br><span class="line">                    Q.append((i,j))</span><br><span class="line">                    <span class="keyword">while</span> Q:</span><br><span class="line">                        x,y=Q.popleft()</span><br><span class="line">                        f(x,y)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/24/236-Lowest-Common-Ancestor-of-a-Binary-Tree-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/24/236-Lowest-Common-Ancestor-of-a-Binary-Tree-1/" class="post-title-link" itemprop="url">236. Lowest Common Ancestor of a Binary Tree</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-12-23 22:24:30" itemprop="dateCreated datePublished" datetime="2023-12-23T22:24:30+08:00">2023-12-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-09 12:46:28" itemprop="dateModified" datetime="2024-01-09T12:46:28+08:00">2024-01-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/">https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lowestCommonAncestor</span>(<span class="params">self, R: <span class="string">&#x27;TreeNode&#x27;</span>, p: <span class="string">&#x27;TreeNode&#x27;</span>, q: <span class="string">&#x27;TreeNode&#x27;</span></span>) -&gt; &#x27;TreeNode&#x27;:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">C</span>):</span></span><br><span class="line">            <span class="keyword">nonlocal</span> ans</span><br><span class="line">            <span class="keyword">if</span> C <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">if</span> C:</span><br><span class="line">                l=f(C.left)</span><br><span class="line">                r=f(C.right)</span><br><span class="line">                found=C==p <span class="keyword">or</span> C==q</span><br><span class="line">                <span class="keyword">if</span> l+r+found&gt;=<span class="number">2</span>:</span><br><span class="line">                    ans=C</span><br><span class="line">                <span class="keyword">return</span> found <span class="keyword">or</span> l <span class="keyword">or</span> r</span><br><span class="line">            </span><br><span class="line">        ans=<span class="literal">None</span></span><br><span class="line">        f(R)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Solution2: Disjoint set</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lowestCommonAncestor</span>(<span class="params">self, R: <span class="string">&#x27;TreeNode&#x27;</span>, p: <span class="string">&#x27;TreeNode&#x27;</span>, q: <span class="string">&#x27;TreeNode&#x27;</span></span>) -&gt; &#x27;TreeNode&#x27;:</span></span><br><span class="line">        <span class="keyword">if</span> R <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        A=[R]</span><br><span class="line">        parent=&#123;R:<span class="literal">None</span>&#125;</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">if</span> p <span class="keyword">in</span> parent <span class="keyword">and</span> q <span class="keyword">in</span> parent:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            C=A.pop()</span><br><span class="line">            <span class="keyword">if</span> C.left:</span><br><span class="line">                A.append(C.left)</span><br><span class="line">                parent[C.left]=C</span><br><span class="line">            <span class="keyword">if</span> C.right:</span><br><span class="line">                A.append(C.right)</span><br><span class="line">                parent[C.right]=C</span><br><span class="line">        seen=<span class="built_in">set</span>()</span><br><span class="line">        <span class="keyword">while</span> p:</span><br><span class="line">            seen.add(p)</span><br><span class="line">            p=parent[p] <span class="comment"># (1)</span></span><br><span class="line">        <span class="comment"># find parent until parent has been seen in step (1)</span></span><br><span class="line">        <span class="keyword">while</span> q <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">            q=parent[q]</span><br><span class="line">        <span class="keyword">return</span> q</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/23/437-Path-Sum-III/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -574,277 +849,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/20/102-Binary-Tree-Level-Order-Traversal/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/20/102-Binary-Tree-Level-Order-Traversal/" class="post-title-link" itemprop="url">102. Binary Tree Level Order Traversal</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-12-19 22:25:00" itemprop="dateCreated datePublished" datetime="2023-12-19T22:25:00+08:00">2023-12-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-09 12:48:51" itemprop="dateModified" datetime="2024-01-09T12:48:51+08:00">2024-01-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>S1: Recursion:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">levelOrder</span>(<span class="params">self, R: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">r,k</span>):</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(ans)==k:</span><br><span class="line">                ans.append([]) <span class="comment">#newline</span></span><br><span class="line">            ans[k].append(r.val)</span><br><span class="line">            <span class="keyword">if</span> r.left:</span><br><span class="line">                f(r.left,k+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">if</span> r.right:</span><br><span class="line">                f(r.right,k+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> R:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        ans=[]</span><br><span class="line">        f(R,<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
-
-
-
-<p>S1: Iteration</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">levelOrder</span>(<span class="params">self, R: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> R:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        Q=deque([(R,<span class="number">0</span>)])</span><br><span class="line">        ans=[]</span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(Q)&gt;<span class="number">0</span>:</span><br><span class="line">            C,k=Q.popleft()</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(ans)==k:</span><br><span class="line">                ans.append([])</span><br><span class="line">            ans[k].append(C.val)</span><br><span class="line">            <span class="keyword">if</span> C.left:</span><br><span class="line">                Q.append((C.left,k+<span class="number">1</span>))</span><br><span class="line">            <span class="keyword">if</span> C.right:</span><br><span class="line">                Q.append((C.right,k+<span class="number">1</span>))</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">levelOrder</span>(<span class="params">self, R: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> R:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        Q=deque([R])</span><br><span class="line">        ans=[]</span><br><span class="line">        k=<span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(Q)&gt;<span class="number">0</span>:</span><br><span class="line">            ans.append([])</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(Q)):</span><br><span class="line">                C=Q.popleft()</span><br><span class="line">                ans[k].append(C.val)</span><br><span class="line">                <span class="keyword">if</span> C.left:</span><br><span class="line">                    Q.append(C.left)</span><br><span class="line">                <span class="keyword">if</span> C.right:</span><br><span class="line">                    Q.append(C.right)</span><br><span class="line">            k+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/19/73-Set-Matrix-Zeroes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/19/73-Set-Matrix-Zeroes/" class="post-title-link" itemprop="url">73. Set Matrix Zeroes</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-12-19 18:24:05 / Modified: 15:27:46" itemprop="dateCreated datePublished" datetime="2023-12-19T18:24:05+08:00">2023-12-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setZeroes</span>(<span class="params">self, A: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">        M=<span class="built_in">len</span>(A)</span><br><span class="line">        N=<span class="built_in">len</span>(A[<span class="number">0</span>])</span><br><span class="line">        r0=<span class="literal">False</span></span><br><span class="line">        c0=<span class="literal">False</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                <span class="keyword">if</span> A[i][j]==<span class="number">0</span>:</span><br><span class="line">                    A[i][<span class="number">0</span>]=<span class="number">0</span>        </span><br><span class="line">                    A[<span class="number">0</span>][j]=<span class="number">0</span></span><br><span class="line">                    <span class="keyword">if</span> i==<span class="number">0</span>:</span><br><span class="line">                        r0=<span class="literal">True</span></span><br><span class="line">                    <span class="keyword">if</span> j==<span class="number">0</span>:</span><br><span class="line">                        c0=<span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,M):</span><br><span class="line">            <span class="keyword">if</span> A[i][<span class="number">0</span>]==<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                    A[i][j]=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,N):</span><br><span class="line">            <span class="keyword">if</span> A[<span class="number">0</span>][j]==<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">                    A[i][j]=<span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> r0:</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                A[<span class="number">0</span>][j]=<span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> c0:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">                A[i][<span class="number">0</span>]=<span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/19/238-Product-of-Array-Except-Self/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/19/238-Product-of-Array-Except-Self/" class="post-title-link" itemprop="url">238. Product of Array Except Self</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-12-19 17:05:28 / Modified: 14:16:45" itemprop="dateCreated datePublished" datetime="2023-12-19T17:05:28+08:00">2023-12-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>method1: division</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">productExceptSelf</span>(<span class="params">self, A: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">        P=<span class="number">1</span></span><br><span class="line">        N=<span class="built_in">len</span>(A)</span><br><span class="line">        k=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">            <span class="keyword">if</span> A[i]==<span class="number">0</span>:</span><br><span class="line">                k+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                P=P*A[i]</span><br><span class="line">        ans=[<span class="number">0</span>]*N</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">            <span class="keyword">if</span> k&gt;=<span class="number">2</span>:</span><br><span class="line">                P=<span class="number">0</span></span><br><span class="line">            <span class="keyword">elif</span> k==<span class="number">1</span>:</span><br><span class="line">                <span class="built_in">print</span>(A[i])</span><br><span class="line">                <span class="keyword">if</span> A[i]==<span class="number">0</span>:</span><br><span class="line">                    ans[i]=P</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    ans[i]=<span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ans[i]=P//A[i]</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
-
-
-
-<p>method2: hash: space O(n) without division</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">productExceptSelf</span>(<span class="params">self, A: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">        L=&#123;&#125;</span><br><span class="line">        R=&#123;&#125;</span><br><span class="line">        N=<span class="built_in">len</span>(A)</span><br><span class="line">        ans=[<span class="number">0</span>]*N</span><br><span class="line">        P=<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">            P=P*A[i]</span><br><span class="line">            L[i]=P</span><br><span class="line">        P=<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            P=P*A[i]</span><br><span class="line">            R[i]=P</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">            curr=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> i-<span class="number">1</span>&gt;=<span class="number">0</span>:</span><br><span class="line">                curr*=L[i-<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> i+<span class="number">1</span>&lt;N:</span><br><span class="line">                curr*=R[i+<span class="number">1</span>]</span><br><span class="line">            ans[i]=curr</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
-
-<p>method3: improve the method 2</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">productExceptSelf</span>(<span class="params">self, A: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">        N=<span class="built_in">len</span>(A)</span><br><span class="line">        ans=[<span class="number">0</span>]*N</span><br><span class="line">        LP=<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">            LP*=A[i]</span><br><span class="line">            ans[i]=LP</span><br><span class="line">        RP=<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            <span class="comment">#right part</span></span><br><span class="line">            curr=RP</span><br><span class="line">            RP*=A[i]</span><br><span class="line">            <span class="comment">#left part</span></span><br><span class="line">            <span class="keyword">if</span> i-<span class="number">1</span>&gt;=<span class="number">0</span>:</span><br><span class="line">                curr*=ans[i-<span class="number">1</span>]</span><br><span class="line">            ans[i]=curr</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/19/189-Rotate-Array/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/19/189-Rotate-Array/" class="post-title-link" itemprop="url">189. Rotate Array</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-12-19 14:43:45 / Modified: 12:50:55" itemprop="dateCreated datePublished" datetime="2023-12-19T14:43:45+08:00">2023-12-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/rotate-array/">https://leetcode.com/problems/rotate-array/</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rotate</span>(<span class="params">self, A: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">        <span class="comment">#reverse the whole</span></span><br><span class="line">        </span><br><span class="line">        N=<span class="built_in">len</span>(A)</span><br><span class="line">        k=k%N</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N//<span class="number">2</span>):</span><br><span class="line">            A[i],A[N-<span class="number">1</span>-i]=A[N-<span class="number">1</span>-i],A[i]</span><br><span class="line">        <span class="comment">#reverse [0:k]</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k//<span class="number">2</span>):</span><br><span class="line">            A[i],A[k-<span class="number">1</span>-i]=A[k-<span class="number">1</span>-i],A[i]</span><br><span class="line">        <span class="comment">#reverse [k:]</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>((N-k)//<span class="number">2</span>):</span><br><span class="line">            A[k+i],A[N-<span class="number">1</span>-i]=A[N-<span class="number">1</span>-i],A[k+i]</span><br></pre></td></tr></table></figure>
-
-
-
-<p>It can be simplified:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rotate</span>(<span class="params">self, A: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">reverse</span>(<span class="params">i,j</span>):</span></span><br><span class="line">            <span class="keyword">while</span> i&lt;j:</span><br><span class="line">                A[i],A[j]=A[j],A[i]</span><br><span class="line">                i,j=i+<span class="number">1</span>,j-<span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        N=<span class="built_in">len</span>(A)</span><br><span class="line">        k=k%N</span><br><span class="line">        <span class="comment">#reverse the whole</span></span><br><span class="line">        reverse(<span class="number">0</span>,N-<span class="number">1</span>)</span><br><span class="line">        <span class="comment">#reverse first k</span></span><br><span class="line">        reverse(<span class="number">0</span>,k-<span class="number">1</span>)</span><br><span class="line">        <span class="comment">#reverse last k</span></span><br><span class="line">        reverse(k,N-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -914,13 +918,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-count">50</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
