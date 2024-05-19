@@ -147,6 +147,99 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/18/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E5%A4%8D%E7%9B%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/05/18/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E5%A4%8D%E7%9B%98/" class="post-title-link" itemprop="url">百度前端实习复盘</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-05-17 23:10:07" itemprop="dateCreated datePublished" datetime="2024-05-17T23:10:07+08:00">2024-05-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-05-19 15:48:21" itemprop="dateModified" datetime="2024-05-19T15:48:21+08:00">2024-05-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="组合模式与继承"><a href="#组合模式与继承" class="headerlink" title="组合模式与继承"></a>组合模式与继承</h2><h3 id="为什么组合大于继承？"><a href="#为什么组合大于继承？" class="headerlink" title="为什么组合大于继承？"></a>为什么组合大于继承？</h3><p>这是在功能不够确定时，组合大于继承。</p>
+<p>例如人类在建立鸟的分类系统时，如果使用单继承，就类似文件夹分类。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Bird</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">fly</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;fly&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>鸟分为麻雀、天鹅、鹈鹕等，但有些鸟会飞，有些不会。如果鸡继承鸟的话，就会有会飞这个方法，但鸡不会飞，为了避免误用，就需要抛出异常:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">chicken</span> <span class="keyword">extends</span> <span class="title">Bird</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="title">fly</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;cannot fly&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者分为两个类，</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Bird</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FlyableBird</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="title">fly</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;fly&#x27;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnFlyableBird</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但后来随着种类增多，可能会有生殖方式、寿命、迁徙、地域、嘴巴形状、眼睛形状等等区分，这个继承层级或者说文件夹的深度会变得越来越深。</p>
+<p>这种情况可以选择组合模式，类似标签。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Flyable &#123;</span><br><span class="line">	fly(): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> EggLayable &#123;</span><br><span class="line">    layEgg(): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但这样我们就会每次都需要实现fly方法，为了减少重复代码，可以使用委托：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Flyable &#123;</span><br><span class="line">  fly(): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Tweetable &#123;</span><br><span class="line">  tweet(): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> EggLayable &#123;</span><br><span class="line">  layEgg(): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FlyAbility</span> <span class="title">implements</span> <span class="title">Flyable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">fly</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;I can fly!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TweetAbility</span> <span class="title">implements</span> <span class="title">Tweetable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">tweet</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;I can tweet!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EggLayAbility</span> <span class="title">implements</span> <span class="title">EggLayable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">layEgg</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;I can lay an egg!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ostrich</span> <span class="title">implements</span> <span class="title">Tweetable</span>, <span class="title">EggLayable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> tweetAbility: TweetAbility;</span><br><span class="line">  <span class="keyword">private</span> eggLayAbility: EggLayAbility;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.tweetAbility = <span class="keyword">new</span> TweetAbility();</span><br><span class="line">    <span class="built_in">this</span>.eggLayAbility = <span class="keyword">new</span> EggLayAbility();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">tweet</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.tweetAbility.tweet();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">layEgg</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.eggLayAbility.layEgg();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sparrow</span> <span class="title">implements</span> <span class="title">Flyable</span>, <span class="title">Tweetable</span>, <span class="title">EggLayable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> flyAbility: FlyAbility;</span><br><span class="line">  <span class="keyword">private</span> tweetAbility: TweetAbility;</span><br><span class="line">  <span class="keyword">private</span> eggLayAbility: EggLayAbility;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.flyAbility = <span class="keyword">new</span> FlyAbility();</span><br><span class="line">    <span class="built_in">this</span>.tweetAbility = <span class="keyword">new</span> TweetAbility();</span><br><span class="line">    <span class="built_in">this</span>.eggLayAbility = <span class="keyword">new</span> EggLayAbility();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">fly</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.flyAbility.fly();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">layEgg</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.eggLayAbility.layEgg();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="柯里化"><a href="#柯里化" class="headerlink" title="柯里化"></a>柯里化</h2><h3 id="什么是柯里化？柯里化有什么用？"><a href="#什么是柯里化？柯里化有什么用？" class="headerlink" title="什么是柯里化？柯里化有什么用？"></a>什么是柯里化？柯里化有什么用？</h3><p>real world haskell中的“Partial Function Application and Currying”章节有讲到：“In Haskell, all functions take only one argument.”</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">ghci</span>&gt; :<span class="class"><span class="keyword">type</span> dropWhile</span></span><br><span class="line"><span class="title">dropWhile</span> :: (a -&gt; <span class="type">Bool</span>) -&gt; [a] -&gt; [a]</span><br><span class="line"></span><br><span class="line"><span class="title">ghci</span>&gt; :<span class="class"><span class="keyword">type</span> dropWhile isSpace</span></span><br><span class="line"><span class="title">dropWhile</span> isSpace :: [<span class="type">Char</span>] -&gt; [<span class="type">Char</span>]</span><br></pre></td></tr></table></figure>
+
+<p>dropWhile isSpace is a function that strips leading whitespace from a string. </p>
+<p>How is this useful? As one example, we can use it as an argument to a higher order function:</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">ghci</span>&gt; map (dropWhile isSpace) [<span class="string">&quot; a&quot;</span>,<span class="string">&quot;f&quot;</span>,<span class="string">&quot;   e&quot;</span>]</span><br><span class="line">[<span class="string">&quot;a&quot;</span>,<span class="string">&quot;f&quot;</span>,<span class="string">&quot;e&quot;</span>]”</span><br></pre></td></tr></table></figure>
+
+<h3 id="bind和curry同样是partial-application，有什么不同？"><a href="#bind和curry同样是partial-application，有什么不同？" class="headerlink" title="bind和curry同样是partial application，有什么不同？"></a>bind和curry同样是partial application，有什么不同？</h3><p>在解决这个问题之前，我们可以看一下bind的实现：</p>
+<h2 id="和-有什么不同？"><a href="#和-有什么不同？" class="headerlink" title="==和===有什么不同？"></a>==和===有什么不同？</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span>==<span class="string">&#x27;5&#x27;</span> <span class="comment">// &#x27;5&#x27;会被转换为number 5</span></span><br><span class="line"><span class="number">0</span> == <span class="literal">false</span> <span class="comment">// false会被转换为0</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>  <span class="comment">// true，因为它们在不进行类型转换的情况下是相等的</span></span><br><span class="line"></span><br><span class="line"><span class="literal">null</span> === <span class="literal">undefined</span> <span class="comment">// false，因为类型不同，null是object类型，undefined是undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a);  <span class="comment">// 输出：object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> b);  <span class="comment">// 输出：undefined</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Array-API"><a href="#Array-API" class="headerlink" title="Array API"></a>Array API</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> L=<span class="built_in">console</span>.log.bind(<span class="built_in">console</span>)</span><br><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">L(arr.some(<span class="function"><span class="params">curr</span>=&gt;</span> curr==<span class="number">2</span> || curr==<span class="number">3</span>)) <span class="comment">// true</span></span><br><span class="line">L(arr.every(<span class="function"><span class="params">curr</span>=&gt;</span> curr &gt;<span class="number">0</span>)) <span class="comment">// true</span></span><br><span class="line">L(arr.every(<span class="function"><span class="params">curr</span>=&gt;</span> curr &gt;<span class="number">1</span>)) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> total=<span class="number">0</span></span><br><span class="line">arr.forEach(<span class="function">(<span class="params">v,i</span>)=&gt;</span>&#123;</span><br><span class="line">    total+=v</span><br><span class="line">&#125;)</span><br><span class="line">L(total) <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line">L(arr.indexOf(<span class="number">4</span>))</span><br><span class="line">L(arr.find((<span class="function"><span class="params">curr</span>=&gt;</span>curr&gt;<span class="number">2</span>))) <span class="comment">// the first element that is bigger than 2 is 3</span></span><br><span class="line"></span><br><span class="line">arr.unshift(<span class="number">9</span>)</span><br><span class="line">L(arr) <span class="comment">// [9,1,2,3,4]</span></span><br><span class="line">L(arr.toString()) <span class="comment">// &#x27;9,1,2,3,4&#x27;</span></span><br><span class="line">L(arr.join())</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr1=arr.splice(<span class="number">1</span>,<span class="number">4</span>)</span><br><span class="line">L(arr) <span class="comment">// [9]</span></span><br><span class="line">L(arr1) <span class="comment">// [1,2,3,4] the element deleted</span></span><br><span class="line"></span><br><span class="line">arr1.reverse()</span><br><span class="line">L(arr1) <span class="comment">// [4,3,2,1]</span></span><br><span class="line"></span><br><span class="line">arr1.splice(<span class="number">2</span>,<span class="number">0</span>,<span class="number">10</span>) </span><br><span class="line">L(arr1) <span class="comment">// [4,3,10,2,1]</span></span><br><span class="line"></span><br><span class="line">arr1.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a-b</span><br><span class="line">&#125;)</span><br><span class="line">L(arr1) <span class="comment">// [1,2,3,4,10]</span></span><br><span class="line"></span><br><span class="line">L(arr1.at(-<span class="number">1</span>)) <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/14/%E5%8E%9F%E5%BD%A2%E9%93%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -161,7 +254,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/05/14/%E5%8E%9F%E5%BD%A2%E9%93%BE/" class="post-title-link" itemprop="url">原形链</a>
+            <a href="/2024/05/14/%E5%8E%9F%E5%BD%A2%E9%93%BE/" class="post-title-link" itemprop="url">小红书2020校招前端笔试题卷一</a>
         </h2>
 
         <div class="post-meta">
@@ -170,10 +263,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2024-05-13 23:57:56 / Modified: 21:57:56" itemprop="dateCreated datePublished" datetime="2024-05-13T23:57:56+08:00">2024-05-13</time>
+              <time title="Created: 2024-05-13 23:57:56" itemprop="dateCreated datePublished" datetime="2024-05-13T23:57:56+08:00">2024-05-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-05-14 13:27:01" itemprop="dateModified" datetime="2024-05-14T13:27:01+08:00">2024-05-14</time>
+              </span>
 
           
 
@@ -712,66 +811,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/04/30/57-Insert-Interval/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/30/57-Insert-Interval/" class="post-title-link" itemprop="url">57. Insert Interval</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2024-04-29 22:23:06 / Modified: 20:23:43" itemprop="dateCreated datePublished" datetime="2024-04-29T22:23:06+08:00">2024-04-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insert</span>(<span class="params">A: <span class="built_in">number</span>[][], T: <span class="built_in">number</span>[]</span>): <span class="title">number</span>[][] </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> i=<span class="number">0</span></span><br><span class="line">    <span class="comment">// currrent ends before T start</span></span><br><span class="line">    <span class="keyword">let</span> res=[]</span><br><span class="line">    <span class="keyword">while</span>(i&lt;A.length &amp;&amp; A[i][<span class="number">1</span>]&lt;T[<span class="number">0</span>])&#123;</span><br><span class="line">        res.push(A[i])</span><br><span class="line">        i+=<span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> u=[T[<span class="number">0</span>],T[<span class="number">1</span>]]</span><br><span class="line">    <span class="comment">// handle overlap part</span></span><br><span class="line">    <span class="keyword">while</span>(i&lt;A.length &amp;&amp; A[i][<span class="number">0</span>]&lt;=T[<span class="number">1</span>])&#123;</span><br><span class="line">        u[<span class="number">0</span>]=<span class="built_in">Math</span>.min(u[<span class="number">0</span>],A[i][<span class="number">0</span>])</span><br><span class="line">        u[<span class="number">1</span>]=<span class="built_in">Math</span>.max(u[<span class="number">1</span>],A[i][<span class="number">1</span>])</span><br><span class="line">        i+=<span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    res.push(u)</span><br><span class="line">    <span class="comment">// handle the rest</span></span><br><span class="line">    <span class="keyword">while</span>(i&lt;A.length)&#123;</span><br><span class="line">        res.push(A[i])</span><br><span class="line">        i+=<span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -841,13 +880,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">90</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
