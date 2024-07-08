@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"illuca.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="axios和fetch区别二者都用来发送ajax请求，实现局部更新，axios是基于xhr的，fetch是原生支持的。 axios的拦截器是什么？有什么用？interceptors.request可以做身份验证 interceptors.response可以做error日志处理，统一返回格式(res.data和res.data.data统一为res.data) 123456789101112131">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度前端实习面试复盘">
+<meta property="og:url" content="https://illuca.github.io/2024/05/17/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E5%A4%8D%E7%9B%98/index.html">
+<meta property="og:site_name" content="Yuan">
+<meta property="og:description" content="axios和fetch区别二者都用来发送ajax请求，实现局部更新，axios是基于xhr的，fetch是原生支持的。 axios的拦截器是什么？有什么用？interceptors.request可以做身份验证 interceptors.response可以做error日志处理，统一返回格式(res.data和res.data.data统一为res.data) 123456789101112131">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-05-17T15:10:07.000Z">
+<meta property="article:modified_time" content="2024-05-27T09:08:13.623Z">
+<meta property="article:author" content="Yuan">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://illuca.github.io/2024/05/17/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E5%A4%8D%E7%9B%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>百度前端实习面试复盘 | Yuan</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Yuan</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/17/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E5%A4%8D%E7%9B%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          百度前端实习面试复盘
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-05-17 23:10:07" itemprop="dateCreated datePublished" datetime="2024-05-17T23:10:07+08:00">2024-05-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-05-27 17:08:13" itemprop="dateModified" datetime="2024-05-27T17:08:13+08:00">2024-05-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="axios和fetch区别"><a href="#axios和fetch区别" class="headerlink" title="axios和fetch区别"></a>axios和fetch区别</h1><p>二者都用来发送ajax请求，实现局部更新，axios是基于xhr的，fetch是原生支持的。</p>
+<h2 id="axios的拦截器是什么？有什么用？"><a href="#axios的拦截器是什么？有什么用？" class="headerlink" title="axios的拦截器是什么？有什么用？"></a>axios的拦截器是什么？有什么用？</h2><p>interceptors.request可以做身份验证</p>
+<p>interceptors.response可以做error日志处理，统一返回格式(res.data和res.data.data统一为res.data)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> instance = axios.create(&#123;</span><br><span class="line">    <span class="attr">baseURL</span>: <span class="string">&#x27;https://api.example.com&#x27;</span>,</span><br><span class="line">    <span class="attr">timeout</span>: <span class="number">1000</span>,</span><br><span class="line">    <span class="attr">headers</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 类似express中的app.use，可以做身份验证</span></span><br><span class="line">instance.interceptors.request.use(</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">config</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> token=<span class="built_in">localStorage</span>.getItem(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span>(token)&#123;</span><br><span class="line">            config.headers.Authorization=<span class="string">`Bearer <span class="subst">$&#123;token&#125;</span>`</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> config</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error)</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以用来统一处理error日志，而不是在每个catch中处理</span></span><br><span class="line">axios.interceptors.response.use(</span><br><span class="line">  <span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 处理成功的响应</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Response received:&#x27;</span>, response);</span><br><span class="line">    <span class="comment">// 例如统一处理数据格式</span></span><br><span class="line">    <span class="keyword">if</span> (response.data &amp;&amp; response.data.data) &#123;</span><br><span class="line">      <span class="keyword">return</span> response.data.data;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 处理错误的响应</span></span><br><span class="line">    <span class="built_in">console</span>.error(<span class="string">&#x27;Error response:&#x27;</span>, error);</span><br><span class="line">    <span class="comment">// 例如统一处理错误信息</span></span><br><span class="line">    <span class="keyword">if</span> (error.response) &#123;</span><br><span class="line">      <span class="keyword">switch</span> (error.response.status) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">401</span>:</span><br><span class="line">          <span class="comment">// 处理未授权错误</span></span><br><span class="line">          <span class="built_in">console</span>.error(<span class="string">&#x27;Unauthorized&#x27;</span>);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">500</span>:</span><br><span class="line">          <span class="comment">// 处理服务器错误</span></span><br><span class="line">          <span class="built_in">console</span>.error(<span class="string">&#x27;Server error&#x27;</span>);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">          <span class="built_in">console</span>.error(<span class="string">&#x27;Error status:&#x27;</span>, error.response.status);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="axios还有哪些方法？"><a href="#axios还有哪些方法？" class="headerlink" title="axios还有哪些方法？"></a>axios还有哪些方法？</h2><p>axios.get, axios.post, axios.options(预检), axios.patch修改</p>
+<p>axios.all(类似promise.all)</p>
+<h1 id="组合模式与继承"><a href="#组合模式与继承" class="headerlink" title="组合模式与继承"></a>组合模式与继承</h1><h2 id="为什么组合大于继承？"><a href="#为什么组合大于继承？" class="headerlink" title="为什么组合大于继承？"></a>为什么组合大于继承？</h2><p>这是在功能不够确定时，组合大于继承。</p>
+<p>例如人类在建立鸟的分类系统时，如果使用单继承，就类似文件夹分类。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Bird</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">fly</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;fly&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>鸟分为麻雀、天鹅、鹈鹕等，但有些鸟会飞，有些不会。如果鸡继承鸟的话，就会有会飞这个方法，但鸡不会飞，为了避免误用，就需要抛出异常:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">chicken</span> <span class="keyword">extends</span> <span class="title">Bird</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="title">fly</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;cannot fly&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者分为两个类，</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Bird</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FlyableBird</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="title">fly</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;fly&#x27;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnFlyableBird</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但后来随着种类增多，可能会有生殖方式、寿命、迁徙、地域、嘴巴形状、眼睛形状等等区分，这个继承层级或者说文件夹的深度会变得越来越深。</p>
+<p>这种情况可以选择组合模式，类似标签。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Flyable &#123;</span><br><span class="line">	fly(): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> EggLayable &#123;</span><br><span class="line">    layEgg(): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但这样我们就会每次都需要实现fly方法，为了减少重复代码，可以使用委托：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Flyable &#123;</span><br><span class="line">  fly(): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Tweetable &#123;</span><br><span class="line">  tweet(): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> EggLayable &#123;</span><br><span class="line">  layEgg(): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FlyAbility</span> <span class="title">implements</span> <span class="title">Flyable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">fly</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;I can fly!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TweetAbility</span> <span class="title">implements</span> <span class="title">Tweetable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">tweet</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;I can tweet!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EggLayAbility</span> <span class="title">implements</span> <span class="title">EggLayable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">layEgg</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;I can lay an egg!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ostrich</span> <span class="title">implements</span> <span class="title">Tweetable</span>, <span class="title">EggLayable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> tweetAbility: TweetAbility;</span><br><span class="line">  <span class="keyword">private</span> eggLayAbility: EggLayAbility;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.tweetAbility = <span class="keyword">new</span> TweetAbility();</span><br><span class="line">    <span class="built_in">this</span>.eggLayAbility = <span class="keyword">new</span> EggLayAbility();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">tweet</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.tweetAbility.tweet();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">layEgg</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.eggLayAbility.layEgg();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sparrow</span> <span class="title">implements</span> <span class="title">Flyable</span>, <span class="title">Tweetable</span>, <span class="title">EggLayable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> flyAbility: FlyAbility;</span><br><span class="line">  <span class="keyword">private</span> tweetAbility: TweetAbility;</span><br><span class="line">  <span class="keyword">private</span> eggLayAbility: EggLayAbility;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.flyAbility = <span class="keyword">new</span> FlyAbility();</span><br><span class="line">    <span class="built_in">this</span>.tweetAbility = <span class="keyword">new</span> TweetAbility();</span><br><span class="line">    <span class="built_in">this</span>.eggLayAbility = <span class="keyword">new</span> EggLayAbility();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">fly</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.flyAbility.fly();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">layEgg</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.eggLayAbility.layEgg();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="柯里化"><a href="#柯里化" class="headerlink" title="柯里化"></a>柯里化</h1><h2 id="什么是柯里化？柯里化有什么用？"><a href="#什么是柯里化？柯里化有什么用？" class="headerlink" title="什么是柯里化？柯里化有什么用？"></a>什么是柯里化？柯里化有什么用？</h2><p>real world haskell中的“Partial Function Application and Currying”章节有讲到：“In Haskell, all functions take only one argument.”</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">ghci</span>&gt; :<span class="class"><span class="keyword">type</span> dropWhile</span></span><br><span class="line"><span class="title">dropWhile</span> :: (a -&gt; <span class="type">Bool</span>) -&gt; [a] -&gt; [a]</span><br><span class="line"></span><br><span class="line"><span class="title">ghci</span>&gt; :<span class="class"><span class="keyword">type</span> dropWhile isSpace</span></span><br><span class="line"><span class="title">dropWhile</span> isSpace :: [<span class="type">Char</span>] -&gt; [<span class="type">Char</span>]</span><br></pre></td></tr></table></figure>
+
+<p>dropWhile isSpace is a function that strips leading whitespace from a string. </p>
+<p>How is this useful? As one example, we can use it as an argument to a higher order function:</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">ghci</span>&gt; map (dropWhile isSpace) [<span class="string">&quot; a&quot;</span>,<span class="string">&quot;f&quot;</span>,<span class="string">&quot;   e&quot;</span>]</span><br><span class="line">[<span class="string">&quot;a&quot;</span>,<span class="string">&quot;f&quot;</span>,<span class="string">&quot;e&quot;</span>]”</span><br></pre></td></tr></table></figure>
+
+<h2 id="bind和curry同样是partial-application，有什么不同？"><a href="#bind和curry同样是partial-application，有什么不同？" class="headerlink" title="bind和curry同样是partial application，有什么不同？"></a>bind和curry同样是partial application，有什么不同？</h2><p>bind需要绑定context，curry不需要。</p>
+<ul>
+<li><input disabled="" type="checkbox"> 在解决这个问题之前，我们可以看一下bind的实现：</li>
+</ul>
+<h2 id="和-有什么不同？"><a href="#和-有什么不同？" class="headerlink" title="==和===有什么不同？"></a>==和===有什么不同？</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5</span>==<span class="string">&#x27;5&#x27;</span> <span class="comment">// &#x27;5&#x27;会被转换为number 5</span></span><br><span class="line"><span class="number">0</span> == <span class="literal">false</span> <span class="comment">// false会被转换为0</span></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>  <span class="comment">// true，因为它们在不进行类型转换的情况下是相等的</span></span><br><span class="line"></span><br><span class="line"><span class="literal">null</span> === <span class="literal">undefined</span> <span class="comment">// false，因为类型不同，null是object类型，undefined是undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a);  <span class="comment">// 输出：object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> b);  <span class="comment">// 输出：undefined</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Array-API"><a href="#Array-API" class="headerlink" title="Array API"></a>Array API</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> L=<span class="built_in">console</span>.log.bind(<span class="built_in">console</span>)</span><br><span class="line"><span class="keyword">let</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">L(arr.some(<span class="function"><span class="params">curr</span>=&gt;</span> curr==<span class="number">2</span> || curr==<span class="number">3</span>)) <span class="comment">// true</span></span><br><span class="line">L(arr.every(<span class="function"><span class="params">curr</span>=&gt;</span> curr &gt;<span class="number">0</span>)) <span class="comment">// true</span></span><br><span class="line">L(arr.every(<span class="function"><span class="params">curr</span>=&gt;</span> curr &gt;<span class="number">1</span>)) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> total=<span class="number">0</span></span><br><span class="line">arr.forEach(<span class="function">(<span class="params">v,i</span>)=&gt;</span>&#123;</span><br><span class="line">    total+=v</span><br><span class="line">&#125;)</span><br><span class="line">L(total) <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line">L(arr.indexOf(<span class="number">4</span>))</span><br><span class="line">L(arr.find((<span class="function"><span class="params">curr</span>=&gt;</span>curr&gt;<span class="number">2</span>))) <span class="comment">// the first element that is bigger than 2 is 3</span></span><br><span class="line"></span><br><span class="line">arr.unshift(<span class="number">9</span>)</span><br><span class="line">L(arr) <span class="comment">// [9,1,2,3,4]</span></span><br><span class="line">L(arr.toString()) <span class="comment">// &#x27;9,1,2,3,4&#x27;</span></span><br><span class="line">L(arr.join())</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr1=arr.splice(<span class="number">1</span>,<span class="number">4</span>)</span><br><span class="line">L(arr) <span class="comment">// [9]</span></span><br><span class="line">L(arr1) <span class="comment">// [1,2,3,4] the element deleted</span></span><br><span class="line"></span><br><span class="line">arr1.reverse()</span><br><span class="line">L(arr1) <span class="comment">// [4,3,2,1]</span></span><br><span class="line"></span><br><span class="line">arr1.splice(<span class="number">2</span>,<span class="number">0</span>,<span class="number">10</span>) </span><br><span class="line">L(arr1) <span class="comment">// [4,3,10,2,1]</span></span><br><span class="line"></span><br><span class="line">arr1.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a-b</span><br><span class="line">&#125;)</span><br><span class="line">L(arr1) <span class="comment">// [1,2,3,4,10]</span></span><br><span class="line"></span><br><span class="line">L(arr1.at(-<span class="number">1</span>)) <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/05/13/%E5%8E%9F%E5%BD%A2%E9%93%BE/" rel="prev" title="小红书2020校招前端笔试题卷一">
+      <i class="fa fa-chevron-left"></i> 小红书2020校招前端笔试题卷一
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/05/27/%E5%8C%97%E4%BA%AC%E4%B9%8C%E6%89%98%E9%82%A6%E9%9D%A2%E8%AF%95/" rel="next" title="北京乌托邦面试">
+      北京乌托邦面试 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#axios%E5%92%8Cfetch%E5%8C%BA%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">axios和fetch区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#axios%E7%9A%84%E6%8B%A6%E6%88%AA%E5%99%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">axios的拦截器是什么？有什么用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#axios%E8%BF%98%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">axios还有哪些方法？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%E4%B8%8E%E7%BB%A7%E6%89%BF"><span class="nav-number">2.</span> <span class="nav-text">组合模式与继承</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%BB%84%E5%90%88%E5%A4%A7%E4%BA%8E%E7%BB%A7%E6%89%BF%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">为什么组合大于继承？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%AF%E9%87%8C%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">柯里化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%9F%AF%E9%87%8C%E5%8C%96%EF%BC%9F%E6%9F%AF%E9%87%8C%E5%8C%96%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">什么是柯里化？柯里化有什么用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bind%E5%92%8Ccurry%E5%90%8C%E6%A0%B7%E6%98%AFpartial-application%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="nav-number">3.2.</span> <span class="nav-text">bind和curry同样是partial application，有什么不同？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8C-%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">&#x3D;&#x3D;和&#x3D;&#x3D;&#x3D;有什么不同？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-API"><span class="nav-number">3.4.</span> <span class="nav-text">Array API</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yuan</p>
+  <div class="site-description" itemprop="description">Challenge is the only redemption</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/illuca" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;illuca" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/xlucax" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;xlucax" rel="noopener" target="_blank"><i class="fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuan</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

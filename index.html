@@ -147,7 +147,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/18/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E5%A4%8D%E7%9B%98/">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/07/08/%E8%85%BE%E8%AE%AF%E6%97%A5%E5%B8%B8%E4%B8%80%E9%9D%A2-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -161,7 +161,232 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/05/18/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E5%A4%8D%E7%9B%98/" class="post-title-link" itemprop="url">百度前端实习面试复盘</a>
+            <a href="/2024/07/08/%E8%85%BE%E8%AE%AF%E6%97%A5%E5%B8%B8%E4%B8%80%E9%9D%A2-1/" class="post-title-link" itemprop="url">腾讯日常一面</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-07-08 13:08:15 / Modified: 13:10:57" itemprop="dateCreated datePublished" datetime="2024-07-08T13:08:15+08:00">2024-07-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h1><ul>
+<li>useState和useEffect模拟useCallback</li>
+</ul>
+<h1 id="Q2"><a href="#Q2" class="headerlink" title="Q2"></a>Q2</h1><p>手写订阅发布</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EventListener</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.D=&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">on</span>(<span class="params">k, f</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!(k <span class="keyword">in</span> <span class="built_in">this</span>.D))&#123;</span><br><span class="line">            <span class="built_in">this</span>.D[k]=[]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">this</span>.D[k].push(f)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">emit</span>(<span class="params">k, ...payload</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">this</span>.D[k])&#123;</span><br><span class="line">            <span class="built_in">this</span>.D[k].forEach(<span class="function"><span class="params">f</span>=&gt;</span>&#123;</span><br><span class="line">                f.apply(<span class="built_in">this</span>, payload)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> print=<span class="built_in">console</span>.log.bind(<span class="built_in">console</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> e1=<span class="keyword">new</span> EventListener()</span><br><span class="line">e1.on(<span class="string">&#x27;keyup&#x27;</span>, <span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">    print(<span class="string">&#x27;hello&#x27;</span>, data)</span><br><span class="line">&#125;)</span><br><span class="line">e1.on(<span class="string">&#x27;keyup&#x27;</span>, <span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">    print(<span class="string">&#x27;hi&#x27;</span>, data)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">e1.emit(<span class="string">&#x27;keyup&#x27;</span>, <span class="string">&#x27;luca&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Q3-react"><a href="#Q3-react" class="headerlink" title="Q3 react"></a>Q3 react</h1><ul>
+<li>useMemo好处，坏处<ul>
+<li><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>性能优化：<ul>
+<li>useMemo 可以避免在每次渲染时都进行昂贵的计算，仅在依赖项变化时重新计算。这在复杂计算或频繁渲染的组件中尤为重要。</li>
+</ul>
+</li>
+<li>减少不必要的渲染：<ul>
+<li>当计算结果被传递给子组件时，如果结果没有变化，子组件可以避免不必要的重新渲染，从而提高性能。</li>
+</ul>
+</li>
+<li>简化代码逻辑：<ul>
+<li>useMemo 使代码更具可读性，通过明确地表达哪些计算需要缓存，开发者可以更容易理解代码的意图。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>过度使用：<ul>
+<li>如果滥用 useMemo，在简单或不频繁更新的组件中使用，可能会导致代码变得复杂且难以维护，同时带来的性能提升微乎其微。</li>
+</ul>
+</li>
+<li>内存开销：<ul>
+<li>useMemo 会占用额外的内存来保存缓存的值，如果依赖项变化频繁，缓存的计算结果也会频繁更新，可能带来额外的内存开销。</li>
+</ul>
+</li>
+<li>依赖项管理：<ul>
+<li>开发者需要小心地管理依赖项列表，如果遗漏或错误设置依赖项，可能会导致计算结果不正确或不必要的重新计算。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="什么时候使用-useMemo"><a href="#什么时候使用-useMemo" class="headerlink" title="什么时候使用 useMemo"></a>什么时候使用 useMemo</h3><ul>
+<li>当计算过程耗时且在多次渲染中可能重复时。</li>
+<li>当计算结果被传递给子组件，并且这些子组件依赖于结果进行渲染时。</li>
+<li>当你明确知道组件的渲染频率和计算的复杂度需要优化时。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>fiber 优势, 用户打断怎么做的</li>
+</ul>
+<h1 id="Q4-网络"><a href="#Q4-网络" class="headerlink" title="Q4 网络"></a>Q4 网络</h1><p>客户端和服务端流量控制，当三次重复ACK，发送方和接收方滑动窗口如何变化</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/07/08/%E8%85%BE%E8%AE%AF%E6%97%A5%E5%B8%B8%E4%B8%80%E9%9D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/07/08/%E8%85%BE%E8%AE%AF%E6%97%A5%E5%B8%B8%E4%B8%80%E9%9D%A2/" class="post-title-link" itemprop="url">腾讯日常一面</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2024-07-08 13:07:56" itemprop="dateCreated datePublished" datetime="2024-07-08T13:07:56+08:00">2024-07-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/27/%E5%8C%97%E4%BA%AC%E4%B9%8C%E6%89%98%E9%82%A6%E9%9D%A2%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/05/27/%E5%8C%97%E4%BA%AC%E4%B9%8C%E6%89%98%E9%82%A6%E9%9D%A2%E8%AF%95/" class="post-title-link" itemprop="url">北京乌托邦面试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-05-27 22:07:00 / Modified: 20:12:21" itemprop="dateCreated datePublished" datetime="2024-05-27T22:07:00+08:00">2024-05-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="async-await-promise-setTimeout区别"><a href="#async-await-promise-setTimeout区别" class="headerlink" title="async, await, promise, setTimeout区别"></a>async, await, promise, setTimeout区别</h1><p>宏任务微任务</p>
+<h1 id="防抖和节流"><a href="#防抖和节流" class="headerlink" title="防抖和节流"></a>防抖和节流</h1><h1 id="栅栏布局"><a href="#栅栏布局" class="headerlink" title="栅栏布局"></a>栅栏布局</h1><h1 id="每隔1s加1"><a href="#每隔1s加1" class="headerlink" title="每隔1s加1"></a>每隔1s加1</h1><h1 id="浏览器有哪些存储数据的方式？"><a href="#浏览器有哪些存储数据的方式？" class="headerlink" title="浏览器有哪些存储数据的方式？"></a>浏览器有哪些存储数据的方式？</h1><h1 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h1><h1 id="react-key"><a href="#react-key" class="headerlink" title="react key"></a>react key</h1><h1 id="地址复制"><a href="#地址复制" class="headerlink" title="地址复制"></a>地址复制</h1><h1 id="项目中遇到的难点"><a href="#项目中遇到的难点" class="headerlink" title="项目中遇到的难点"></a>项目中遇到的难点</h1><p>大文件上传</p>
+<p>语义化</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/17/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E5%A4%8D%E7%9B%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/05/17/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E5%AE%9E%E4%B9%A0%E5%A4%8D%E7%9B%98/" class="post-title-link" itemprop="url">百度前端实习面试复盘</a>
         </h2>
 
         <div class="post-meta">
@@ -250,7 +475,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/14/%E5%8E%9F%E5%BD%A2%E9%93%BE/">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/13/%E5%8E%9F%E5%BD%A2%E9%93%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -264,7 +489,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/05/14/%E5%8E%9F%E5%BD%A2%E9%93%BE/" class="post-title-link" itemprop="url">小红书2020校招前端笔试题卷一</a>
+            <a href="/2024/05/13/%E5%8E%9F%E5%BD%A2%E9%93%BE/" class="post-title-link" itemprop="url">小红书2020校招前端笔试题卷一</a>
         </h2>
 
         <div class="post-meta">
@@ -314,7 +539,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/14/Promise/">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/13/Promise/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -328,7 +553,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/05/14/Promise/" class="post-title-link" itemprop="url">Promise</a>
+            <a href="/2024/05/13/Promise/" class="post-title-link" itemprop="url">Promise</a>
         </h2>
 
         <div class="post-meta">
@@ -402,7 +627,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/05/3101-%E4%BA%A4%E6%9B%BF%E5%AD%90%E6%95%B0%E7%BB%84%E8%AE%A1%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/04/3101-%E4%BA%A4%E6%9B%BF%E5%AD%90%E6%95%B0%E7%BB%84%E8%AE%A1%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -416,7 +641,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/05/05/3101-%E4%BA%A4%E6%9B%BF%E5%AD%90%E6%95%B0%E7%BB%84%E8%AE%A1%E6%95%B0/" class="post-title-link" itemprop="url">3101. 交替子数组计数</a>
+            <a href="/2024/05/04/3101-%E4%BA%A4%E6%9B%BF%E5%AD%90%E6%95%B0%E7%BB%84%E8%AE%A1%E6%95%B0/" class="post-title-link" itemprop="url">3101. 交替子数组计数</a>
         </h2>
 
         <div class="post-meta">
@@ -474,7 +699,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/05/3100-%E6%8D%A2%E6%B0%B4%E9%97%AE%E9%A2%98-II/">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/04/3100-%E6%8D%A2%E6%B0%B4%E9%97%AE%E9%A2%98-II/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -488,7 +713,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/05/05/3100-%E6%8D%A2%E6%B0%B4%E9%97%AE%E9%A2%98-II/" class="post-title-link" itemprop="url">3100. 换水问题 II</a>
+            <a href="/2024/05/04/3100-%E6%8D%A2%E6%B0%B4%E9%97%AE%E9%A2%98-II/" class="post-title-link" itemprop="url">3100. 换水问题 II</a>
         </h2>
 
         <div class="post-meta">
@@ -602,7 +827,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/04/1109-Corporate-Flight-Bookings/">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/03/1109-Corporate-Flight-Bookings/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -616,7 +841,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/05/04/1109-Corporate-Flight-Bookings/" class="post-title-link" itemprop="url">1109. Corporate Flight Bookings</a>
+            <a href="/2024/05/03/1109-Corporate-Flight-Bookings/" class="post-title-link" itemprop="url">1109. Corporate Flight Bookings</a>
         </h2>
 
         <div class="post-meta">
@@ -643,191 +868,6 @@
       
           <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/corporate-flight-bookings/">https://leetcode.cn/problems/corporate-flight-bookings/</a></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[][]&#125;</span> <span class="variable">bookings</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">n</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number[]&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> corpFlightBookings = <span class="function"><span class="keyword">function</span>(<span class="params">bookings, n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> R=<span class="keyword">new</span> <span class="built_in">Array</span>(n+<span class="number">1</span>).fill(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> booking <span class="keyword">of</span> bookings)&#123;</span><br><span class="line">        <span class="keyword">let</span> [first,last,seats]=booking</span><br><span class="line">        R[first]+=seats</span><br><span class="line">        <span class="keyword">if</span>(last+<span class="number">1</span>&lt;R.length)&#123;</span><br><span class="line">            <span class="comment">//之后累加时，从first到last都会累计+seats的buff，而为了去buff，</span></span><br><span class="line">            <span class="comment">//就需要对last+1上debuff</span></span><br><span class="line">            R[last+<span class="number">1</span>]-=seats</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">2</span>;i&lt;n+<span class="number">1</span>;i++)&#123;</span><br><span class="line">        R[i]+=R[i-<span class="number">1</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    R.shift()</span><br><span class="line">    <span class="keyword">return</span> R</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/01/151-Reverse-Words-in-a-String/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/05/01/151-Reverse-Words-in-a-String/" class="post-title-link" itemprop="url">151. Reverse Words in a String</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2024-04-30 23:02:59 / Modified: 21:20:12" itemprop="dateCreated datePublished" datetime="2024-04-30T23:02:59+08:00">2024-04-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reverseWords</span>(<span class="params">s: <span class="built_in">string</span></span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> tmp=[]</span><br><span class="line">    <span class="keyword">let</span> A=[]</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;s.length;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i]===<span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(tmp.length&gt;<span class="number">0</span>) &#123;</span><br><span class="line">                A.push(tmp.join(<span class="string">&#x27;&#x27;</span>))</span><br><span class="line">                tmp=[]</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(s[i]!==<span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">            tmp.push(s[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(tmp.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        A.push(tmp.join(<span class="string">&#x27;&#x27;</span>))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> A.reverse().join(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/05/01/6-Zigzag-Conversion/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/05/01/6-Zigzag-Conversion/" class="post-title-link" itemprop="url">6. Zigzag Conversion</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2024-04-30 22:19:15 / Modified: 20:31:01" itemprop="dateCreated datePublished" datetime="2024-04-30T22:19:15+08:00">2024-04-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/zigzag-conversion/description/">https://leetcode.com/problems/zigzag-conversion/description/</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">convert</span>(<span class="params">self, s: <span class="built_in">str</span>, nrows: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span></span><br><span class="line">        <span class="keyword">if</span> nrows==<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> s</span><br><span class="line">        D=defaultdict(<span class="built_in">list</span>)</span><br><span class="line">        <span class="comment"># traverse row and once reach the ceil or bottom, then</span></span><br><span class="line">        <span class="comment"># change direction and increase/stop increase column</span></span><br><span class="line">        k=<span class="number">0</span></span><br><span class="line">        i=<span class="number">0</span></span><br><span class="line">        j=<span class="number">0</span></span><br><span class="line">        direction=<span class="literal">True</span></span><br><span class="line">        increase=<span class="literal">False</span></span><br><span class="line">        <span class="keyword">while</span> k&lt;<span class="built_in">len</span>(s):</span><br><span class="line">            D[i].append(s[k])</span><br><span class="line">            k+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> direction:</span><br><span class="line">                i+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                i-=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> increase:</span><br><span class="line">                j+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> k%(nrows-<span class="number">1</span>)==<span class="number">0</span>:</span><br><span class="line">                direction=<span class="keyword">not</span> direction</span><br><span class="line">                increase=<span class="keyword">not</span> increase</span><br><span class="line">        R=<span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> <span class="built_in">range</span>(nrows):</span><br><span class="line">            R+=<span class="string">&quot;&quot;</span>.join(D[row])</span><br><span class="line">        <span class="keyword">return</span> R</span><br></pre></td></tr></table></figure>
-
-<p>Actually, we don’t need <code>increase</code> variable. But it is simulation, so i keep it there.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2024/04/30/56-Merge-Intervals/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/30/56-Merge-Intervals/" class="post-title-link" itemprop="url">56. Merge Intervals</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2024-04-29 23:15:04 / Modified: 21:23:41" itemprop="dateCreated datePublished" datetime="2024-04-29T23:15:04+08:00">2024-04-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">A: <span class="built_in">number</span>[][]</span>): <span class="title">number</span>[][] </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!A)&#123;</span><br><span class="line">        <span class="keyword">return</span> A</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> [i,k]=[<span class="number">1</span>,<span class="number">0</span>]</span><br><span class="line">    A.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a[<span class="number">0</span>]-b[<span class="number">0</span>]</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">let</span> R=[A[<span class="number">0</span>]]</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;A.length &amp;&amp; R[k][<span class="number">1</span>]&lt;A[i][<span class="number">0</span>]) &#123;</span><br><span class="line">            R.push(A[i])</span><br><span class="line">            k++</span><br><span class="line">            i++</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i&gt;=A.length) <span class="keyword">break</span></span><br><span class="line">        R[k][<span class="number">1</span>]=<span class="built_in">Math</span>.max(R[k][<span class="number">1</span>],A[i][<span class="number">1</span>])</span><br><span class="line">        i+=<span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> R</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>It can be simplified:</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">A: <span class="built_in">number</span>[][]</span>): <span class="title">number</span>[][] </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!A)&#123;</span><br><span class="line">        <span class="keyword">return</span> A</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> [i,k]=[<span class="number">1</span>,<span class="number">0</span>]</span><br><span class="line">    A.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a[<span class="number">0</span>]-b[<span class="number">0</span>]</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">let</span> R=[]</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;A.length;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(R.length==<span class="number">0</span>)&#123;</span><br><span class="line">            R.push(A[i])</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(R[R.length-<span class="number">1</span>][<span class="number">1</span>]&lt;A[i][<span class="number">0</span>])&#123;</span><br><span class="line">            R.push(A[i])</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(R[R.length-<span class="number">1</span>][<span class="number">1</span>]&gt;=A[i][<span class="number">0</span>])&#123;</span><br><span class="line">            R[R.length-<span class="number">1</span>][<span class="number">1</span>]=<span class="built_in">Math</span>.max(R[R.length-<span class="number">1</span>][<span class="number">1</span>], A[i][<span class="number">1</span>])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> R</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -913,7 +953,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
