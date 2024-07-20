@@ -20,16 +20,17 @@
     var CONFIG = {"hostname":"illuca.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Challenge is the only redemption">
+  <meta name="description" content="Q1 useState和useEffect模拟useCallback  Q2手写订阅发布 123456789101112131415161718192021222324252627282930class EventListener&amp;#123;    constructor()&amp;#123;        this.D&#x3D;&amp;#123;&amp;#125;    &amp;#125;    on(k, f)&amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="腾讯日常一面">
 <meta property="og:url" content="https://illuca.github.io/2024/07/08/%E8%85%BE%E8%AE%AF%E6%97%A5%E5%B8%B8%E4%B8%80%E9%9D%A2/index.html">
 <meta property="og:site_name" content="Yuan">
-<meta property="og:description" content="Challenge is the only redemption">
+<meta property="og:description" content="Q1 useState和useEffect模拟useCallback  Q2手写订阅发布 123456789101112131415161718192021222324252627282930class EventListener&amp;#123;    constructor()&amp;#123;        this.D&#x3D;&amp;#123;&amp;#125;    &amp;#125;    on(k, f)&amp;#123;">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-07-08T05:07:56.000Z">
-<meta property="article:modified_time" content="2024-07-08T05:07:56.901Z">
+<meta property="article:published_time" content="2024-07-08T05:08:15.000Z">
+<meta property="article:modified_time" content="2024-07-20T10:09:50.986Z">
 <meta property="article:author" content="Yuan">
+<meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://illuca.github.io/2024/07/08/%E8%85%BE%E8%AE%AF%E6%97%A5%E5%B8%B8%E4%B8%80%E9%9D%A2/">
@@ -173,8 +174,15 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2024-07-08 13:07:56" itemprop="dateCreated datePublished" datetime="2024-07-08T13:07:56+08:00">2024-07-08</time>
+              <time title="Created: 2024-07-08 13:08:15" itemprop="dateCreated datePublished" datetime="2024-07-08T13:08:15+08:00">2024-07-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-07-20 18:09:50" itemprop="dateModified" datetime="2024-07-20T18:09:50+08:00">2024-07-20</time>
+              </span>
 
           
 
@@ -187,7 +195,56 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h1><ul>
+<li>useState和useEffect模拟useCallback</li>
+</ul>
+<h1 id="Q2"><a href="#Q2" class="headerlink" title="Q2"></a>Q2</h1><p>手写订阅发布</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EventListener</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.D=&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">on</span>(<span class="params">k, f</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!(k <span class="keyword">in</span> <span class="built_in">this</span>.D))&#123;</span><br><span class="line">            <span class="built_in">this</span>.D[k]=[]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">this</span>.D[k].push(f)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">emit</span>(<span class="params">k, ...payload</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">this</span>.D[k])&#123;</span><br><span class="line">            <span class="built_in">this</span>.D[k].forEach(<span class="function"><span class="params">f</span>=&gt;</span>&#123;</span><br><span class="line">                f.apply(<span class="built_in">this</span>, payload)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> print=<span class="built_in">console</span>.log.bind(<span class="built_in">console</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> e1=<span class="keyword">new</span> EventListener()</span><br><span class="line">e1.on(<span class="string">&#x27;keyup&#x27;</span>, <span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">    print(<span class="string">&#x27;hello&#x27;</span>, data)</span><br><span class="line">&#125;)</span><br><span class="line">e1.on(<span class="string">&#x27;keyup&#x27;</span>, <span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">    print(<span class="string">&#x27;hi&#x27;</span>, data)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">e1.emit(<span class="string">&#x27;keyup&#x27;</span>, <span class="string">&#x27;luca&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Q3-react"><a href="#Q3-react" class="headerlink" title="Q3 react"></a>Q3 react</h1><ul>
+<li>useMemo好处，坏处<ul>
+<li><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>性能优化：<ul>
+<li>useMemo 可以避免在每次渲染时都进行昂贵的计算，仅在依赖项变化时重新计算。这在复杂计算或频繁渲染的组件中尤为重要。</li>
+</ul>
+</li>
+<li>减少不必要的渲染：<ul>
+<li>当计算结果被传递给子组件时，如果结果没有变化，子组件可以避免不必要的重新渲染，从而提高性能。</li>
+</ul>
+</li>
+<li>简化代码逻辑：<ul>
+<li>useMemo 使代码更具可读性，通过明确地表达哪些计算需要缓存，开发者可以更容易理解代码的意图。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>过度使用：<ul>
+<li>如果滥用 useMemo，在简单或不频繁更新的组件中使用，可能会导致代码变得复杂且难以维护，同时带来的性能提升微乎其微。</li>
+</ul>
+</li>
+<li>内存开销：<ul>
+<li>useMemo 会占用额外的内存来保存缓存的值，如果依赖项变化频繁，缓存的计算结果也会频繁更新，可能带来额外的内存开销。</li>
+</ul>
+</li>
+<li>依赖项管理：<ul>
+<li>开发者需要小心地管理依赖项列表，如果遗漏或错误设置依赖项，可能会导致计算结果不正确或不必要的重新计算。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="什么时候使用-useMemo"><a href="#什么时候使用-useMemo" class="headerlink" title="什么时候使用 useMemo"></a>什么时候使用 useMemo</h3><ul>
+<li>当计算过程耗时且在多次渲染中可能重复时。</li>
+<li>当计算结果被传递给子组件，并且这些子组件依赖于结果进行渲染时。</li>
+<li>当你明确知道组件的渲染频率和计算的复杂度需要优化时。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>fiber 优势, 用户打断怎么做的</li>
+</ul>
+<h1 id="Q4-网络"><a href="#Q4-网络" class="headerlink" title="Q4 网络"></a>Q4 网络</h1><p>客户端和服务端流量控制，当三次重复ACK，发送方和接收方滑动窗口如何变化</p>
+
     </div>
 
     
@@ -195,6 +252,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          </div>
 
         
 
@@ -206,8 +266,8 @@
       <i class="fa fa-chevron-left"></i> 北京乌托邦面试
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/07/08/%E8%85%BE%E8%AE%AF%E6%97%A5%E5%B8%B8%E4%B8%80%E9%9D%A2-1/" rel="next" title="腾讯日常一面">
-      腾讯日常一面 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/07/20/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/" rel="next" title="发布订阅">
+      发布订阅 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -267,6 +327,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q1"><span class="nav-number">1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q2"><span class="nav-number">2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q3-react"><span class="nav-number">3.</span> <span class="nav-text">Q3 react</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">3.0.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-number">3.0.2.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8-useMemo"><span class="nav-number">3.0.3.</span> <span class="nav-text">什么时候使用 useMemo</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q4-%E7%BD%91%E7%BB%9C"><span class="nav-number">4.</span> <span class="nav-text">Q4 网络</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -280,7 +341,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">106</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -147,73 +147,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/30/279-Perfect-Squares/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/30/279-Perfect-Squares/" class="post-title-link" itemprop="url">279. Perfect Squares</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-12-30 20:08:03" itemprop="dateCreated datePublished" datetime="2023-12-30T20:08:03+08:00">2023-12-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-09 12:43:46" itemprop="dateModified" datetime="2024-01-09T12:43:46+08:00">2024-01-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/perfect-squares/">https://leetcode.com/problems/perfect-squares/</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">numSquares</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="comment"># find the biggest sqaure num that is smaller than n</span></span><br><span class="line">        x=floor(sqrt(n))</span><br><span class="line">        Z=<span class="number">0</span></span><br><span class="line">        A=[i**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(x+<span class="number">1</span>)]</span><br><span class="line">        dp=[n+<span class="number">1</span>]*(n+<span class="number">1</span>)</span><br><span class="line">        dp[<span class="number">0</span>]=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> a <span class="keyword">in</span> A:</span><br><span class="line">                <span class="keyword">if</span> a&gt;i:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                dp[i]=<span class="built_in">min</span>(dp[i],dp[i-a]+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/28/118-Pascal-s-Triangle/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -799,6 +732,77 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/24/200-Number-of-Islands/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/24/200-Number-of-Islands/" class="post-title-link" itemprop="url">200. Number of Islands</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-12-24 21:52:38" itemprop="dateCreated datePublished" datetime="2023-12-24T21:52:38+08:00">2023-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-09 12:46:33" itemprop="dateModified" datetime="2024-01-09T12:46:33+08:00">2024-01-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/number-of-islands/">https://leetcode.com/problems/number-of-islands/</a></p>
+<p>Solution1: DFS</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">numIslands</span>(<span class="params">self, G: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">i,j</span>):</span></span><br><span class="line">            <span class="keyword">if</span> <span class="number">0</span>&lt;=i&lt;M <span class="keyword">and</span> <span class="number">0</span>&lt;=j&lt;N <span class="keyword">and</span> G[i][j]==<span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                G[i][j]=<span class="string">&#x27;0&#x27;</span></span><br><span class="line">                f(i-<span class="number">1</span>,j)</span><br><span class="line">                f(i+<span class="number">1</span>,j)</span><br><span class="line">                f(i,j-<span class="number">1</span>)</span><br><span class="line">                f(i,j+<span class="number">1</span>)</span><br><span class="line">        M=<span class="built_in">len</span>(G)</span><br><span class="line">        N=<span class="built_in">len</span>(G[<span class="number">0</span>])</span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                <span class="keyword">if</span> G[i][j]==<span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                    f(i,j)</span><br><span class="line">                    ans+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+<p>Solution2: BFS</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">numIslands</span>(<span class="params">self, G: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">i,j</span>):</span></span><br><span class="line">            <span class="keyword">nonlocal</span> Q,G</span><br><span class="line">            <span class="keyword">for</span> i,j <span class="keyword">in</span> [(i+<span class="number">1</span>,j),(i-<span class="number">1</span>,j),(i,j+<span class="number">1</span>),(i,j-<span class="number">1</span>)]:</span><br><span class="line">                <span class="keyword">if</span> <span class="number">0</span>&lt;=i&lt;M <span class="keyword">and</span> <span class="number">0</span>&lt;=j&lt;N <span class="keyword">and</span> G[i][j]==<span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                    G[i][j]=<span class="number">0</span></span><br><span class="line">                    Q.append((i,j))</span><br><span class="line">        M=<span class="built_in">len</span>(G)</span><br><span class="line">        N=<span class="built_in">len</span>(G[<span class="number">0</span>])</span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        Q=deque()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(M):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                <span class="keyword">if</span> G[i][j]==<span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                    ans+=<span class="number">1</span></span><br><span class="line">                    G[i][j]=<span class="string">&#x27;0&#x27;</span></span><br><span class="line">                    Q.append((i,j))</span><br><span class="line">                    <span class="keyword">while</span> Q:</span><br><span class="line">                        x,y=Q.popleft()</span><br><span class="line">                        f(x,y)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -868,7 +872,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">106</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

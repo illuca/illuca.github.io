@@ -147,98 +147,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/15/1101.%20The%20Earliest%20Moment%20When%20Everyone%20Become%20Friends/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/15/1101.%20The%20Earliest%20Moment%20When%20Everyone%20Become%20Friends/" class="post-title-link" itemprop="url">1101. The Earliest Moment When Everyone Become Friends</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-05-15 00:00:00" itemprop="dateCreated datePublished" datetime="2023-05-15T00:00:00+08:00">2023-05-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-16 20:01:05" itemprop="dateModified" datetime="2023-05-16T20:01:05+08:00">2023-05-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>There are n people in a social group labeled from <code>0</code> to <code>n - 1</code>. You are given an array <code>logs</code> where <code>logs[i] = [timestampi, xi, yi]</code> indicates that <code>xi</code> and <code>yi</code> will be friends at the time <code>timestampi</code>.</p>
-<p>Friendship is <strong>symmetric</strong>. That means if <code>a</code> is friends with <code>b</code>, then <code>b</code> is friends with <code>a</code>. Also, person <code>a</code> is acquainted with a person <code>b</code> if <code>a</code> is friends with <code>b</code>, or <code>a</code> is a friend of someone acquainted with <code>b</code>.</p>
-<p>Return <em>the earliest time for which every person became acquainted with every other person</em>. If there is no such earliest time, return <code>-1</code>.</p>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Input: logs = [[20190101,0,1],[20190104,3,4],[20190107,2,3],[20190211,1,5],[20190224,2,4],[20190301,0,3],[20190312,1,2],[20190322,4,5]], n = 6</span><br><span class="line">Output: 20190301</span><br><span class="line">Explanation: </span><br><span class="line">The first event occurs at timestamp = 20190101, and after 0 and 1 become friends, we have the following friendship groups [0,1], [2], [3], [4], [5].</span><br><span class="line">The second event occurs at timestamp = 20190104, and after 3 and 4 become friends, we have the following friendship groups [0,1], [2], [3,4], [5].</span><br><span class="line">The third event occurs at timestamp = 20190107, and after 2 and 3 become friends, we have the following friendship groups [0,1], [2,3,4], [5].</span><br><span class="line">The fourth event occurs at timestamp = 20190211, and after 1 and 5 become friends, we have the following friendship groups [0,1,5], [2,3,4].</span><br><span class="line">The fifth event occurs at timestamp = 20190224, and as 2 and 4 are already friends, nothing happens.</span><br><span class="line">The sixth event occurs at timestamp = 20190301, and after 0 and 3 become friends, we all become friends.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: logs = [[0,2,0],[1,0,1],[3,0,3],[4,1,2],[7,3,1]], n = 4</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: At timestamp = 3, all the persons (i.e., 0, 1, 2, and 3) become friends.</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><code>2 &lt;= n &lt;= 100</code></li>
-<li><code>1 &lt;= logs.length &lt;= 104</code></li>
-<li><code>logs[i].length == 3</code></li>
-<li><code>0 &lt;= timestampi &lt;= 109</code></li>
-<li><code>0 &lt;= xi, yi &lt;= n - 1</code></li>
-<li><code>xi != yi</code></li>
-<li>All the values <code>timestampi</code> are <strong>unique</strong>.</li>
-<li>All the pairs <code>(xi, yi)</code> occur at most one time in the input.</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRoot</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; &amp;parent, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// keep find next util next is -1</span></span><br><span class="line">        <span class="keyword">int</span> curr = x;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> next = parent[curr];</span><br><span class="line">            <span class="keyword">if</span> (next == <span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> curr;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                curr = next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">compare</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp;v1, vector&lt;<span class="keyword">int</span>&gt;&amp;v2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> v1[<span class="number">0</span>] &lt; v2[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">earliestAcq</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; &amp;logs, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// init a nodes array, every time connect two parent, we firstly find root of i, and parent[root]=j</span></span><br><span class="line">        <span class="comment">// remove j from leaves</span></span><br><span class="line">        <span class="comment">// if all leaves have same root, then return time. </span></span><br><span class="line">        <span class="comment">// otherwise, keep traversing logs</span></span><br><span class="line">        <span class="built_in">sort</span>(logs.<span class="built_in">begin</span>(), logs.<span class="built_in">end</span>(), compare);</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">parent</span><span class="params">(n, <span class="number">-1</span>)</span></span>;</span><br><span class="line">        set&lt;<span class="keyword">int</span>&gt; leaves;</span><br><span class="line">        set&lt;<span class="keyword">int</span>&gt; seen;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; logs.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = logs[i][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">int</span> y = logs[i][<span class="number">2</span>];</span><br><span class="line">            seen.<span class="built_in">insert</span>(x);</span><br><span class="line">            seen.<span class="built_in">insert</span>(y);</span><br><span class="line">            <span class="keyword">int</span> root = <span class="built_in">findRoot</span>(parent, x);</span><br><span class="line">            <span class="comment">// if root is itself, it is a leaf</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">findRoot</span>(parent,y) == root) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (x == root) &#123;</span><br><span class="line">                leaves.<span class="built_in">insert</span>(x);</span><br><span class="line">            &#125;</span><br><span class="line">            parent[root] = y;</span><br><span class="line">            leaves.<span class="built_in">erase</span>(y);</span><br><span class="line">            <span class="keyword">if</span> (seen.<span class="built_in">size</span>() == n) &#123;</span><br><span class="line">                <span class="keyword">int</span> curr_root = <span class="built_in">findRoot</span>(parent, <span class="number">0</span>);</span><br><span class="line">                <span class="keyword">bool</span> connected = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> item: leaves) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(curr_root!=<span class="built_in">findRoot</span>(parent, item))&#123;</span><br><span class="line">                        connected=<span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (connected) &#123;</span><br><span class="line">                    <span class="keyword">return</span> logs[i][<span class="number">0</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>After optimization:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; parent;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; rank;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRoot</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="comment">// keep find next util curr is itself</span></span><br><span class="line">        <span class="keyword">if</span>(parent[x]==x) &#123;</span><br><span class="line">            <span class="keyword">return</span> x;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">findRoot</span>(parent[x]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">earliestAcq</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; &amp;logs, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// sort logs by time</span></span><br><span class="line">        <span class="comment">// init a parent array, every time we connect two people, we exec parent[root of i]=j</span></span><br><span class="line">        <span class="comment">// but we firstly check if i and j has been connected already.</span></span><br><span class="line">            <span class="comment">// namely find the root of j and compare it with root of i</span></span><br><span class="line">            <span class="comment">// if they equal, then they are connected.</span></span><br><span class="line">        <span class="comment">// we find root of i and parent[root]=j</span></span><br><span class="line">        <span class="built_in">sort</span>(logs.<span class="built_in">begin</span>(), logs.<span class="built_in">end</span>());</span><br><span class="line">        parent.<span class="built_in">resize</span>(n,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            parent[i]=i;</span><br><span class="line">        &#125;</span><br><span class="line">        rank.<span class="built_in">resize</span>(n,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> groups=n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;logs.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> x=logs[i][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">int</span> y=logs[i][<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">int</span> rootx=<span class="built_in">findRoot</span>(x);</span><br><span class="line">            <span class="keyword">int</span> rooty=<span class="built_in">findRoot</span>(y);</span><br><span class="line">            <span class="keyword">if</span> (rootx==rooty) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// At first, there are n independent person. if two root are not equal, then merge two groups</span></span><br><span class="line">            <span class="comment">// when only 1 group left, all people are connected</span></span><br><span class="line">            <span class="comment">// let node with higher rank be the parent</span></span><br><span class="line">            <span class="keyword">if</span>(rank[rootx]==rank[rooty])&#123;</span><br><span class="line">                parent[rootx]=rooty;</span><br><span class="line">                rank[rooty]++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(rank[rootx]&lt;rank[rooty])&#123;</span><br><span class="line">                parent[rootx]=rooty;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(rank[rootx]&gt;rank[rooty]) &#123;</span><br><span class="line">                parent[rooty]=rootx;</span><br><span class="line">            &#125;</span><br><span class="line">            groups--;</span><br><span class="line">            <span class="keyword">if</span>(groups==<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> logs[i][<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// does not exist that time</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>If rooty is root, its rank will be increased.<br>Then it will be more likely to be parent. The graph looks like a star and the root is in the center.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/14/Longest%20Palindromic%20Substring/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1059,6 +967,124 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2020/12/18/%E9%9B%AA%E5%8D%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/18/%E9%9B%AA%E5%8D%8E/" class="post-title-link" itemprop="url">雪华</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-18 12:03:12" itemprop="dateCreated datePublished" datetime="2020-12-18T12:03:12+08:00">2020-12-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-07-14 04:21:59" itemprop="dateModified" datetime="2024-07-14T04:21:59+08:00">2024-07-14</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <div style="display:flex; justify-content:center;">
+<div>
+<p>
+太阳会孤独么<br>
+在极炽的熔岩下，有多少冰屑在开花<br>
+在压抑的谷底中，有多少昆虫在飞翔<br>
+</p>
+<p>
+天空是什么？<br>
+是有云的地方么？<br>
+那处处都是天空<br>
+</p>
+<p>
+翱翔是什么？<br>
+是短暂的滞空？<br>
+我们所以为的自由是自由么？<br>
+苍穹之下，斑斓的思想，无论怎样，都重复着盛开与凋零<br>
+</p>
+<p>
+孤寂的小岛上，破败的土壤中<br>
+在不知道的残垣断壁之下，我偷偷的窃喜<br>
+又一朵美丽的花儿，被我找到<br>
+</p>
+<p>
+破碎吧，破碎吧<br>
+流行的臂膀与星辰的容颜<br>
+一刹永恒，你活在记忆的单曲循环中<br>
+每一次听你，我都仿佛看到了你<br>
+</p>
+<p>
+融化吧，融化吧<br>
+在骄阳下，在雪地中<br>
+永恒不变的躯体，无时无刻的精神<br>
+都在消融，冰一样，雪一样<br>
+积累的，都在融化，化为虚无，化为你看过的一场景<br>
+</p>
+<p>
+它融化了，升华了，它消失了，它无处不在，它是气，吹到肺中<br>
+它是光，折射眼里<br>
+它消失了，它与你融为一体<br>
+啊，你与天地的雪景融为一体<br>
+你与大地融为一体<br>
+</p>
+<p>
+你疯了<br>
+<p>
+<p>
+我听见雪，我看见音符<br>
+我遥遥的看见你白衣如雪，笑容融化了大地<br>
+和在大地上生长的我的冰<br>
+</p>
+</div>
+</div>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1128,7 +1154,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">106</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -147,104 +147,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/12/09/72-Edit-Distance/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yuan">
-      <meta itemprop="description" content="Challenge is the only redemption">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuan">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/09/72-Edit-Distance/" class="post-title-link" itemprop="url">72. Edit Distance</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-12-09 19:33:14" itemprop="dateCreated datePublished" datetime="2023-12-09T19:33:14+08:00">2023-12-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-09 12:43:36" itemprop="dateModified" datetime="2024-01-09T12:43:36+08:00">2024-01-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/edit-distance/">https://leetcode.com/problems/edit-distance/</a></p>
-<p>Given two strings <code>word1</code> and <code>word2</code>, return <em>the minimum number of operations required to convert <code>word1</code> to <code>word2</code></em>.</p>
-<p>You have the following three operations permitted on a word:</p>
-<ul>
-<li>Insert a character</li>
-<li>Delete a character</li>
-<li>Replace a character</li>
-</ul>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: word1 = &quot;horse&quot;, word2 = &quot;ros&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: </span><br><span class="line">horse -&gt; rorse (replace &#x27;h&#x27; with &#x27;r&#x27;)</span><br><span class="line">rorse -&gt; rose (remove &#x27;r&#x27;)</span><br><span class="line">rose -&gt; ros (remove &#x27;e&#x27;)</span><br></pre></td></tr></table></figure>
-
-<p><strong>Example 2:</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input: word1 = &quot;intention&quot;, word2 = &quot;execution&quot;</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: </span><br><span class="line">intention -&gt; inention (remove &#x27;t&#x27;)</span><br><span class="line">inention -&gt; enention (replace &#x27;i&#x27; with &#x27;e&#x27;)</span><br><span class="line">enention -&gt; exention (replace &#x27;n&#x27; with &#x27;x&#x27;)</span><br><span class="line">exention -&gt; exection (replace &#x27;n&#x27; with &#x27;c&#x27;)</span><br><span class="line">exection -&gt; execution (insert &#x27;u&#x27;)</span><br></pre></td></tr></table></figure>
-
-<p><strong>Constraints:</strong></p>
-<ul>
-<li><code>0 &lt;= word1.length, word2.length &lt;= 500</code></li>
-<li><code>word1</code> and <code>word2</code> consist of lowercase English letters</li>
-</ul>
-<p>Let <code>P[i][j]</code> denote the cost of transforming <code>a[0..i-1]</code> to <code>b[0..j-1]</code>.<br>For current operation, we have several choices.</p>
-<p>Assume we have solved <code>P[i-1][j-1]</code>, <code>P[i-1][j]</code>, <code>P[i][j-1]</code>. Now we try to solve <code>P[i][j]</code>.<br>if current operation is delete, then we must have transformed <code>a[0..i-2]</code> to <code>b[0..j-1]</code><br>if current operation is insert, then we must have transformed <code>a[0..i-1]</code> to <code>b[0..j-2]</code><br>Otherwise, then we have transformed <code>a[0..i-1]</code> to <code>b[0..j-1]</code>.<br>If <code>a[i-1]=b[j-1]</code>, then current operation is do nothing.<br>If <code>a[i-1]!=b[j-1]</code>, then current operation is replacement.</p>
-<p>Thus for i∈[1,n], j∈[1,m], we have<br>$$<br>P[i][j]=\begin{cases}<br>    P[i-1][j]+1<br>        &amp;  \<br>    P[i][j-1]+1<br>        &amp;  \<br>    P[i-1][j-1]<br>        &amp; a[i-1]=b[j-1] \<br>    P[i-1][j-1]+1<br>        &amp; a[i-1]!=b[j-1]<br>\end{cases}<br>$$</p>
-<p><strong>Base cases:</strong></p>
-<p>The cost of transforming <code>a[0..i-1]</code> to empty string is always doing deletion i times .</p>
-<p>Thus <code>P[i][0]=i</code> </p>
-<p>The cost of transforming emtpy string to <code>b[0..j-1]</code> is always doing insertion j times.</p>
-<p>Thus <code>P[0][j]=j</code></p>
-<p><strong>Order of Computation and Final Solution</strong></p>
-<p>Before we solve <code>P[i][j]</code>, we need to solve <code>P[i-1][j],P[i][j-1],P[i][j]</code>, thus the order should be increasing order of i and j.</p>
-<p>The final solution is <code>P[n][m]</code></p>
-<p><strong>Time Complexity</strong></p>
-<p>There are <code>n*m</code> subproblems, thus the time complexity is O(nm).</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minDistance</span>(<span class="params">self, a: <span class="built_in">str</span>, b: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        n=<span class="built_in">len</span>(a)</span><br><span class="line">        m=<span class="built_in">len</span>(b)</span><br><span class="line">        P=[[<span class="number">0</span>]*(m+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">if</span> m==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> n</span><br><span class="line">        <span class="keyword">if</span> n==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> m</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">            P[i][<span class="number">0</span>]=i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,m+<span class="number">1</span>):</span><br><span class="line">            P[<span class="number">0</span>][j]=j</span><br><span class="line">       </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,m+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> a[i-<span class="number">1</span>]==b[j-<span class="number">1</span>]:</span><br><span class="line">                    P[i][j]=<span class="built_in">min</span>(</span><br><span class="line">                        P[i-<span class="number">1</span>][j]+<span class="number">1</span>, <span class="comment">#delete</span></span><br><span class="line">                        P[i][j-<span class="number">1</span>]+<span class="number">1</span>, <span class="comment">#insert</span></span><br><span class="line">                        P[i-<span class="number">1</span>][j-<span class="number">1</span>]  </span><br><span class="line">                    )</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    P[i][j]=<span class="built_in">min</span>(</span><br><span class="line">                        P[i-<span class="number">1</span>][j]+<span class="number">1</span>,</span><br><span class="line">                        P[i][j-<span class="number">1</span>]+<span class="number">1</span>,</span><br><span class="line">                        P[i-<span class="number">1</span>][j-<span class="number">1</span>]+<span class="number">1</span> <span class="comment">#replace</span></span><br><span class="line">                    )</span><br><span class="line">        <span class="keyword">return</span> P[n][m]</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/11/08/23-Merge-k-Sorted-Lists/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1023,6 +925,78 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://illuca.github.io/2023/05/26/Segment-Tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yuan">
+      <meta itemprop="description" content="Challenge is the only redemption">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuan">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/26/Segment-Tree/" class="post-title-link" itemprop="url">Segment Tree</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-05-26 13:26:44" itemprop="dateCreated datePublished" datetime="2023-05-26T13:26:44+08:00">2023-05-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2024-01-09 11:52:26" itemprop="dateModified" datetime="2024-01-09T11:52:26+08:00">2024-01-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Range-LCM-Queries"><a href="#Range-LCM-Queries" class="headerlink" title="Range LCM Queries"></a>Range LCM Queries</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">//There is an array arr. It has N integers.</span></span><br><span class="line"><span class="comment">//There is another array query. Each element of query is a range for arr, like [L,R]</span></span><br><span class="line"><span class="comment">//[L,R] has many integers, my job is to find the least common multiple for them.</span></span><br><span class="line"><span class="comment">//Example: [3,6]=arr[3],arr[4],arr[5],arr[6]</span></span><br><span class="line"><span class="comment">//LCM(a,b)=a*b/GCD(a,b)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x==<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">gcd</span>(y % x, x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//LCM accepts two parameter: vector&lt;int&gt;, vector&lt;int&gt;</span></span><br><span class="line"><span class="comment">//return an integer</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LCM</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; arr, vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; query)</span></span>&#123;</span><br><span class="line">    <span class="comment">//let us firstly consider one query, query[0]</span></span><br><span class="line">    <span class="comment">//LCM of [i] and [i+1] is [i]*[i+1]/gcd([i],[i+1]</span></span><br><span class="line">    <span class="comment">//traverse from query[0][0],query[0][1]]</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> v:query)&#123;</span><br><span class="line">        <span class="keyword">int</span> left=v[<span class="number">0</span>], right=v[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">int</span> lcm=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=left; i&lt;=right;i++)&#123;</span><br><span class="line">            lcm = lcm * arr[i] / <span class="built_in">gcd</span>(lcm, arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; lcm &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; arr = &#123;<span class="number">5</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">11</span>, <span class="number">17</span>, <span class="number">14</span>, <span class="number">1</span>, <span class="number">44</span>&#125;;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; query = &#123;&#123;<span class="number">2</span>, <span class="number">5</span>&#125;,</span><br><span class="line">                                 &#123;<span class="number">5</span>, <span class="number">10</span>&#125;,</span><br><span class="line">                                 &#123;<span class="number">0</span>, <span class="number">10</span>&#125;&#125;;</span><br><span class="line">    <span class="built_in">LCM</span>(arr, query);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Using segment tree can make it more efficient.</p>
+<p>We use O(nlogn) time to convert the array into a tree. Then for each query, it only costs O(logn) time.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; tree;</span><br><span class="line">vector&lt;<span class="keyword">int</span>&gt; arr;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">gcd</span>(y % x, x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lcm</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x / <span class="built_in">gcd</span>(x, y) * y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//cut up util mouth of [lquery, rquery] can swallow [left, right]</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> larr, <span class="keyword">int</span> rarr, <span class="keyword">int</span> lquery, <span class="keyword">int</span> rquery)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// if two ranges have no common part</span></span><br><span class="line">    <span class="keyword">if</span> (lquery &gt; rarr || rquery &lt; larr) &#123;</span><br><span class="line">        <span class="comment">// we must deal with such condition and lcm(1,x)=x</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (lquery &lt;= larr &amp;&amp; rarr &lt;= rquery) &#123;</span><br><span class="line">        <span class="keyword">return</span> tree[root];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//lcm = lcm of left part and right part</span></span><br><span class="line">    <span class="keyword">int</span> mid = larr + ((rarr - larr) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> l = <span class="built_in">query</span>(<span class="number">2</span> * 	]]]]	]]]	root, larr, mid, lquery, rquery);</span><br><span class="line">    <span class="keyword">int</span> r = <span class="built_in">query</span>(<span class="number">2</span> * root + <span class="number">1</span>, mid + <span class="number">1</span>, rarr, lquery, rquery);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">lcm</span>(l, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> larr, <span class="keyword">int</span> rarr)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//if it is a leaf, then store the element of arr</span></span><br><span class="line">    <span class="keyword">if</span> (larr == rarr) &#123;</span><br><span class="line">        <span class="comment">//leaf only has one element</span></span><br><span class="line">        tree[root] = arr[larr];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = larr + ((rarr - larr) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="comment">//turn left part of arr into a tree</span></span><br><span class="line">    <span class="built_in">build</span>(root * <span class="number">2</span>, larr, mid);</span><br><span class="line">    <span class="comment">//turn right part of arr into a tree</span></span><br><span class="line">    <span class="built_in">build</span>(root * <span class="number">2</span> + <span class="number">1</span>, mid + <span class="number">1</span>, rarr);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//root store the lcm of left and right node</span></span><br><span class="line">    tree[root] = <span class="built_in">lcm</span>(tree[root * <span class="number">2</span>], tree[root * <span class="number">2</span> + <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    arr = &#123;<span class="number">5</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">11</span>, <span class="number">17</span>, <span class="number">14</span>, <span class="number">1</span>, <span class="number">44</span>&#125;;</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; queries = &#123;&#123;<span class="number">2</span>, <span class="number">5</span>&#125;,</span><br><span class="line">                                   &#123;<span class="number">5</span>, <span class="number">10</span>&#125;,</span><br><span class="line">                                   &#123;<span class="number">0</span>, <span class="number">10</span>&#125;&#125;;</span><br><span class="line">    tree.<span class="built_in">resize</span>(<span class="number">1000</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">//init a tree array and convert arr into a tree</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//root index is 1, left is 2*root, right is 2*root+1</span></span><br><span class="line">    <span class="built_in">build</span>(<span class="number">1</span>, <span class="number">0</span>, arr.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> q: queries) &#123;</span><br><span class="line">        <span class="comment">//query start from root</span></span><br><span class="line">        <span class="comment">//lquery is q[0], rquery is q[1]</span></span><br><span class="line">        cout &lt;&lt; <span class="built_in">query</span>(<span class="number">1</span>, <span class="number">0</span>, arr.<span class="built_in">size</span>() - <span class="number">1</span>, q[<span class="number">0</span>], q[<span class="number">1</span>]) &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1092,7 +1066,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">106</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
