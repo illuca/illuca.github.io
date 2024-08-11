@@ -8,13 +8,21 @@ hero:
   tagline: My great project tagline
   actions:
     - theme: brand
-      text: "Leetcode"
-      link: /leetcode/
+      text: "算法"
+      link: /algorithm/
     - theme: alt
-      text: "Poetry"
-      link: /poetry/
+      text: "随笔"
+      link: /essay/
+    - text: '前端'
+      link: /front-end
+    - text: '后端'
+      link: /back-end
+    - text: '面试'
+      link: /interview
+    - text: '课程'
+      link: /course
 features:
-  - title: 专注于 Leetcode
+  - title: 专注于算法
     details: 详细的Leetcode题解及代码实现。
   - title: 面试
     details: 面试遇到的题目及之后的反思总结

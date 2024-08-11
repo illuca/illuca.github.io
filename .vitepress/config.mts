@@ -1,11 +1,14 @@
 import { generateSidebar } from "vitepress-sidebar";
 import { defineConfig } from "vitepress";
-
+// .vitepress/config.js
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Yuan's Blog",
   description: "挑战是唯一的救赎",
   themeConfig: {
+    search: {
+      provider: 'local', // 使用内置的 flexsearch
+    },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
