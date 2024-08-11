@@ -11,9 +11,9 @@ export default defineConfig({
     },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "Home", link: "/" },
-      { text: "Leetcode", link: "/leetcode/" }, // 指向Leetcode分类的首页
-      { text: "Poetry", link: "/poetry/" }, // 指向Poetry分类的首页
+      { text: "首页", link: "/" },
+      { text: "算法", link: "/algorithm/" }, // 指向Leetcode分类的首页
+      { text: "诗歌", link: "/essay/" }, // 指向Poetry分类的首页
     ],
 
     sidebar: generateSidebar({
