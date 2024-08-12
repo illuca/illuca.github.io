@@ -1,5 +1,5 @@
 ---
-title: Greedy--Candies
+title: Greedy Candies
 date: 2023-06-29 18:46:40
 tags: [hankerrank, greedy]
 ---

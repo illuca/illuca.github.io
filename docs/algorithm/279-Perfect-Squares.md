@@ -1,5 +1,5 @@
 ---
-title: 279. Perfect Squares
+title: 279-Perfect Squares
 date: 2023-12-30 20:08:03
 tags: [leetcode, medium, DP]
 ---

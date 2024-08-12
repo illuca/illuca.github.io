@@ -1,5 +1,5 @@
 ---
-title: 1002 A+B for Polynomials
+title: 1002. A+B for Polynomials
 date: 2023-05-26 23:47:19
 tags: PAT
 ---

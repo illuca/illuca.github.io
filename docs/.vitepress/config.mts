@@ -1,12 +1,14 @@
 import { generateSidebar } from "vitepress-sidebar";
 import { defineConfig } from "vitepress";
-
+import AutoIndex from "./src/index";
 // .vitepress/config.js
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Yuan's Blog",
   description: "挑战是唯一的救赎",
-
+  vite: {
+    plugins: [AutoIndex({})],
+  },
   themeConfig: {
     algolia: {
       apiKey: "b3a8a0460b41cf4334330639dcc5271a",
@@ -23,6 +25,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "首页", link: "/" },
+      { text: "课程", link: "/course/" }, // 指向Leetcode分类的首页
       { text: "算法", link: "/algorithm/" }, // 指向Leetcode分类的首页
       { text: "诗歌", link: "/essay/" }, // 指向Poetry分类的首页
     ],
@@ -32,7 +35,7 @@ export default defineConfig({
       collapseDepth: 2,
       collapsed: true,
       // 你可以通过这个选项控制 sidebar 分组
-      documentRootPath: '/docs'
+      documentRootPath: "/docs",
     }),
 
     socialLinks: [{ icon: "github", link: "https://github.com/illuca" }],

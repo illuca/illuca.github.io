@@ -1,5 +1,5 @@
 ---
-title: 1001 A+B Format
+title: 1001. A-B-Format
 date: 2023-05-26 21:17:20
 tags: PAT
 ---

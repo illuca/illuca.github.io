@@ -1,5 +1,5 @@
 ---
-title: assignment management system
+title: assignment-management-system
 date: 2021-06-20
 tags: [assignment]
 ---
