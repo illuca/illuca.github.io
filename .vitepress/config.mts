@@ -6,8 +6,17 @@ export default defineConfig({
   title: "Yuan's Blog",
   description: "挑战是唯一的救赎",
   themeConfig: {
+    algolia: {
+      apiKey: "b3a8a0460b41cf4334330639dcc5271a",
+      indexName: "illucaio",
+      appId: "CCJLCQMVIY",
+      placeholder: "Search documentation",
+      searchParameters: {
+        // 你可以在这里添加其他Algolia的搜索参数
+      },
+    },
     search: {
-      provider: 'local', // 使用内置的 flexsearch
+      provider: "local", // 使用内置的 flexsearch
     },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
