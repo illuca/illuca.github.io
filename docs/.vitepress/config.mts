@@ -1,10 +1,12 @@
 import { generateSidebar } from "vitepress-sidebar";
 import { defineConfig } from "vitepress";
+
 // .vitepress/config.js
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Yuan's Blog",
   description: "挑战是唯一的救赎",
+
   themeConfig: {
     algolia: {
       apiKey: "b3a8a0460b41cf4334330639dcc5271a",
@@ -30,6 +32,7 @@ export default defineConfig({
       collapseDepth: 2,
       collapsed: true,
       // 你可以通过这个选项控制 sidebar 分组
+      documentRootPath: '/docs'
     }),
 
     socialLinks: [{ icon: "github", link: "https://github.com/illuca" }],
