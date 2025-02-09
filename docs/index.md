@@ -1,7 +1,7 @@
-# 目录
-- [course](./course/)
+# Outline
+- [interview](./interview/)
 - [algorithm](./algorithm/)
+- [course](./course/)
 - [back-end](./back-end/back-end.md)
 - [essay](./essay/)
-- [interview](./interview/)
 - [front-end](./front-end/)

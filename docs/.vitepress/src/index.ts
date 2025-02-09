@@ -118,7 +118,7 @@ function generateIndex(dir: string, option: IndexPluginOptionType): void {
   const files1 = readdirSync(dir);
   let s = basename(dir);
   if (s === mdFilePath) {
-    s = "目录";
+    s = "Outline";
   }
   let indexContent = `# ${s}\n`;
   let files = files1.sort((a: string, b: string): number => {
