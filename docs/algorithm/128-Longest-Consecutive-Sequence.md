@@ -57,3 +57,33 @@ class Solution:
         return M
 ```
 
+
+
+[2025-11-13 Thu 21:37]
+
+Trick is: make use of set=O(n), set is better than sort.
+
+and k consective, make use of k.
+
+So it is obvious.
+
+```python
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        S=set(nums)
+        R=1
+        M=1
+        for n in S:
+            R=1
+            if n-1 not in S:
+                curr=n
+                # if next consective is in S, then continue to check next one, otherwise break
+                while curr+1 in S:
+                    curr+=1
+                    R+=1
+                    M=max(R,M)
+        return M
+```
+
